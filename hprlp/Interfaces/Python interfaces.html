@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Version &mdash; HPR-LP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Releases" href="../Releases/index.html" />
+    <link rel="prev" title="C++ Binding for HPR-LP-C" href="C%20interfaces/C%2B%2B%20interfaces.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HPR-LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20HPR-LP/index.html">About HPR-LP</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Julia%20interfaces.html">Julia Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%20interfaces/index.html">C Version</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Python Version</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Citing%20HPR-LP.html">Citing HPR-LP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HPR-LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Interfaces</a></li>
+      <li class="breadcrumb-item active">Python Version</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="python-version">
+<h1>Python Version</h1>
+<p>Coming soon…</p>
+<!-- This page shows how to use the **Python interface** of HPR-LP: run demos, build custom problems, adjust solver settings, and interpret results.
+
+---
+
+## Running examples
+
+The demo LP problem is:
+
+### Test problem (LP)
+
+The default demo problem we ship is a small linear program of the form
+
+
+$$
+\begin{aligned}
+\min \quad & - 3 x_1 - 5 x_2\\
+\text{s.t.} \quad & x_1 + 2 x_2 \le 10, \\
+& 3 x_1 + x_2 \le 12, \\
+& x_1 \ge 0, \\
+& x_2 \ge 0.
+\end{aligned}
+$$
+
+---
+
+After installing the environment, you can run the solver in two ways: **model-based API** or **`.mps` API**.
+
+### 1. Model-based API 
+
+You can also build and solve an LP **directly from NumPy / SciPy arrays**.
+
+```python
+import os, sys
+import numpy as np
+from scipy import sparse
+
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from src.model_api import Model, Parameters
+
+A  = sparse.csr_matrix(
+    [[1.0, 2.0],
+     [3.0, 1.0]],
+    dtype=np.float64
+)
+
+# Row bounds on A x:
+AL = np.array([-np.inf, -np.inf], dtype=np.float64)
+AU = np.array([10.0,     12.0   ], dtype=np.float64)
+
+# Variable bounds:
+l  = np.array([0.0, 0.0],       dtype=np.float64)
+u  = np.array([np.inf, np.inf], dtype=np.float64)
+
+# Objective vector for "maximize c^T x"
+c  = np.array([-3.0, -5.0],     dtype=np.float64)
+
+# Build a Model object directly from arrays (no disk I/O)
+model = Model.from_arrays(A, AL, AU, l, u, c)
+param = Parameters()
+
+# These names match what you set in run_single_file.py
+param.time_limit    = 3600.0       
+param.stoptol       = 1e-9       
+param.device_number = 0                    
+
+
+res = model.solve(param)
+
+# -----------------------------------------------------------------------------
+# 5. Print result
+# -----------------------------------------------------------------------------
+print("status:     ", getattr(res, "output_type", None))
+print("objective:  ", getattr(res, "primal_obj", None))
+print("solution x: ", getattr(res, "x", None))
+print("iterations: ", getattr(res, "iter", None))
+print("solve_time: ", getattr(res, "time", None))
+
+```
+
+### 2. MPS file API
+
+```bash
+python scripts/run_single_file.py
+```
+
+This calls `run_single_file.py` with its default arguments, which solve one LP model in MPS format.
+
+You can also override any of these from the command line, for example:
+
+```bash
+python scripts/run_single_file.py \
+    --file_name /path/to/your_problem.mps \
+    --device_number 0 \
+    --stoptol 1e-8 \
+    --time_limit 3600 \
+    --check_iter 150 \
+    --warm_up True \
+    --use_Ruiz_scaling True \
+    --use_Pock_Chambolle_scaling True \
+    --use_bc_scaling True
+```
+
+## Parameters
+
+Below is a list of the parameters in HPR-LP along with their default values and usage:
+
+```{list-table}
+:header-rows: 1
+:widths: 20 20 60
+
+* - **Parameter**
+  - **Default Value**
+  - **Description**
+* - `warm_up`
+  - `false`
+  - Determines if a warm-up phase is performed before main execution.
+* - `time_limit`
+  - `3600`
+  - Maximum allowed runtime (seconds) for the algorithm.
+* - `stoptol`
+  - `1e-4`
+  - Stopping tolerance for convergence checks.
+* - `device_number`
+  - `0`
+  - GPU device number (only relevant if `use_gpu` is true).
+* - `max_iter`
+  - `typemax(Int32)`
+  - Maximum number of iterations allowed.
+* - `check_iter`
+  - `150`
+  - Number of iterations to check residuals.
+* - `use_Ruiz_scaling`
+  - `true`
+  - Whether to apply Ruiz scaling.
+* - `use_Pock_Chambolle_scaling`
+  - `true`
+  - Whether to use the Pock-Chambolle scaling.
+* - `use_bc_scaling`
+  - `true`
+  - Whether to use the scaling for b and c.
+* - `use_gpu`
+  - `true`
+  - Whether to use GPU or not.
+* - `print_frequency`
+  - `-1` (auto)
+  - Print the log every `print_frequency` iterations.
+```
+
+
+## Results
+After solving an instance, you can access the result variables as shown below:
+
+```{list-table}
+:header-rows: 1
+:widths: 20 20 60
+
+* - **Category**
+  - **Variable**
+  - **Description**
+
+* - Iteration Counts
+  - `iter`
+  - Total number of iterations performed by the algorithm.
+* - 
+  - `iter_4`
+  - Number of iterations required to achieve an accuracy of `1e-4`.
+* - 
+  - `iter_6`
+  - Number of iterations required to achieve an accuracy of `1e-6`.
+
+* - Time Metrics
+  - `time`
+  - Total time in seconds taken by the algorithm.
+* - 
+  - `time_4`
+  - Time in seconds taken to achieve an accuracy of `1e-4`.
+* - 
+  - `time_6`
+  - Time in seconds taken to achieve an accuracy of `1e-6`.
+* - 
+  - `power_time`
+  - Time in seconds used by the power method.
+
+* - Objective Values
+  - `primal_obj`
+  - The primal objective value obtained.
+* - 
+  - `gap`
+  - The gap between the primal and dual objective values.
+
+* - Residuals
+  - `residuals`
+  - Relative residuals of the primal feasibility, dual feasibility, and duality gap.
+
+* - Algorithm Status
+  - `output_type`
+  - The final status of the algorithm:
+    - `OPTIMAL` : Found optimal solution
+    - `MAX_ITER` : Max iterations reached
+    - `TIME_LIMIT` : Time limit reached
+
+* - Solution Vectors
+  - `x`
+  - The final solution vector **x**.
+* - 
+  - `y`
+  - The final solution vector **y**.
+* - 
+  - `z`
+  - The final solution vector **z**.
+``` -->
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="C%20interfaces/C%2B%2B%20interfaces.html" class="btn btn-neutral float-left" title="C++ Binding for HPR-LP-C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Releases/index.html" class="btn btn-neutral float-right" title="Releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

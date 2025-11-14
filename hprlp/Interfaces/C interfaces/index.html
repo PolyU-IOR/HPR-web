@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C Version &mdash; HPR-LP</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Python Binding of HPR-LP-C" href="Python%20Interfaces%20of%20HPR-LP-C.html" />
+    <link rel="prev" title="Julia Version" href="../Julia%20interfaces.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            HPR-LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../About%20HPR-LP/index.html">About HPR-LP</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Julia%20interfaces.html">Julia Version</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">C Version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-examples">Running examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test-problem-lp">Test problem (LP)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#solving-from-mps-files">Solving from MPS Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-as-a-library">Using as a Library</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-options">Command-Line Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#language-interface-installation">Language Interface Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bindings-for-hpr-lp-c">Bindings for HPR-LP-C</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html">Python Binding of HPR-LP-C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html">MATLAB Binding of HPR-LP-C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html">Julia Binding of HPR-LP-C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="C%20interfaces.html">Pure C examples from C programs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="C%2B%2B%20interfaces.html">C++ Binding for HPR-LP-C</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Python%20interfaces.html">Python Version</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Releases/index.html">Releases</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Citing%20HPR-LP.html">Citing HPR-LP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HPR-LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Interfaces</a></li>
+      <li class="breadcrumb-item active">C Version</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="c-version">
+<h1>C Version</h1>
+<p>This page shows the <strong>C interface</strong> of HPR-LP with a minimal, task-oriented guide. Use the CLI to solve <code class="docutils literal notranslate"><span class="pre">.mps</span></code> files, or link your C/C++ program against <code class="docutils literal notranslate"><span class="pre">libhprlp</span></code> for programmatic access.</p>
+<hr class="docutils" />
+<section id="running-examples">
+<h2>Running examples</h2>
+<p>The demo LP problem is:</p>
+<section id="test-problem-lp">
+<h3>Test problem (LP)</h3>
+<p>The default demo problem we ship is a small linear program of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\min \quad &amp; - 3 x_1 - 5 x_2\\
+\text{s.t.} \quad &amp; x_1 + 2 x_2 \le 10, \\
+&amp; 3 x_1 + x_2 \le 12, \\
+&amp; x_1 \ge 0, \\
+&amp; x_2 \ge 0.
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="usage">
+<h2>Usage</h2>
+<section id="solving-from-mps-files">
+<h3>Solving from MPS Files</h3>
+<p>Use the prebuilt executable in <code class="docutils literal notranslate"><span class="pre">build/</span></code>. The default settings enable GPU, standard scalings, and a 3600-second time limit.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show help</span>
+./build/solve_mps_file<span class="w"> </span>-h
+
+<span class="c1"># Run with default settings</span>
+./build/solve_mps_file<span class="w"> </span>-i<span class="w"> </span>data/model.mps
+
+<span class="c1"># Run with custom settings</span>
+./build/solve_mps_file<span class="w"> </span>-i<span class="w"> </span>data/model.mps<span class="w"> </span>--tol<span class="w"> </span>1e-4<span class="w"> </span>--time-limit<span class="w"> </span><span class="m">3600</span>
+</pre></div>
+</div>
+</section>
+<section id="using-as-a-library">
+<h3>Using as a Library</h3>
+<p>Link against <code class="docutils literal notranslate"><span class="pre">libhprlp.a</span></code> (static) or <code class="docutils literal notranslate"><span class="pre">libhprlp.so</span></code> (shared) and include the public headers under <code class="docutils literal notranslate"><span class="pre">include/</span></code>.<br />
+See the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory for small, self-contained demos (C and C++) showing compilation flags and basic API calls.</p>
+<p>For more details, check <code class="docutils literal notranslate"><span class="pre">examples/c(cpp)/README.md</span></code> on integrating HPR-LP-C into external projects (include paths, link order, and CUDA libs).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="command-line-options">
+<h2>Command-Line Options</h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--input</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p>Path to input MPS file</p></td>
+<td><p><em>required</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--device</span> <span class="pre">&lt;id&gt;</span></code></p></td>
+<td><p>CUDA device ID</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--max-iter</span> <span class="pre">&lt;N&gt;</span></code></p></td>
+<td><p>Maximum iterations</p></td>
+<td><p>unlimited</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--tol</span> <span class="pre">&lt;eps&gt;</span></code></p></td>
+<td><p>Stopping tolerance</p></td>
+<td><p>1e-4</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--time-limit</span> <span class="pre">&lt;sec&gt;</span></code></p></td>
+<td><p>Time limit in seconds</p></td>
+<td><p>3600</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--check-iter</span> <span class="pre">&lt;N&gt;</span></code></p></td>
+<td><p>Convergence check interval</p></td>
+<td><p>150</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ruiz</span> <span class="pre">&lt;true/false&gt;</span></code></p></td>
+<td><p>Ruiz scaling</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--pock</span> <span class="pre">&lt;true/false&gt;</span></code></p></td>
+<td><p>Pock-Chambolle scaling</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--bc</span> <span class="pre">&lt;true/false&gt;</span></code></p></td>
+<td><p>Bounds/cost scaling</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code></p></td>
+<td><p>Show help message</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>Tip: If the runtime can’t find <code class="docutils literal notranslate"><span class="pre">libhprlp.so</span></code>, set <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH</span></code> (or install to a system path).</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="language-interface-installation">
+<h2>Language Interface Installation</h2>
+<p><strong>Python (pip only):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>HPR-LP-C/bindings/python
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.<span class="w">         </span><span class="c1"># or: python -m pip install -e .</span>
+</pre></div>
+</div>
+<p><strong>Julia Interface:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>bindings/julia
+bash<span class="w"> </span>install.sh
+</pre></div>
+</div>
+<p><strong>MATLAB Interface:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>bindings/matlab
+bash<span class="w"> </span>install.sh
+</pre></div>
+</div>
+<p>See the respective README files in <code class="docutils literal notranslate"><span class="pre">bindings/</span></code> for usage, version notes, and troubleshooting.</p>
+</section>
+<hr class="docutils" />
+<section id="bindings-for-hpr-lp-c">
+<h2>Bindings for HPR-LP-C</h2>
+<p>HPR-LP-C provides native interfaces for multiple languages:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html">Python Binding of HPR-LP-C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html#test-problem-lp">Test problem (LP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html#example-1-build-model-directly-from-matrices">Example 1: Build model directly from matrices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html#model-from-arrays-a-al-au-l-u-c"><code class="docutils literal notranslate"><span class="pre">Model.from_arrays(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html#example-2-solve-from-mps-file">Example 2: Solve from MPS File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html#model-from-mps-filename"><code class="docutils literal notranslate"><span class="pre">Model.from_mps(filename)</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Python%20Interfaces%20of%20HPR-LP-C.html#model-solve-param-none"><code class="docutils literal notranslate"><span class="pre">Model.solve(param=None)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html">MATLAB Binding of HPR-LP-C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html#test-problem-lp">Test problem (LP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html#example-1-build-model-directly-from-matrices">Example 1: Build model directly from matrices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html#hprlp-model-from-arrays-a-al-au-l-u-c"><code class="docutils literal notranslate"><span class="pre">hprlp.Model.from_arrays(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html#example-2-solve-from-mps-file">Example 2: Solve from MPS File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html#hprlp-model-from-mps-filename"><code class="docutils literal notranslate"><span class="pre">hprlp.Model.from_mps(filename)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html#model-solve-param"><code class="docutils literal notranslate"><span class="pre">model.solve(param)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html#hprlp-parameters"><code class="docutils literal notranslate"><span class="pre">hprlp.Parameters</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html">Julia Binding of HPR-LP-C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html#test-problem-lp">Test problem (LP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html#example-1-build-model-directly-from-matrices">Example 1: Build model directly from matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html#example-2-read-model-from-an-mps-file">Example 2: Read model from an MPS file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html#model-filename-string"><code class="docutils literal notranslate"><span class="pre">Model(filename::String)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html#solve-model-model-params-nothing"><code class="docutils literal notranslate"><span class="pre">solve(model::Model,</span> <span class="pre">params=nothing)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html#example-3-use-jump-to-construct-and-solve-lps">Example 3: Use JuMP to construct and solve LPs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C%20interfaces.html">Pure C examples from C programs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C%20interfaces.html#test-problem-lp">Test problem (LP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%20interfaces.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%20interfaces.html#building">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%20interfaces.html#basic-usage">Basic Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C%2B%2B%20interfaces.html">C++ Binding for HPR-LP-C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C%2B%2B%20interfaces.html#test-problem-lp">Test problem (LP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%2B%2B%20interfaces.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%2B%2B%20interfaces.html#building">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%2B%2B%20interfaces.html#basic-usage">Basic Usage</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- ### **Python**:  pybind11 bindings (see the [github](https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/python) for more details)
+
+#### Example 1: Build model directly from matrices
+
+```bash
+cd examples
+python example_direct_lp.py              # Solve from arrays
+```
+
+**Quick overview**:
+The following snippet demonstrates how to define and solve an LP problem directly from matrices.
+For a complete version with additional options, see example_direct_lp.py.
+
+```python
+import numpy as np
+from scipy import sparse
+import hprlp
+
+# Define LP: minimize c'x subject to AL <= Ax <= AU, l <= x <= u
+A = sparse.csr_matrix([[1.0, 2.0], [3.0, 1.0]])
+AL = np.array([-np.inf, -np.inf])
+AU = np.array([10.0, 12.0])
+l = np.array([0.0, 0.0])
+u = np.array([np.inf, np.inf])
+c = np.array([-3.0, -5.0])
+
+# Create model
+model = hprlp.Model.from_arrays(A, AL, AU, l, u, c)
+
+# Configure solver
+param = hprlp.Parameters()
+param.stop_tol = 1e-9
+param.device_number = 0
+
+# Solve
+result = model.solve(param)
+
+if result.is_optimal():
+    print(f"Optimal: {result.primal_obj}")
+    print(f"Solution: {result.x}")
+```
+
+
+
+
+#### `Model.from_arrays(A, AL, AU, l, u, c)`
+Create an LP model from matrices and vectors.
+
+**Arguments:**
+- `A` - Constraint matrix (scipy sparse or dense)
+- `AL`, `AU` - Constraint bounds (numpy arrays)
+- `l`, `u` - Variable bounds (numpy arrays)
+- `c` - Objective coefficients (numpy array)
+
+**Returns:** Model object
+
+---
+
+### Example 2: Solve from MPS File
+
+```bash
+cd examples
+python example_mps_file     # Solve from MPS file
+```
+
+**Quick overview:**
+The following snippet demonstrates how to define and solve an LP problem directly from an MPS file. For a complete version with additional options, see example_mps_file.py.
+
+```python
+import hprlp
+
+# Create model from MPS file
+model = hprlp.Model.from_mps("problem.mps")
+
+# Solve
+result = model.solve()
+print(result)
+```
+
+### `Model.from_mps(filename)`
+Create an LP model from the MPS file.
+
+**Arguments:**
+- `filename` - Path to MPS file
+
+**Returns:** Model object
+
+### `Model.solve(param=None)`
+Solve the LP model.
+
+**Arguments:**
+- `param` - (Optional) Parameters object
+
+**Returns:** Results object -->
+<!-- ### **MATLAB**: MEX interface with OOP wrapper (see the [github](https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/matlab) for more details)  
+
+#### Example 1: Build model directly from matrices
+
+```bash
+cd examples
+matlab -batch "example_direct_lp"              # Solve from arrays
+```
+
+Or run interactively in MATLAB:
+```matlab
+cd examples
+example_direct_lp
+```
+
+**Quick overview**:
+The following snippet demonstrates how to define and solve an LP problem directly from matrices.
+For a complete version with additional options, see example_direct_lp.m.
+
+
+```matlab
+% Define LP: minimize c'x subject to AL <= Ax <= AU, l <= x <= u
+A = sparse([1.0, 2.0; 3.0, 1.0]);
+AL = [-inf; -inf];
+AU = [10.0; 12.0];
+l = [0.0; 0.0];
+u = [inf; inf];
+c = [-3.0; -5.0];
+
+% Create model
+model = hprlp.Model.from_arrays(A, AL, AU, l, u, c);
+
+% Configure solver
+param = hprlp.Parameters();
+param.stop_tol = 1e-9;
+param.device_number = 0;
+
+% Solve
+result = model.solve(param);
+
+if strcmp(result.status, 'OPTIMAL')
+    fprintf('Optimal: %.6f\n', result.primal_obj);
+    fprintf('Solution: x = [%.6f, %.6f]\n', result.x(1), result.x(2));
+end
+```
+
+### `hprlp.Model.from_arrays(A, AL, AU, l, u, c)`
+Create an LP model from matrices and vectors.
+
+**Arguments:**
+- `A` - Constraint matrix (m×n sparse or dense)
+- `AL`, `AU` - Constraint bounds (column vectors)
+- `l`, `u` - Variable bounds (column vectors)
+- `c` - Objective coefficients (column vector)
+
+**Returns:** Model object
+
+---
+### Example 2: Solve from MPS File
+
+```bash
+cd examples
+matlab -batch "example_mps_file"              # Solve from MPS file
+```
+
+Or run interactively in MATLAB:
+```matlab
+cd examples
+example_mps_file
+```
+
+**Quick overview**:
+The following snippet demonstrates how to define and solve an LP problem from an MPS file.
+For a complete version with additional options, see example_mps_file.m.
+
+```matlab
+% Create model from MPS file
+model = hprlp.Model.from_mps('problem.mps');
+
+% Solve
+result = model.solve();
+disp(result);
+```
+### `hprlp.Model.from_mps(filename)`
+Create an LP model from the MPS file.
+
+**Arguments:**
+- `filename` - Path to MPS file
+
+**Returns:** Model object
+
+### `model.solve(param)`
+Solve the LP model.
+
+**Arguments:**
+- `param` - (Optional) Parameters object. If omitted, default parameters are used.
+
+**Returns:** Result object
+
+## `hprlp.Parameters`
+Solver configuration:
+- `max_iter` - Maximum iterations (default: 2147483647)
+- `stop_tol` - Stopping tolerance (default: 1e-4)
+- `time_limit` - Time limit in seconds (default: 3600)
+- `device_number` - CUDA device ID (default: 0)
+- `check_iter` - Convergence check interval (default: 150)
+- `use_Ruiz_scaling` - Ruiz scaling (default: true)
+- `use_Pock_Chambolle_scaling` - Pock-Chambolle scaling (default: true)
+- `use_bc_scaling` - Bounds/cost scaling (default: true)
+
+**Example:**
+```matlab
+param = hprlp.Parameters();
+param.stop_tol = 1e-9;
+param.device_number = 0;
+``` -->
+<!-- ### **Julia**: Native Julia wrapper (see the [github](https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/julia) for more details)  
+
+#### Example 1: Build model directly from matrices
+```bash
+cd examples
+julia --project=../package example_direct_lp.jl
+```
+
+**Quick overview:**
+The following snippet demonstrates how to define and solve a small LP problem directly from matrices.
+For a complete version with additional options, see example_direct_lp.jl.
+```julia
+using HPRLP
+using SparseArrays
+
+# Define LP: minimize c'x subject to AL ≤ A*x ≤ AU, l ≤ x ≤ u
+A  = sparse([1.0 2.0; 3.0 1.0])
+AL = [-Inf, -Inf]
+AU = [10.0, 12.0]
+l  = [0.0, 0.0]
+u  = [Inf, Inf]
+c  = [-3.0, -5.0]
+
+# Create model
+model = Model(A, AL, AU, l, u, c)
+
+# Configure solver parameters
+params = Parameters(
+    stop_tol = 1e-9,
+    device_number = 0
+)
+
+# Solve
+result = solve(model, params)
+
+if is_optimal(result)
+    println("Optimal objective: ", result.primal_obj)
+    println("Optimal solution:  ", result.x)
+end
+```
+---
+**`Model(A, AL, AU, l, u, c)`**
+Create an LP model directly from matrices and vectors.
+
+| Argument | Description |
+|-----------|--------------|
+| `A` | Sparse constraint matrix (m×n) |
+| `AL`, `AU` | Constraint bounds |
+| `l`, `u` | Variable bounds |
+| `c` | Objective coefficients |
+
+**Returns:** `Model` object
+
+#### Example 2: Read model from an MPS file
+
+```
+cd examples
+julia --project=../package example_mps_file.jl
+```
+
+**Quick overview:**
+The following snippet demonstrates how to define and solve an LP problem directly from an MPS file. For a complete version with additional options, see example_mps_file.jl.
+```julia
+using HPRLP
+
+# Create model from MPS file
+model = Model("problem.mps")
+
+# Solve
+result = solve(model)
+println(result)
+```
+
+---
+
+**`Model(filename::String)`**
+Create an LP model by reading an MPS file.
+
+| Argument | Description |
+|-----------|--------------|
+| `filename` | Path to the MPS file |
+
+**Returns:** `Model` object
+
+---
+
+**`solve(model::Model, params=nothing)`**
+Solve the given LP model.
+
+| Argument | Description |
+|-----------|--------------|
+| `model` | LP model object |
+| `params` | Optional solver parameters |
+| **Returns** | `Results` object |
+
+---
+
+
+#### Example 3: Use JuMP to construct and solve LPs
+
+```
+cd examples
+julia --project=../package example_jump.jl
+``` -->
+<!-- + -->
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Julia%20interfaces.html" class="btn btn-neutral float-left" title="Julia Version" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Python%20Interfaces%20of%20HPR-LP-C.html" class="btn btn-neutral float-right" title="Python Binding of HPR-LP-C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

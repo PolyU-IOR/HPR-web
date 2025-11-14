@@ -1,0 +1,198 @@
+/* ================================
+   HPR-LP · Apple Blue Theme (Scheme B)
+   Primary: #007AFF   Sidebar: #2C3547
+   ================================ */
+
+/* -------- CSS Variables -------- */
+:root{
+  --hpr-sidebar-bg:    #2C3547;   /* dark blue-gray sidebar */
+  --hpr-sidebar-bg-2:  #3B465C;   /* slightly lighter band for search/header */
+  --hpr-text-light:    #E0E0E0;   /* regular text in sidebar */
+  --hpr-text-weak:     #B6C0D0;   /* secondary text in sidebar */
+  --hpr-accent:        #007AFF;   /* Apple blue accents */
+  --hpr-accent-dk:     #0063cc;   /* darker hover for accents */
+  --hpr-border:        rgba(255,255,255,.12);
+  --back-btn-h:        56px;      /* reserved height for the Back button */
+}
+
+/* ========== Sidebar base colors ========== */
+.wy-nav-side{
+  background: var(--hpr-sidebar-bg);
+  padding-bottom: calc(12px + var(--back-btn-h));
+}
+.wy-side-nav-search{
+  background: var(--hpr-sidebar-bg-2);
+  border-bottom: 1px solid var(--hpr-border);
+}
+
+/* Level-1 items (left nav) */
+.wy-nav-side .toctree-l1 > a{
+  color: var(--hpr-text-light);
+}
+.wy-nav-side .toctree-l1 > a:hover{
+  color: #FFFFFF;
+}
+
+/* Current level-1 item
+   Note: RTD theme often renders .current container with a light background.
+   If not light, fallback styles in other selectors keep contrast acceptable. */
+.wy-menu-vertical .toctree-l1.current > a{
+  font-weight: 800;
+  color: #000000;
+  background-color: rgba(255,255,255,.92);
+}
+.wy-nav-side .toctree-l1.current > a:visited,
+.wy-nav-side .toctree-l1.current > a:hover{
+  color: #000000;
+}
+
+/* Level-2+ items: dark text only inside the light .current container.
+   Otherwise, they inherit the light-gray sidebar color. */
+.wy-menu-vertical .toctree-l1.current .toctree-l2 > a,
+.wy-menu-vertical .toctree-l1.current .toctree-l3 > a{
+  color: #2a2a2a;
+}
+.wy-menu-vertical .toctree-l1.current .toctree-l2 > a:hover,
+.wy-menu-vertical .toctree-l1.current .toctree-l3 > a:hover{
+  color: var(--hpr-accent);
+}
+
+/* ========== Sidebar header (project title + search) — fluid layout ========== */
+.wy-side-nav-search{
+  position: static;
+  display: block;       /* restore default block layout */
+  min-height: auto;
+  padding: 12px 12px 12px;
+  box-sizing: border-box;
+}
+.wy-side-nav-search .wy-form{
+  position: static;
+  width: auto;
+  padding: 0;
+  margin: 8px 0 0;
+  z-index: auto;
+}
+
+/* Project title sizing — safer responsive range */
+.wy-side-nav-search .project,
+.wy-side-nav-search > a,
+.wy-side-nav-search a.icon.icon-home{
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  display: block;
+  white-space: normal;  /* allow wrapping for long names */
+  margin: 0;
+  text-align: center;
+}
+
+/* Remove default home icon */
+.wy-side-nav-search a.icon.icon-home::before{
+  content: none !important;
+}
+
+/* ========== Back button (bottom-left, Apple blue) ========== */
+.hpr-back-fab{
+  position: fixed;
+  left: 0;
+  bottom: 12px;
+  width: 280px;
+  z-index: 1000;
+  display: block;
+  text-align: center;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--hpr-accent-dk);
+  background: var(--hpr-accent);
+  color: #fff !important;
+  box-shadow: 0 8px 18px rgba(0,122,255,.22);
+}
+.hpr-back-fab:hover{ background: var(--hpr-accent-dk); }
+.hpr-back-fab:active{ transform: translateY(1px); }
+@media (max-width: 768px){
+  .hpr-back-fab{ display:none; }
+}
+
+/* ========== Breadcrumbs aside (GitHub link styling) ========== */
+.wy-breadcrumbs-aside a{
+  font-weight: 700;
+  color: var(--hpr-accent);
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.wy-breadcrumbs-aside a:hover{
+  color: var(--hpr-accent-dk);
+  text-decoration: none;
+}
+.wy-breadcrumbs-aside .gh-icon{
+  width: 24px;
+  height: 24px;
+}
+
+/* ========== Body links (accent color) ========== */
+.rst-content a{
+  color: var(--hpr-accent);
+  text-decoration: none;
+}
+.rst-content a:hover{
+  color: var(--hpr-accent-dk);
+  text-decoration: underline;
+}
+/* Toctree anchors within content */
+.rst-content .toctree-wrapper a{
+  color: var(--hpr-accent);
+}
+.rst-content .toctree-wrapper a:hover{
+  color: var(--hpr-accent-dk);
+}
+
+/* ========== Code blocks & inline code ========== */
+.rst-content code{
+  background: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 4px;
+  padding: .1em .35em;
+}
+.highlight{
+  border-radius: 6px;
+  border: 1px solid #e1e4e8;
+}
+
+/* ========== Tables and widget borders ========== */
+.rst-content table.docutils{
+  border-color: #e1e4e8;
+}
+.rst-content table.docutils td,
+.rst-content table.docutils th{
+  border-color: #e1e4e8;
+}
+
+/* ========== Sidebar section captions ========== */
+.wy-nav-side .caption-text{
+  color: var(--hpr-text-weak);
+}
+
+/* === Normalize base font size & line-height across pages === */
+html, body { font-size: 16px; }
+.wy-body-for-nav,
+.wy-nav-content,
+.wy-nav-content .rst-content {
+  font-size: 1rem;     /* avoid !important to keep room for specific overrides */
+  line-height: 1.65;
+}
+
+/* Toctree content is often downscaled by themes — normalize here as well */
+.rst-content .toctree-wrapper,
+.rst-content .toctree-wrapper * {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* widen main reading column on sphinx_rtd_theme */
+.wy-nav-content{max-width:900px !important;}
+@media (min-width:1440px){
+  .wy-nav-content{max-width:1020px !important;}
+}
