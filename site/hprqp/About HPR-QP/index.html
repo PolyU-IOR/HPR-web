@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About HPR-QP &mdash; HPR-QP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Quick start guide" href="../Quick%20start%20guide/index.html" />
+    <link rel="prev" title="HPR-QP Solver" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HPR-QP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About HPR-QP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#problem-statement">Problem statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dual-hpr-method-for-solving-ccqp">Dual HPR method for Solving CCQP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-algorithm">Base algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#an-easy-to-implement-dual-hpr-method">An Easy-to-Implement Dual HPR Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restart-strategy">Restart strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-strategy-for-sigma">Update strategy for <span class="math notranslate nohighlight">\(\sigma\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gpu-implementation">GPU Implementation</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Interfaces/index.html">Interfaces</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Citing%20HPR-QP.html">Citing HPR-QP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HPR-QP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">About HPR-QP</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-QP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="about-hpr-qp">
+<h1>About HPR-QP</h1>
+<p>HPR-QP is a GPU-accelerated solver for large-scale convex composite quadratic programming (CCQP). It is a GPU-based dual Halpern–Peaceman–Rachford solver built on the restricted Wolfe dual with symmetric Gauss–Seidel, range-space updates, and adaptive restart.</p>
+<section id="problem-statement">
+<h2>Problem statement</h2>
+<p><strong>Problem form.</strong> The CCQP solved by HPR-QP is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\min_{x \in \mathbb{R}^n}\quad &amp; \tfrac12\langle x, Qx\rangle + \langle c, x \rangle + \phi(x) \\
+\text{s.t.}\quad &amp; Ax \in \mathcal{K}, \\
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(Q:\mathbb{R}^n\to\mathbb{R}^n\)</span> is a self-adjoint positive semidefinite linear operator,
+<span class="math notranslate nohighlight">\(c\in\mathbb{R}^n\)</span> is a given vector, and <span class="math notranslate nohighlight">\(\phi:\mathbb{R}^n\to(-\infty,+\infty]\)</span> is a proper, closed, and convex function.<br />
+Here, <span class="math notranslate nohighlight">\(A:\mathbb{R}^n\to\mathbb{R}^m\)</span> is a linear operator, and <span class="math notranslate nohighlight">\(\mathcal{K}\)</span> is a simple polyhedral set:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{K} := \{\, y \in \mathbb{R}^m \mid -\infty \le l_i \le y_i \le u_i \le +\infty,\; 1 \le i \le m \,\}.\]</div>
+<p>A key feature of our approach is that it does not require an explicit matrix representation of <span class="math notranslate nohighlight">\(Q\)</span>,<br />
+which makes the proposed method particularly suitable for large-scale or matrix-free settings—e.g., when <span class="math notranslate nohighlight">\(Q\)</span> is defined implicitly via Kronecker products or structured operators.</p>
+<p>In particular, CCQP includes the classical convex QP (CQP) as an important special case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\min_{x \in \mathbb{R}^n}\quad &amp; \tfrac12\langle x, Qx\rangle + \langle c, x \rangle + \delta_{\mathcal{C}}(x) \\
+\text{s.t.}\quad &amp; Ax \in \mathcal{K}, \\
+\end{aligned}\end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\delta_{\mathcal{C}}(\cdot)\)</span> is the indicator function of the box constraint set <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{C} := \{\, x \in \mathbb{R}^n \mid L \le x \le U \,\},
+\qquad
+L \in (\mathbb{R} \cup \{-\infty\})^n,\quad
+U \in (\mathbb{R} \cup \{+\infty\})^n.\]</div>
+<p><strong>Dual form.</strong> The novel restricted Wolfe dual problem is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\min_{(y,w,z) \in \mathbb{R}^m \times \mathbb{R}^n \times \mathbb{R}^n} \quad
+&amp; \tfrac{1}{2}\langle w, Qw\rangle
+  + \delta_{\mathcal{K}}^*(-y)
+  + \phi^*(-z) \\
+\text{s.t.} \quad
+&amp; -Qw + A^*y + z = c, \\
+&amp; w \in \mathcal{W}.
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{W}:=Range(Q)\)</span>, the range space of <span class="math notranslate nohighlight">\(Q\)</span>.</p>
+</section>
+<section id="dual-hpr-method-for-solving-ccqp">
+<h2>Dual HPR method for Solving CCQP</h2>
+<p>HPR-QP is based on the Halpern–Peaceman–Rachford (HPR) method for convex composite quadratic programming (CCQP). It’s a general HPR framework with semi-proximal terms for solving the restricted Wolfe dual problem. The base algorithm appears below, followed by its convergence guarantees and complexity properties, which in turn motivate the algorithmic enhancements described later.</p>
+<section id="base-algorithm">
+<h3>Base algorithm</h3>
+<p>Let <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span> be a given penalty parameter.<br />
+Define the augmented Lagrangian function <span class="math notranslate nohighlight">\(L_{\sigma}(y,w,z; x)\)</span> associated with problem for any<br />
+<span class="math notranslate nohighlight">\((y,w,z,x) \in \mathbb{R}^m \times \mathcal{W} \times \mathbb{R}^n \times \mathbb{R}^n\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[L_{\sigma}(y,w,z; x)
+= \tfrac{1}{2}\langle w, Qw\rangle
+  + \delta_{\mathcal{K}}^*(-y)
+  + \phi^*(-z)
+  + \langle x, -Qw + A^*y + z - c\rangle
+  + \tfrac{\sigma}{2}\| -Qw + A^*y + z - c \|^2.\]</div>
+<p>We make the following assumption:</p>
+<p><strong>Assumption 1</strong> <em>There exists a vector <span class="math notranslate nohighlight">\((y^*, w^*, z^*, x^*) \in \mathbb{R}^m \times \mathcal{W} \times \mathbb{R}^n \times \mathbb{R}^n\)</span> satisfying the KKT system.</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{|l|}
+\hline
+\textbf{Algorithm 1: A dual HPR method for solving the restricted-Wolfe dual problem} \\ \hline
+\textbf{Input:}\ 
+\text{Let } \mathcal{S}_y \text{ and } \mathcal{S}_w \text{ be two self-adjoint positive semidefinite linear operators on } \mathbb{R}^m \text{ and } \mathcal{W}, \\
+\text{respectively, such that } \mathcal{S}_y + A A^* \text{ is positive definite. Denote } u = (y, w, z, x), \ \bar{u} = (\bar{y}, \bar{w}, \bar{z}, \bar{x}). \\
+\text{Let } u^0 = (y^0, w^0, z^0, x^0) \in \mathcal{U}, \ \text{and set } \sigma &gt; 0. \\ 
+\textbf{for } k = 0,1,2,\ldots \ \textbf{do} \\ 
+\quad \text{Step 1: } \ \bar{z}^{k+1} = \arg\min_{z \in \mathbb{R}^n} \{ L_\sigma(y^k, w^k, z; x^k) \}; \\[3pt]
+\quad \text{Step 2: } \ \bar{x}^{k+1} = x^k + \sigma(-Qw^k + A^*y^k + \bar{z}^{k+1} - c); \\[3pt]
+\quad \text{Step 3-1: } \ \bar{w}^{k+\frac{1}{2}} = \arg\min_{w \in \mathcal{W}} 
+   \{ L_\sigma(y^k, w, \bar{z}^{k+1}; \bar{x}^{k+1}) + \tfrac{\sigma}{2}\| w - w^k \|_{\mathcal{S}_w}^2 \}; \\[3pt]
+\quad \text{Step 3-2: } \ \bar{y}^{k+1} = \arg\min_{y \in \mathbb{R}^m}
+   \{ L_\sigma(y, \bar{w}^{k+\frac{1}{2}}, \bar{z}^{k+1}; \bar{x}^{k+1}) + \tfrac{\sigma}{2}\| y - y^k \|_{\mathcal{S}_y}^2 \}; \\[3pt]
+\quad \text{Step 3-3: } \ \bar{w}^{k+1} = \arg\min_{w \in \mathcal{W}}
+   \{ L_\sigma(\bar{y}^{k+1}, w, \bar{z}^{k+1}; \bar{x}^{k+1}) + \tfrac{\sigma}{2}\| w - w^k \|_{\mathcal{S}_w}^2 \}; \\[3pt]
+\quad \text{Step 4: } \ \hat{u}^{k+1} = 2\bar{u}^{k+1} - u^k; \\[3pt]
+\quad \text{Step 5: } \ u^{k+1} = \tfrac{1}{k+2}u^0 + \tfrac{k+1}{k+2}\hat{u}^{k+1}; \\ 
+\textbf{end for} \\ 
+\textbf{Output:}\ \text{Iteration sequence } \{ \bar{u}^k \}. \\ \hline
+\end{array}\end{split}\]</div>
+<p><strong>Remark</strong> In Algorithm 1, the updates for <span class="math notranslate nohighlight">\(\bar{w}^{k+\frac{1}{2}}\)</span> and <span class="math notranslate nohighlight">\(\bar{w}^{k+1}\)</span> for <span class="math notranslate nohighlight">\(k \ge 0\)</span> are restricted to the subspace <span class="math notranslate nohighlight">\(\mathcal{W} = \mathrm{Range}(Q)\)</span>. Although it may seem more straightforward to update <span class="math notranslate nohighlight">\(\bar{w}^{k+\frac{1}{2}}\)</span> and <span class="math notranslate nohighlight">\(\bar{w}^{k+1}\)</span> in the full space <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, doing so—particularly under a linearized ADMM framework—necessitates a proximal operator with a larger spectral norm, such as<br />
+<span class="math notranslate nohighlight">\(\mathcal{S}_w = \lambda_1(Q^2 + Q/\sigma)I_n - (Q^2 + Q/\sigma)\)</span>, to ensure convergence.<br />
+A proximal operator with a large spectral norm typically results in slower convergence.<br />
+By contrast, restricting the update to <span class="math notranslate nohighlight">\(\mathcal{W}\)</span> allows <em>HPR-QP</em> to employ a proximal operator with a smaller spectral norm, namely<br />
+<span class="math notranslate nohighlight">\(\mathcal{S}_w = Q(\lambda_1(Q)I_n - Q)\)</span>, which accelerates convergence while preserving theoretical guarantees.</p>
+</section>
+<section id="an-easy-to-implement-dual-hpr-method">
+<h3>An Easy-to-Implement Dual HPR Method</h3>
+<p>While computing <span class="math notranslate nohighlight">\(\bar{w}^{k+\frac{1}{2}}\)</span> and <span class="math notranslate nohighlight">\(\bar{w}^{k+1}\)</span> within <span class="math notranslate nohighlight">\(\mathrm{Range}(Q)\)</span> may seem costly, these updates can be implemented efficiently <strong>without explicit projection</strong>. For small-scale or structured cases, one may simply set <span class="math notranslate nohighlight">\(\mathcal{S}_w = 0\)</span> and use direct or preconditioned conjugate gradient solvers.  For large-scale general CCQP problems, HPR-QP adopts the proximal operator</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{S}_w = Q(\lambda_Q I_n - Q),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_Q &gt; 0\)</span> satisfies <span class="math notranslate nohighlight">\(\lambda_Q \ge \lambda_1(Q)\)</span>. Then, for <span class="math notranslate nohighlight">\(k \ge 0\)</span>, the updates of <span class="math notranslate nohighlight">\(\bar{w}^{k+\frac{1}{2}}\)</span> and <span class="math notranslate nohighlight">\(\bar{w}^{k+1}\)</span> become</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{
+\begin{aligned}
+Q\bar{w}^{k+\frac{1}{2}}
+&amp;= \frac{1}{1+\sigma\lambda_Q}\,
+  Q\!\left(\sigma\lambda_Q w^k + \bar{x}^{k+1}
+  + \sigma(-Qw^k + A^* y^k + \bar{z}^{k+1} - c)\right),
+  \quad \bar{w}^{k+\frac{1}{2}} \in \mathcal{W},
+  \\
+Q\bar{w}^{k+1}
+&amp;= \frac{1}{1+\sigma\lambda_Q}\,
+  Q\!\left(\sigma\lambda_Q w^k + \bar{x}^{k+1}
+  + \sigma(-Qw^k + A^* \bar{y}^{k+1} + \bar{z}^{k+1} - c)\right),
+  \quad \bar{w}^{k+1} \in \mathcal{W}.
+\end{aligned}
+\right.\end{split}\]</div>
+<p>This design allows efficient updates via a <strong>shadow sequence</strong>, avoiding explicit projection onto <span class="math notranslate nohighlight">\(\mathrm{Range}(Q)\)</span> and reducing computational overhead.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{|l|}
+\hline
+\textbf{Algorithm 2: An easy-to-implement dual HPR method}\\ \textbf{for the restricted-Wolfe dual problem} \\ \hline
+\textbf{Input:}\ 
+\text{Let } \mathcal{S}_w = Q(\lambda_Q I_n - Q) \text{ with } \lambda_Q \ge \lambda_1(Q), \text{ and let } \mathcal{S}_y \succeq 0 \text{ such that } \mathcal{S}_y + A A^* \succ 0. \\ 
+\text{Denote } u_Q = (y, w_Q, z, x),\ \bar{u}_Q = (\bar{y}, \bar{w}_Q, \bar{z}, \bar{x}).\ \text{Let } u_Q^0 = (y^0, w_Q^0, z^0, x^0) \text{ and set } \sigma &gt; 0. \\ 
+\textbf{for } k = 0,1,2,\ldots \ \textbf{do} \\ 
+\quad \text{Step 1: } \ \bar{z}^{k+1} = \arg\min_{z \in \mathbb{R}^n} \{ L_\sigma(y^k, w_Q^k, z; x^k) \}; \\[3pt]
+\quad \text{Step 2: } \ \bar{x}^{k+1} = x^k + \sigma(-Qw_Q^k + A^*y^k + \bar{z}^{k+1} - c); \\[3pt]
+\quad \text{Step 3-1: } \ \bar{w}_Q^{k+\frac{1}{2}} = \tfrac{1}{1+\sigma\lambda_Q}
+  (\sigma\lambda_Q w_Q^k + \bar{x}^{k+1} + \sigma(-Qw_Q^k + A^*y^k + \bar{z}^{k+1} - c)); \\[3pt]
+\quad \text{Step 3-2: } \ \bar{y}^{k+1} = \arg\min_{y \in \mathbb{R}^m}
+  \{ L_\sigma(y, \bar{w}_Q^{k+\frac{1}{2}}, \bar{z}^{k+1}; \bar{x}^{k+1}) + \tfrac{\sigma}{2}\|y - y^k\|_{\mathcal{S}_y}^2 \}; \\[3pt]
+\quad \text{Step 3-3: } \ \bar{w}_Q^{k+1} = \tfrac{1}{1+\sigma\lambda_Q}
+  (\sigma\lambda_Q w_Q^k + \bar{x}^{k+1} + \sigma(-Qw_Q^k + A^*\bar{y}^{k+1} + \bar{z}^{k+1} - c)); \\[3pt]
+\quad \text{Step 4: } \ \hat{u}_Q^{k+1} = 2\bar{u}_Q^{k+1} - u_Q^k; \\[3pt]
+\quad \text{Step 5: } \ u_Q^{k+1} = \tfrac{1}{k+2}u_Q^0 + \tfrac{k+1}{k+2}\hat{u}_Q^{k+1}; \\ 
+\textbf{end for} \\ 
+\textbf{Output:}\ \text{Iteration sequence } \{ \bar{u}_Q^k \}. \\ \hline
+\end{array}\end{split}\]</div>
+<p><strong>Theorem 1</strong> <em>Suppose Assumption 1 holds.<br />
+Let <span class="math notranslate nohighlight">\(\{\bar{u}_Q^k\} = \{(y^k, w_Q^k, z^k, x^k)\}\)</span> and <span class="math notranslate nohighlight">\(\{u_Q^k\} = \{(y^k, w_Q^k, z^k, x^k)\}\)</span> be the sequences generated by Algorithm 2,<br />
+and let <span class="math notranslate nohighlight">\(u^* = (y^*, w^*, z^*, x^*)\)</span> be a solution to the KKT system.<br />
+Then, for all <span class="math notranslate nohighlight">\(k \ge 0\)</span>, the following complexity bounds hold with <span class="math notranslate nohighlight">\(R_0 = \|u_Q^0 - u^*\|_{\mathcal{M}}\)</span>:</em></p>
+<div class="math notranslate nohighlight">
+\[\|\bar{u}_Q^{k+1} - u_Q^k\|_{\mathcal{M}} \le \frac{R_0}{k+1},\]</div>
+<div class="math notranslate nohighlight">
+\[\|\mathcal{R}(\bar{u}_Q^{k+1})\|
+\le \left(\frac{\sigma\|A_Q^*\| + 1}{\sqrt{\sigma}} + \|\sqrt{\mathcal{S} + \hat{\mathcal{S}}_{\mathrm{sGS}}}\|\right)\frac{R_0}{k+1},\]</div>
+<div class="math notranslate nohighlight">
+\[-\frac{\|x^*\|}{\sqrt{\sigma}} \cdot \frac{R_0}{k+1}
+\;\le\;
+h(\bar{y}^{k+1}, \bar{w}_Q^{k+1}, \bar{z}^{k+1})
+\;\le\;
+\left(3R_0 + \frac{\|x^*\|}{\sqrt{\sigma}}\right)\frac{R_0}{k+1}.\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{|l|}
+\hline
+\textbf{Algorithm 3: HPR-QP — A dual HPR method for the CCQP problem} \\ \hline
+\textbf{Input: }
+\text{Let }\mathcal{S}_w\text{ be defined as in (2.8), and let }\mathcal{S}_y\text{ be a self-adjoint positive semidefinite linear operator on }\mathbb{R}^m,\\
+\text{such that }\mathcal{S}_y + A A^*\text{ is positive definite. Let }u_Q=(y,w_Q,z,x),\ \bar{u}_Q=(\bar{y},\bar{w}_Q,\bar{z}_Q,\bar{x}),\\
+\text{and initial point }u_Q^{0,0}=(y^{0,0},w_Q^{0,0},z^{0,0},x^{0,0})\in\mathbb{R}^m\times\mathbb{R}^n\times\mathbb{R}^n\times\mathbb{R}^n.\\[0.4em]
+\textbf{Initialization: }
+\text{Set outer loop counter }r=0,\ \text{total iteration counter }k=0,\ \text{and initial penalty parameter }\sigma_0&gt;0.\\[0.4em]
+\textbf{repeat} \\
+\quad \text{Initialize inner loop: set inner counter }t=0;\\
+\quad \textbf{repeat} \\
+\quad\quad \bar{z}_Q^{r,t+1}
+= \operatorname*{arg\,min}_{z\in\mathbb{R}^n}\, L_{\sigma_r}(y^{r,t}, w_Q^{r,t}, z;\ x^{r,t});\\
+\quad\quad \bar{x}^{r,t+1}
+= x^{r,t} + \sigma_r\!\left(-Q w_Q^{r,t} + A^* y^{r,t} + \bar{z}_Q^{r,t+1} - c\right);\\
+\quad\quad \bar{w}_Q^{r,t+\frac{1}{2}}
+= \frac{1}{1+\sigma_r \lambda_Q}\!\left(\sigma_r \lambda_Q w_Q^{r,t} + \bar{x}^{r,t+1}
++ \sigma_r\!\left(-Q w_Q^{r,t} + A^* y^{r,t} + \bar{z}_Q^{r,t+1} - c\right)\right);\\
+\quad\quad \bar{y}^{r,t+1}
+= \operatorname*{arg\,min}_{y\in\mathbb{R}^m}
+\Big\{ L_{\sigma_r}\!\left(y, \bar{w}_Q^{r,t+\frac{1}{2}}, \bar{z}_Q^{r,t+1};\ \bar{x}^{r,t+1}\right)
++ \tfrac{\sigma_r}{2}\,\|y - y^{r,t}\|_{\mathcal{S}_y}^2 \Big\};\\
+\quad\quad \bar{w}_Q^{r,t+1}
+= \frac{1}{1+\sigma_r \lambda_Q}\!\left(\sigma_r \lambda_Q w_Q^{r,t} + \bar{x}^{r,t+1}
++ \sigma_r\!\left(-Q w_Q^{r,t} + A^* \bar{y}^{r,t+1} + \bar{z}_Q^{r,t+1} - c\right)\right);\\
+\quad\quad \hat{u}_Q^{r,t+1} = 2\,\bar{u}_Q^{r,t+1} - u_Q^{r,t};\\
+\quad\quad u_Q^{r,t+1} = \tfrac{1}{t+2}\,u_Q^{r,0} + \tfrac{t+1}{t+2}\,\hat{u}_Q^{r,t+1};\\
+\quad\quad t = t + 1,\ \ k = k + 1;\\
+\quad \textbf{until restart or termination criteria are met;}\\[0.3em]
+\quad \textbf{Restart: }
+\text{Set }\tau_r = t,\ \ u_Q^{r+1,0} = \bar{u}_Q^{r,\tau_r};\\
+\quad \sigma_{r+1} = \textbf{SigmaUpdate}\!\left(\bar{u}_Q^{r,\tau_r},\ u_Q^{r,0},\ \mathcal{S}_y,\ \mathcal{S}_w,\ A,\ Q\right);\\
+\quad r = r + 1;\\
+\textbf{until termination criteria are met;}\\
+\textbf{Output: } \{\bar{u}_Q^{r,t}\}.\\ \hline
+\end{array}\end{split}\]</div>
+</section>
+<section id="restart-strategy">
+<h3>Restart strategy</h3>
+<p>HPR-QP method adopts an adaptive restart strategy grounded in the <span class="math notranslate nohighlight">\(O(1/k)\)</span> iteration complexity of the HPR method. This strategy has shown strong empirical performance on large-scale convex problems.<br />
+Motivated by this success, we extend the adaptive restart strategy to the CCQP problem by defining a merit function consistent with the theoretical complexity bound. Specifically, we define the following idealized merit function:</p>
+<div class="math notranslate nohighlight">
+\[R_{r,t} := \| u_Q^{r,t} - u^* \|_{\mathcal{M}}, 
+\qquad \forall\, r \ge 0,\ t \ge 0,\]</div>
+<p>where <span class="math notranslate nohighlight">\(u^*\)</span> denotes any solution to the KKT system. Note that <span class="math notranslate nohighlight">\(R_{r,0}\)</span> corresponds to the upper bound implied by the complexity result at the beginning of the <span class="math notranslate nohighlight">\(r\)</span>-th outer iteration. Since <span class="math notranslate nohighlight">\(u^*\)</span> is unknown in practice, we use the following computable surrogate:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{R}_{r,t} := \| u_Q^{r,t} - \hat{u}_Q^{r,t+1} \|_{\mathcal{M}}.\]</div>
+<p>Based on this surrogate merit function, we introduce the following adaptive restart criteria for HPR-QP method:</p>
+<ol class="arabic simple">
+<li><p><strong>Sufficient decay:</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\tilde{R}_{r,t+1} \le \alpha_1\, \tilde{R}_{r,0};\]</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Insufficient local progress despite overall decay:</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\tilde{R}_{r,t+1} \le \alpha_2\, \tilde{R}_{r,0}, 
+\qquad
+\tilde{R}_{r,t+1} &gt; \tilde{R}_{r,t};\]</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Excessively long inner loop:</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[t \ge \alpha_3\, k;\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_1 \in (0, \alpha_2)\)</span>, <span class="math notranslate nohighlight">\(\alpha_2 \in (0,1)\)</span>, and <span class="math notranslate nohighlight">\(\alpha_3 \in (0,1)\)</span> are user-defined parameters. Whenever any of the above conditions is satisfied, the current inner loop is terminated, and a new outer iteration is started by setting <span class="math notranslate nohighlight">\(u_Q^{r+1,0} = \bar{u}_Q^{r,\tau_r}\)</span> and updating the penalty parameter <span class="math notranslate nohighlight">\(\sigma_{r+1}\)</span> accordingly.</p>
+</section>
+<section id="update-strategy-for-sigma">
+<h3>Update strategy for <span class="math notranslate nohighlight">\(\sigma\)</span></h3>
+<p>The penalty parameter <span class="math notranslate nohighlight">\(\sigma\)</span> is dynamically updated at each restart to improve convergence stability and reduce the residual of the KKT system. At the beginning of the <span class="math notranslate nohighlight">\((r+1)\)</span>-th outer iteration, the ideal update rule is defined by</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{r+1}
+:= \operatorname*{arg\,min}_{\sigma &gt; 0}
+\| u_Q^{r+1,0} - u^* \|_{\mathcal{M}}^2,\]</div>
+<p>where <span class="math notranslate nohighlight">\(u^*\)</span> denotes any solution to the KKT system and <span class="math notranslate nohighlight">\(\|u_Q^{r+1,0} - u^*\|_{\mathcal{M}}\)</span> corresponds to the upper bound. Since <span class="math notranslate nohighlight">\(u^*\)</span> is unknown in practice, we approximate the above rule by minimizing a computable surrogate function</p>
+<div class="math notranslate nohighlight">
+\[f(\sigma)
+= \tilde{\theta}_1\,\sigma
+  + \frac{\tilde{\theta}_2}{\sigma}
+  + \frac{\sigma^2 \tilde{\theta}_3}{1 + \lambda_Q \sigma},\]</div>
+<p>where the coefficients are estimated from observable quantities of the current and previous restarts:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{\theta}_1 = \lambda_A \| \bar{y}^{r,\tau_r} - y^{r,0} \|^2
+                 + \lambda_Q \| \bar{w}_Q^{r,\tau_r} - w_Q^{r,0} \|_Q^2,
+\qquad
+\tilde{\theta}_2 = \| \bar{x}^{r,\tau_r} - x^{r,0} \|^2,
+\qquad
+\tilde{\theta}_3 = \| A^*\bar{y}^{r,\tau_r} - A^*y^{r,0} \|_Q^2.\]</div>
+<p>This one-dimensional minimization problem can be efficiently solved using a golden-section search or other scalar optimization methods to obtain <span class="math notranslate nohighlight">\(\sigma_{\text{new}}\)</span>. To stabilize the update, an exponential smoothing scheme is applied:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{r+1}
+= \exp\!\big(
+  \beta \log(\sigma_{\text{new}})
+  + (1-\beta)\log(\sigma_r)
+\big),
+\qquad
+\beta = \exp\!\left(-\frac{\tilde{R}_{r,\tau_r-1}}{\tilde{R}_{r,0}-\tilde{R}_{r,\tau_r-1}}\right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{R}_{r,t}\)</span> is the surrogate merit function defined in the restart criteria. This adaptive update balances theoretical consistency and empirical stability, ensuring smooth adjustment of <span class="math notranslate nohighlight">\(\sigma\)</span> throughout the optimization process.</p>
+</section>
+</section>
+<section id="gpu-implementation">
+<h2>GPU Implementation</h2>
+<p>We now present the GPU-oriented update formulas for each subproblem in <strong>HPR-QP</strong>.<br />
+For any <span class="math notranslate nohighlight">\(r \ge 0\)</span> and <span class="math notranslate nohighlight">\(t \ge 0\)</span>, the update of <span class="math notranslate nohighlight">\(\bar{z}_Q^{r,t+1}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\bar{z}_Q^{r,t+1}
+= \frac{1}{\sigma_r}
+\Big(
+  \operatorname{Prox}_{\sigma_r \phi}(r_{z}^{r,t})
+  - r_{z}^{r,t}
+\Big),
+\qquad
+r_{z}^{r,t} = x^{r,t} + \sigma_r(-Qw_Q^{r,t} + A^*y^{r,t} - c).\]</div>
+<p>The corresponding update of <span class="math notranslate nohighlight">\(\bar{x}^{r,t+1}\)</span> is then given by:</p>
+<div class="math notranslate nohighlight">
+\[\bar{x}^{r,t+1}
+= x^{r,t}
++ \sigma_r(-Qw_Q^{r,t} + A^*y^{r,t} + \bar{z}_Q^{r,t+1} - c)
+= \operatorname{Prox}_{\sigma_r \phi}(r_{z}^{r,t}).\]</div>
+<p>Next, the updates of <span class="math notranslate nohighlight">\(\bar{w}_Q^{r,t+\frac{1}{2}}\)</span> and <span class="math notranslate nohighlight">\(\bar{w}_Q^{r,t+1}\)</span> can be simplified as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\bar{w}_Q^{r,t+\frac{1}{2}}
+&amp;= \frac{1}{1+\sigma_r \lambda_Q}
+\Big(
+  \sigma_r \lambda_Q w_Q^{r,t}
+  + \bar{x}^{r,t+1}
+  + \sigma_r(-Qw_Q^{r,t} + A^*y^{r,t} + \bar{z}_Q^{r,t+1} - c)
+\Big),\\[4pt]
+\bar{w}_Q^{r,t+1}
+&amp;= \frac{1}{1+\sigma_r \lambda_Q}
+\Big(
+  \sigma_r \lambda_Q w_Q^{r,t}
+  + \bar{x}^{r,t+1}
+  + \sigma_r(-Qw_Q^{r,t} + A^*\bar{y}^{r,t+1} + \bar{z}_Q^{r,t+1} - c)
+\Big)\\[4pt]
+&amp;= \bar{w}_Q^{r,t+\frac{1}{2}}
+  + \frac{\sigma_r}{1+\sigma_r \lambda_Q}
+    A^*(\bar{y}^{r,t+1} - y^{r,t}).
+\end{aligned}\end{split}\]</div>
+<p>To simplify the subproblem with respect to <span class="math notranslate nohighlight">\(y\)</span>, we adopt the proximal operator</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{S}_y = \lambda_A I_m - A A^*,
+\qquad
+\lambda_A \ge \|A\|_2^2.\]</div>
+<p>With this choice, the <span class="math notranslate nohighlight">\(y\)</span>-update reduces to the projection</p>
+<div class="math notranslate nohighlight">
+\[\bar{y}^{r,t+1}
+= \frac{1}{\sigma_r \lambda_A}
+\Big(
+  \Pi_{\mathcal{K}}(R_y) - R_y
+\Big),
+\qquad
+R_y := A(2\bar{x}^{r,t+1} - x^{r,t}) - \sigma_r \lambda_A y^{r,t}.\]</div>
+<p>Each step thus consists only of <strong>sparse matrix–vector products (SpMV)</strong>, vector additions, and simple proximal/projection operations, giving a per-iteration complexity of <span class="math notranslate nohighlight">\(O(\mathrm{nnz}(A))\)</span>.</p>
+<p>On GPUs, these operations are fused into custom CUDA kernels.<br />
+Matrix–vector multiplications are implemented with <strong><code class="docutils literal notranslate"><span class="pre">cusparseSpMV()</span></code></strong> under the <strong><code class="docutils literal notranslate"><span class="pre">CUSPARSE_SPMV_CSR_ALG2</span></code></strong> algorithm for deterministic and high-throughput performance.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="HPR-QP Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Quick%20start%20guide/index.html" class="btn btn-neutral float-right" title="Quick start guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

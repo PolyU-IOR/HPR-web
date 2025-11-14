@@ -1,0 +1,27 @@
+param(
+  [string]$Message = "deploy 11.14 official",
+  [string]$CustomDomain = "hpr.top"
+)
+
+$ErrorActionPreference = "Stop"
+
+git fetch origin
+
+cmd /c build.bat
+robocopy assets site\assets /MIR > $null
+
+$CnamePath = "site/CNAME"
+New-Item -ItemType File -Force -Path $CnamePath | Out-Null
+Set-Content -Path $CnamePath -NoNewline -Value $CustomDomain
+if (!(Test-Path "site/.nojekyll")) { New-Item -ItemType File -Path "site/.nojekyll" | Out-Null }
+
+git add -A :/
+git add -f site/**
+git commit -m $Message 2>$null
+if ($LASTEXITCODE -ne 0) { Write-Host "No changes to commit on main" }
+
+git push origin main
+
+$sha = git subtree split --prefix=site HEAD
+git push -f origin ("{0}:gh-pages" -f $sha)
+

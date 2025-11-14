@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C interfaces &mdash; HPR-LP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=1776d9ad"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Python interfaces" href="Python%20interfaces.html" />
+    <link rel="prev" title="Julia interfaces" href="Julia%20interfaces.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HPR-LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20HPR-LP/index.html">About HPR-LP</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Julia%20interfaces.html">Julia interfaces</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">C interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#solving-from-mps-files">Solving from MPS Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-as-a-library">Using as a Library</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-options">Command-Line Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#language-interface-installation">Language Interface Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#language-interfaces">Language Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-pybind11-bindings-see-the-github-for-more-details"><strong>Python</strong>:  pybind11 bindings (see the github for more details)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2-solve-from-mps-file">Example 2: Solve from MPS File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-from-mps-filename"><code class="docutils literal notranslate"><span class="pre">Model.from_mps(filename)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-solve-param-none"><code class="docutils literal notranslate"><span class="pre">Model.solve(param=None)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-mex-interface-with-oop-wrapper-see-the-github-for-more-details"><strong>MATLAB</strong>: MEX interface with OOP wrapper (see the github for more details)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hprlp-model-from-arrays-a-al-au-l-u-c"><code class="docutils literal notranslate"><span class="pre">hprlp.Model.from_arrays(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Example 2: Solve from MPS File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hprlp-model-from-mps-filename"><code class="docutils literal notranslate"><span class="pre">hprlp.Model.from_mps(filename)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-solve-param"><code class="docutils literal notranslate"><span class="pre">model.solve(param)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hprlp-parameters"><code class="docutils literal notranslate"><span class="pre">hprlp.Parameters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#julia-native-julia-wrapper-see-the-github-for-more-details"><strong>Julia</strong>: Native Julia wrapper (see the github for more details)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Example 1: Build model directly from matrices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-a-al-au-l-u-c"><code class="docutils literal notranslate"><span class="pre">Model(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-read-model-from-an-mps-file">Example 2: Read model from an MPS file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#model-filename-string"><code class="docutils literal notranslate"><span class="pre">Model(filename::String)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solve-model-model-params-nothing"><code class="docutils literal notranslate"><span class="pre">solve(model::Model,</span> <span class="pre">params=nothing)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-3-use-jump-to-construct-and-solve-lps">Example 3: Use JuMP to construct and solve LPs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Python%20interfaces.html">Python interfaces</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Citing%20HPR-LP.html">Citing HPR-LP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HPR-LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Interfaces</a></li>
+      <li class="breadcrumb-item active">C interfaces</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="c-interfaces">
+<h1>C interfaces</h1>
+<p>This page shows the <strong>C interface</strong> of HPR-LP with a minimal, task-oriented guide. Use the CLI to solve <code class="docutils literal notranslate"><span class="pre">.mps</span></code> files, or link your C/C++ program against <code class="docutils literal notranslate"><span class="pre">libhprlp</span></code> for programmatic access.</p>
+<hr class="docutils" />
+<section id="usage">
+<h2>Usage</h2>
+<section id="solving-from-mps-files">
+<h3>Solving from MPS Files</h3>
+<p>Use the prebuilt executable in <code class="docutils literal notranslate"><span class="pre">build/</span></code>. The default settings enable GPU, standard scalings, and a 3600-second time limit.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show help</span>
+./build/solve_mps_file<span class="w"> </span>-h
+
+<span class="c1"># Run with default settings</span>
+./build/solve_mps_file<span class="w"> </span>-i<span class="w"> </span>data/model.mps
+
+<span class="c1"># Run with custom settings</span>
+./build/solve_mps_file<span class="w"> </span>-i<span class="w"> </span>data/model.mps<span class="w"> </span>--tol<span class="w"> </span>1e-4<span class="w"> </span>--time-limit<span class="w"> </span><span class="m">3600</span>
+</pre></div>
+</div>
+</section>
+<section id="using-as-a-library">
+<h3>Using as a Library</h3>
+<p>Link against <code class="docutils literal notranslate"><span class="pre">libhprlp.a</span></code> (static) or <code class="docutils literal notranslate"><span class="pre">libhprlp.so</span></code> (shared) and include the public headers under <code class="docutils literal notranslate"><span class="pre">include/</span></code>.<br />
+See the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory for small, self-contained demos (C and C++) showing compilation flags and basic API calls.</p>
+<p>For more details, check <code class="docutils literal notranslate"><span class="pre">examples/c(cpp)/README.md</span></code> on integrating HPR-LP-C into external projects (include paths, link order, and CUDA libs).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="command-line-options">
+<h2>Command-Line Options</h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--input</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p>Path to input MPS file</p></td>
+<td><p><em>required</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--device</span> <span class="pre">&lt;id&gt;</span></code></p></td>
+<td><p>CUDA device ID</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--max-iter</span> <span class="pre">&lt;N&gt;</span></code></p></td>
+<td><p>Maximum iterations</p></td>
+<td><p>unlimited</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--tol</span> <span class="pre">&lt;eps&gt;</span></code></p></td>
+<td><p>Stopping tolerance</p></td>
+<td><p>1e-4</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--time-limit</span> <span class="pre">&lt;sec&gt;</span></code></p></td>
+<td><p>Time limit in seconds</p></td>
+<td><p>3600</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--check-iter</span> <span class="pre">&lt;N&gt;</span></code></p></td>
+<td><p>Convergence check interval</p></td>
+<td><p>150</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ruiz</span> <span class="pre">&lt;true/false&gt;</span></code></p></td>
+<td><p>Ruiz scaling</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--pock</span> <span class="pre">&lt;true/false&gt;</span></code></p></td>
+<td><p>Pock-Chambolle scaling</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--bc</span> <span class="pre">&lt;true/false&gt;</span></code></p></td>
+<td><p>Bounds/cost scaling</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code></p></td>
+<td><p>Show help message</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>Tip: If the runtime can’t find <code class="docutils literal notranslate"><span class="pre">libhprlp.so</span></code>, set <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH</span></code> (or install to a system path).</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="language-interface-installation">
+<h2>Language Interface Installation</h2>
+<p><strong>Python (pip only):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>HPR-LP-C/bindings/python
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.<span class="w">         </span><span class="c1"># or: python -m pip install -e .</span>
+</pre></div>
+</div>
+<p><strong>Julia Interface:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>bindings/julia
+bash<span class="w"> </span>install.sh
+</pre></div>
+</div>
+<p><strong>MATLAB Interface:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>bindings/matlab
+bash<span class="w"> </span>install.sh
+</pre></div>
+</div>
+<p>See the respective README files in <code class="docutils literal notranslate"><span class="pre">bindings/</span></code> for usage, version notes, and troubleshooting.</p>
+</section>
+<hr class="docutils" />
+<section id="language-interfaces">
+<h2>Language Interfaces</h2>
+<p>HPR-LP-C provides native interfaces for multiple languages:</p>
+<section id="python-pybind11-bindings-see-the-github-for-more-details">
+<h3><strong>Python</strong>:  pybind11 bindings (see the <a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/python">github</a> for more details)</h3>
+<section id="example-1-build-model-directly-from-matrices">
+<h4>Example 1: Build model directly from matrices</h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python<span class="w"> </span>example_direct_lp.py<span class="w">              </span><span class="c1"># Solve from arrays</span>
+</pre></div>
+</div>
+<p><strong>Quick overview</strong>:
+The following snippet demonstrates how to define and solve an LP problem directly from matrices.
+For a complete version with additional options, see example_direct_lp.py.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hprlp</span>
+
+<span class="c1"># Define LP: minimize c&#39;x subject to AL &lt;= Ax &lt;= AU, l &lt;= x &lt;= u</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+<span class="n">AL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="n">AU</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">])</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">])</span>
+
+<span class="c1"># Create model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">hprlp</span><span class="o">.</span><span class="n">Model</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">AL</span><span class="p">,</span> <span class="n">AU</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># Configure solver</span>
+<span class="n">param</span> <span class="o">=</span> <span class="n">hprlp</span><span class="o">.</span><span class="n">Parameters</span><span class="p">()</span>
+<span class="n">param</span><span class="o">.</span><span class="n">stop_tol</span> <span class="o">=</span> <span class="mf">1e-9</span>
+<span class="n">param</span><span class="o">.</span><span class="n">device_number</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Solve</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">is_optimal</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimal: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">primal_obj</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="model-from-arrays-a-al-au-l-u-c">
+<h4><code class="docutils literal notranslate"><span class="pre">Model.from_arrays(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></h4>
+<p>Create an LP model from matrices and vectors.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code> - Constraint matrix (scipy sparse or dense)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AL</span></code>, <code class="docutils literal notranslate"><span class="pre">AU</span></code> - Constraint bounds (numpy arrays)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l</span></code>, <code class="docutils literal notranslate"><span class="pre">u</span></code> - Variable bounds (numpy arrays)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code> - Objective coefficients (numpy array)</p></li>
+</ul>
+<p><strong>Returns:</strong> Model object</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="example-2-solve-from-mps-file">
+<h3>Example 2: Solve from MPS File</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python<span class="w"> </span>example_mps_file<span class="w">     </span><span class="c1"># Solve from MPS file</span>
+</pre></div>
+</div>
+<p><strong>Quick overview:</strong>
+The following snippet demonstrates how to define and solve an LP problem directly from an MPS file. For a complete version with additional options, see example_mps_file.py.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hprlp</span>
+
+<span class="c1"># Create model from MPS file</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">hprlp</span><span class="o">.</span><span class="n">Model</span><span class="o">.</span><span class="n">from_mps</span><span class="p">(</span><span class="s2">&quot;problem.mps&quot;</span><span class="p">)</span>
+
+<span class="c1"># Solve</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="model-from-mps-filename">
+<h3><code class="docutils literal notranslate"><span class="pre">Model.from_mps(filename)</span></code></h3>
+<p>Create an LP model from the MPS file.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code> - Path to MPS file</p></li>
+</ul>
+<p><strong>Returns:</strong> Model object</p>
+</section>
+<section id="model-solve-param-none">
+<h3><code class="docutils literal notranslate"><span class="pre">Model.solve(param=None)</span></code></h3>
+<p>Solve the LP model.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> - (Optional) Parameters object</p></li>
+</ul>
+<p><strong>Returns:</strong> Results object</p>
+</section>
+<section id="matlab-mex-interface-with-oop-wrapper-see-the-github-for-more-details">
+<h3><strong>MATLAB</strong>: MEX interface with OOP wrapper (see the <a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/matlab">github</a> for more details)</h3>
+<section id="id1">
+<h4>Example 1: Build model directly from matrices</h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+matlab<span class="w"> </span>-batch<span class="w"> </span><span class="s2">&quot;example_direct_lp&quot;</span><span class="w">              </span><span class="c1"># Solve from arrays</span>
+</pre></div>
+</div>
+<p>Or run interactively in MATLAB:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="n">examples</span>
+<span class="n">example_direct_lp</span>
+</pre></div>
+</div>
+<p><strong>Quick overview</strong>:
+The following snippet demonstrates how to define and solve an LP problem directly from matrices.
+For a complete version with additional options, see example_direct_lp.m.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define LP: minimize c&#39;x subject to AL &lt;= Ax &lt;= AU, l &lt;= x &lt;= u</span>
+<span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sparse</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">]);</span>
+<span class="n">AL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="n">inf</span><span class="p">];</span>
+<span class="n">AU</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">10.0</span><span class="p">;</span><span class="w"> </span><span class="mf">12.0</span><span class="p">];</span>
+<span class="n">l</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0</span><span class="p">;</span><span class="w"> </span><span class="mf">0.0</span><span class="p">];</span>
+<span class="n">u</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">inf</span><span class="p">;</span><span class="w"> </span><span class="n">inf</span><span class="p">];</span>
+<span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="mf">5.0</span><span class="p">];</span>
+
+<span class="c">% Create model</span>
+<span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">hprlp</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">AL</span><span class="p">,</span><span class="w"> </span><span class="n">AU</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+
+<span class="c">% Configure solver</span>
+<span class="n">param</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">hprlp</span><span class="p">.</span><span class="n">Parameters</span><span class="p">();</span>
+<span class="n">param</span><span class="p">.</span><span class="n">stop_tol</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">;</span>
+<span class="n">param</span><span class="p">.</span><span class="n">device_number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="c">% Solve</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">param</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nb">strcmp</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;OPTIMAL&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Optimal: %.6f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">primal_obj</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Solution: x = [%.6f, %.6f]\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hprlp-model-from-arrays-a-al-au-l-u-c">
+<h3><code class="docutils literal notranslate"><span class="pre">hprlp.Model.from_arrays(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></h3>
+<p>Create an LP model from matrices and vectors.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code> - Constraint matrix (m×n sparse or dense)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AL</span></code>, <code class="docutils literal notranslate"><span class="pre">AU</span></code> - Constraint bounds (column vectors)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l</span></code>, <code class="docutils literal notranslate"><span class="pre">u</span></code> - Variable bounds (column vectors)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code> - Objective coefficients (column vector)</p></li>
+</ul>
+<p><strong>Returns:</strong> Model object</p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h3>Example 2: Solve from MPS File</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+matlab<span class="w"> </span>-batch<span class="w"> </span><span class="s2">&quot;example_mps_file&quot;</span><span class="w">              </span><span class="c1"># Solve from MPS file</span>
+</pre></div>
+</div>
+<p>Or run interactively in MATLAB:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="n">examples</span>
+<span class="n">example_mps_file</span>
+</pre></div>
+</div>
+<p><strong>Quick overview</strong>:
+The following snippet demonstrates how to define and solve an LP problem from an MPS file.
+For a complete version with additional options, see example_mps_file.m.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create model from MPS file</span>
+<span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">hprlp</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">from_mps</span><span class="p">(</span><span class="s">&#39;problem.mps&#39;</span><span class="p">);</span>
+
+<span class="c">% Solve</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="n">solve</span><span class="p">();</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="hprlp-model-from-mps-filename">
+<h3><code class="docutils literal notranslate"><span class="pre">hprlp.Model.from_mps(filename)</span></code></h3>
+<p>Create an LP model from the MPS file.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code> - Path to MPS file</p></li>
+</ul>
+<p><strong>Returns:</strong> Model object</p>
+</section>
+<section id="model-solve-param">
+<h3><code class="docutils literal notranslate"><span class="pre">model.solve(param)</span></code></h3>
+<p>Solve the LP model.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> - (Optional) Parameters object. If omitted, default parameters are used.</p></li>
+</ul>
+<p><strong>Returns:</strong> Result object</p>
+</section>
+</section>
+<section id="hprlp-parameters">
+<h2><code class="docutils literal notranslate"><span class="pre">hprlp.Parameters</span></code></h2>
+<p>Solver configuration:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">max_iter</span></code> - Maximum iterations (default: 2147483647)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_tol</span></code> - Stopping tolerance (default: 1e-4)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_limit</span></code> - Time limit in seconds (default: 3600)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_number</span></code> - CUDA device ID (default: 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_iter</span></code> - Convergence check interval (default: 150)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_Ruiz_scaling</span></code> - Ruiz scaling (default: true)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_Pock_Chambolle_scaling</span></code> - Pock-Chambolle scaling (default: true)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_bc_scaling</span></code> - Bounds/cost scaling (default: true)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">hprlp</span><span class="p">.</span><span class="n">Parameters</span><span class="p">();</span>
+<span class="n">param</span><span class="p">.</span><span class="n">stop_tol</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">;</span>
+<span class="n">param</span><span class="p">.</span><span class="n">device_number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="julia-native-julia-wrapper-see-the-github-for-more-details">
+<h3><strong>Julia</strong>: Native Julia wrapper (see the <a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/julia">github</a> for more details)</h3>
+</section>
+<section id="id3">
+<h3>Example 1: Build model directly from matrices</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+julia<span class="w"> </span>--project<span class="o">=</span>../package<span class="w"> </span>example_direct_lp.jl
+</pre></div>
+</div>
+<p><strong>Quick overview:</strong>
+The following snippet demonstrates how to define and solve a small LP problem directly from matrices.
+For a complete version with additional options, see example_direct_lp.jl.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">HPRLP</span>
+<span class="k">using</span><span class="w"> </span><span class="n">SparseArrays</span>
+
+<span class="c"># Define LP: minimize c&#39;x subject to AL ≤ A*x ≤ AU, l ≤ x ≤ u</span>
+<span class="n">A</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">sparse</span><span class="p">([</span><span class="mf">1.0</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span><span class="w"> </span><span class="mf">3.0</span><span class="w"> </span><span class="mf">1.0</span><span class="p">])</span>
+<span class="n">AL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="nb">Inf</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="nb">Inf</span><span class="p">]</span>
+<span class="n">AU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">]</span>
+<span class="n">l</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">]</span>
+<span class="n">u</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nb">Inf</span><span class="p">,</span><span class="w"> </span><span class="nb">Inf</span><span class="p">]</span>
+<span class="n">c</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">5.0</span><span class="p">]</span>
+
+<span class="c"># Create model</span>
+<span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">AL</span><span class="p">,</span><span class="w"> </span><span class="n">AU</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+
+<span class="c"># Configure solver parameters</span>
+<span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Parameters</span><span class="p">(</span>
+<span class="w">    </span><span class="n">stop_tol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">,</span>
+<span class="w">    </span><span class="n">device_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c"># Solve</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="n">is_optimal</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Optimal objective: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">primal_obj</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Optimal solution:  &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="model-a-al-au-l-u-c">
+<h3><code class="docutils literal notranslate"><span class="pre">Model(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></h3>
+<p>Create an LP model directly from matrices and vectors.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">A</span></code></p></td>
+<td><p>Sparse constraint matrix (m×n)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AL</span></code>, <code class="docutils literal notranslate"><span class="pre">AU</span></code></p></td>
+<td><p>Constraint bounds</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">l</span></code>, <code class="docutils literal notranslate"><span class="pre">u</span></code></p></td>
+<td><p>Variable bounds</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Objective coefficients</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <code class="docutils literal notranslate"><span class="pre">Model</span></code> object</p>
+</section>
+</section>
+<section id="example-2-read-model-from-an-mps-file">
+<h2>Example 2: Read model from an MPS file</h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
+<span class="n">julia</span> <span class="o">--</span><span class="n">project</span><span class="o">=../</span><span class="n">package</span> <span class="n">example_mps_file</span><span class="o">.</span><span class="n">jl</span>
+</pre></div>
+</div>
+<p><strong>Quick overview:</strong>
+The following snippet demonstrates how to define and solve an LP problem directly from an MPS file. For a complete version with additional options, see example_mps_file.jl.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">HPRLP</span>
+
+<span class="c"># Create model from MPS file</span>
+<span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">(</span><span class="s">&quot;problem.mps&quot;</span><span class="p">)</span>
+
+<span class="c"># Solve</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="model-filename-string">
+<h3><code class="docutils literal notranslate"><span class="pre">Model(filename::String)</span></code></h3>
+<p>Create an LP model by reading an MPS file.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">filename</span></code></p></td>
+<td><p>Path to the MPS file</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <code class="docutils literal notranslate"><span class="pre">Model</span></code> object</p>
+</section>
+<hr class="docutils" />
+<section id="solve-model-model-params-nothing">
+<h3><code class="docutils literal notranslate"><span class="pre">solve(model::Model,</span> <span class="pre">params=nothing)</span></code></h3>
+<p>Solve the given LP model.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model</span></code></p></td>
+<td><p>LP model object</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">params</span></code></p></td>
+<td><p>Optional solver parameters</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Returns</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Results</span></code> object</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="example-3-use-jump-to-construct-and-solve-lps">
+<h2>Example 3: Use JuMP to construct and solve LPs</h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
+<span class="n">julia</span> <span class="o">--</span><span class="n">project</span><span class="o">=../</span><span class="n">package</span> <span class="n">example_jump</span><span class="o">.</span><span class="n">jl</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>C/C++</strong>: Direct API usage (see <code class="docutils literal notranslate"><span class="pre">examples/c/</span></code> and <code class="docutils literal notranslate"><span class="pre">examples/cpp/</span></code> for minimal build/run demos)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Julia%20interfaces.html" class="btn btn-neutral float-left" title="Julia interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Python%20interfaces.html" class="btn btn-neutral float-right" title="Python interfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

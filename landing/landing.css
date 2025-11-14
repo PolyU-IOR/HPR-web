@@ -1,0 +1,233 @@
+/* ================================
+   HPR Landing · Stylesheet
+   (Extracted from inline <style> and enhanced)
+   ================================ */
+
+/* ===== Base ===== */
+html, body { height: 100%; margin: 0; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color: #e6f1ff;
+  background: #0a0f1c;
+  overflow-x: hidden;
+  transition: background-color .5s ease, color .5s ease;
+  position: relative;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ===== Stars background ===== */
+canvas#stars{
+  position: fixed; inset: 0; z-index: -2; /* behind everything */
+  background: #0a0f1c;
+  transition: opacity .8s ease;
+}
+
+/* ===== Hero ===== */
+.hero{
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 24px; text-align: center; padding: 24px;
+}
+.title{
+  font-weight: 900; line-height: 0.95; letter-spacing: 0.04em;
+  text-shadow: 0 0 20px rgba(120,170,255,.45);
+  font-size: clamp(48px, 7vw, 110px);
+  transition: color .5s ease, text-shadow .5s ease;
+}
+
+/* ===== Typewriter line ===== */
+.type-line{
+  margin-top: 6px;
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 500;
+  opacity: .95;
+  min-height: 1.6em; /* avoid layout shift */
+}
+.cursor{
+  display: inline-block; width: .6ch; border-right: 2px solid currentColor;
+  animation: blink .9s step-end infinite; transform: translateY(2px);
+}
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* ===== Buttons ===== */
+.btns{ display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.btn{
+  padding: 16px 26px;
+  font-size: 18px; font-weight: 800;
+  border-radius: 14px;
+  border: 1px solid #2d4b86;
+  background: rgba(20,40,80,.65);
+  color: #d0e3ff;
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    background-color .5s ease,
+    color .5s ease;
+  backdrop-filter: saturate(1.1) blur(2px);
+}
+.btn:hover{
+  transform: translateY(-3px);
+  border-color: #4aa8ff;
+  box-shadow: 0 12px 30px rgba(40,120,220,.35);
+}
+
+/* ===== Scroll indicator ===== */
+.scroll-down{
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: #a9c5ffb0; font-size: 13px; cursor: pointer; user-select: none;
+  transition: opacity .2s ease;
+}
+.scroll-down:hover{ opacity: .9; }
+.arrow{
+  width: 22px; height: 22px; border: 2px solid currentColor; border-left: 0; border-top: 0;
+  transform: rotate(45deg); animation: bounce 1.4s ease-in-out infinite;
+}
+@keyframes bounce{
+  0%, 100% { transform: rotate(45deg) translate(0,0); }
+  50%      { transform: rotate(45deg) translate(0,6px); }
+}
+
+/* ===== Sections ===== */
+section{ padding: 72px 24px; transition: background-color .5s ease, color .5s ease; }
+.container{ max-width: 1100px; margin: 0 auto; }
+.section-title{ font-size: clamp(28px,4vw,40px); font-weight: 900; margin-bottom: 24px; }
+
+/* ===== Features grid ===== */
+.features-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 36px;
+}
+@media (max-width: 900px){ .features-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px){ .features-grid{ grid-template-columns: 1fr; } }
+
+.feature{
+  text-align: center; padding: 22px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(42,68,116,.25);
+  background: rgba(16,28,54,.08);
+  transition:
+    transform .2s ease, box-shadow .2s ease,
+    background-color .3s ease, border-color .3s ease, color .3s ease;
+}
+.feature:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(40,120,220,.12); }
+.feature .icon{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; margin-bottom: 10px;
+  border-radius: 10px; background: rgba(80,130,255,.12);
+}
+.feature svg{ width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 2; }
+.feature h3{ margin: 8px 0 6px 0; font-size: 18px; font-weight: 800; }
+.feature p{ margin: 0 auto; max-width: 28em; font-size: 14px; line-height: 1.6; opacity: .9; min-height: 40px; }
+
+/* ===== Cards / grid (used earlier for Modules, reusable) ===== */
+.muted{ color: #a8c3ffcc; line-height: 1.6; font-size: 16px; transition: color .5s ease; }
+.grid{ display: grid; gap: 18px; grid-template-columns: repeat(12, 1fr); }
+.card{
+  grid-column: span 12;
+  background: rgba(16,28,54,.66);
+  border: 1px solid #2a4474; border-radius: 16px; padding: 20px;
+  transition:
+    transform .2s ease, border-color .2s ease, box-shadow .2s ease,
+    background-color .5s ease, color .5s ease;
+  color: #e6f1ff;
+}
+.card:hover{
+  transform: translateY(-3px);
+  border-color: #4aa8ff;
+  box-shadow: 0 10px 24px rgba(40,120,220,.25);
+}
+.card h3{ margin: 0 0 8px 0; font-size: 20px; }
+.card p{ margin: 0; color: #a8c3ff; font-size: 14px; line-height: 1.6; }
+.card .go{ display: inline-block; margin-top: 10px; font-weight: 700; color: #bfe1ff; }
+@media (min-width: 900px){ .card{ grid-column: span 6; } }
+
+/* ===== Light (pure white) mode after hero ===== */
+body.light{ background: #ffffff; color: #1b2330; }
+body.light canvas#stars{ opacity: 0; }
+body.light .title{ color: #1b2330; text-shadow: none; }
+body.light .type-line{ color: #1b2330; }
+body.light .btn{ background: #ffffff; color: #1b2330; border-color: #d6d9e6; }
+body.light .btn:hover{
+  border-color: #7aa2ff; box-shadow: 0 10px 24px rgba(80,120,200,.18);
+}
+body.light .muted{ color: #3b4660; }
+body.light .card{ background: #ffffff; color: #1b2330; border-color: #e3e6ef; }
+body.light .card p{ color: #4a556d; }
+body.light .card .go{ color: #3558ff; }
+body.light .feature{ background: #ffffff; border-color: #e4e7f0; color: #1b2330; }
+body.light .feature .icon{ background: #eef3ff; }
+
+/* ============================================
+   Credits · two display styles
+   A) Card-style people (for rich bios)
+   B) Small round avatars like OSQP
+   Use either or both as needed.
+   ============================================ */
+
+/* --- A) Card-style people (with bullets) --- */
+.person .top{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.person .avatar{
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;          /* circular avatar */
+  object-fit: cover;           /* crop nicely */
+  border: 2px solid rgba(90,120,190,.35);
+}
+.person .name{ margin: 0; font-size: 18px; font-weight: 700; }
+.person .role{ font-size: 14px; opacity: .85; }
+.person .bullets{
+  margin: 10px 0 0 0;
+  padding-left: 18px;
+  color: #a8c3ff;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.person .bullets li{ margin: 4px 0; }
+
+body.light .person .role{ color: #4a556d; }
+body.light .person .bullets{ color: #4a556d; }
+
+/* --- B) Small round avatar grid (OSQP-like) --- */
+.credits-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 32px;
+  justify-items: center;
+  margin-top: 36px;
+}
+.credits { display: grid; grid-template-columns: repeat(3, minmax(220px,1fr)); gap: 32px; }
+.credits-note {
+  grid-column: 1 / -1;           /* 跨越所有列 */
+  text-align: center;
+  margin-top: 8px;                /* 与上方卡片的距离 */
+  color: #6b7280;                 /* 可选：次要文本色 */
+  font-style: italic;             /* 可选 */
+}
+.credit{ text-align: center; }
+.credit img{
+  width: 96px;            /* 80–120px recommended */
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid rgba(90,120,190,.30);
+}
+.credit .name{
+  font-weight: 700;
+  margin: 6px 0 2px 0;
+}
+.credit .role{
+  font-size: 14px;
+  opacity: .85;
+}
+body.light .credit .role{ color: #4a556d; }

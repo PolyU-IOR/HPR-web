@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julia Releases &mdash; HPR-LP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=1776d9ad"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="C Releases" href="C%20Releases.html" />
+    <link rel="prev" title="Releases" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HPR-LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20HPR-LP/index.html">About HPR-LP</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Interfaces/index.html">Interfaces</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Releases</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Julia Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%20Releases.html">C Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Python%20Releases.html">Python Releases</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Citing%20HPR-LP.html">Citing HPR-LP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HPR-LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Releases</a></li>
+      <li class="breadcrumb-item active">Julia Releases</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="julia-releases">
+<h1>Julia Releases</h1>
+<p>A compact index of HPR-LP (Julia) releases—each entry shows the version tag and a one-line summary; click a version to view full notes, benchmarks, and downloads.</p>
+<hr class="docutils" />
+<details id="v013">
+<summary><code>v0.1.3</code> — Robustness upgrade: refined parameter schedule achieves 1e-9 KKT/duality gaps and streamlines JuMP modeling</summary>
+<p><strong>Release date</strong>: 2025-10-17</p>
+<p><strong>Highlights</strong></p>
+<ol class="arabic simple">
+<li><p>Enhanced parameter adjustment strategy for significantly improved stability, achieving relative KKT and duality gap accuracy up to <strong>1e-9</strong>.</p></li>
+<li><p>Improved LP modeling pipeline with seamless <strong>JuMP</strong> integration for a smoother modeling experience.</p></li>
+</ol>
+<p><strong>Benchmark results</strong></p>
+<ul class="simple">
+<li><p><strong>Platform</strong>: NVIDIA A100-SXM4-80GB</p></li>
+<li><p><strong>Dataset</strong>: Mittelmann’s LP benchmark (no presolve)</p></li>
+<li><p><strong>Performance</strong>: 47 / 49 instances solved (<strong>Tolerance</strong>: 1e-4, <strong>Time limit</strong>: 3600s)</p></li>
+<li><p><strong>Performance</strong>: 41 / 49 instances solved (<strong>Tolerance</strong>: 1e-9, <strong>Time limit</strong>: 3600s)</p></li>
+</ul>
+<p><strong>Downloads</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.3.zip">Source code (zip)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.3.tar.gz">Source code (tar.gz)</a></p></li>
+</ul>
+</details>
+<hr class="docutils" />
+<details id="v012">
+<summary><code>v0.1.2</code> — SpMV & kernel rewrites</summary>
+<p><strong>Release date</strong>: 2025-09-27</p>
+<p><strong>Highlights</strong></p>
+<ul class="simple">
+<li><p>SpMV rewrites: added preprocessing and buffer preallocation to avoid redundant work between iterations.</p></li>
+<li><p>CUDA kernel refactors: reduced memory traffic and improved occupancy.</p></li>
+<li><p>Under SGM10 (1e-8 accuracy): +11% on Mittelmann’s LP benchmark set and +7% on MIP2017 large-scale LP relaxations (vs. v0.1.1).</p></li>
+</ul>
+<p><strong>Downloads</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/releases/download/v0.1.2/HPR-LP_v012_bug_fixed.zip">HPR-LP_v012_bug_fixed.zip</a></p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.2.zip">Source code (zip)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.2.tar.gz">Source code (tar.gz)</a></p></li>
+</ul>
+</details>
+<hr class="docutils" />
+<details id="v011">
+<summary><code>v0.1.1</code> — Model reformulation + adaptive restart/penalty + fused kernels</summary>
+<p><strong>Release date</strong>: 2025-09-09</p>
+<p><strong>Highlights</strong></p>
+<ul class="simple">
+<li><p>Model reformulation. Updated the problem formulation to the new form for better stability and consistency across instances.</p></li>
+<li><p>Adaptive restarts &amp; penalty auto-tuning. A redesigned penalty parameter update rule to improve convergence speed and robustness.</p></li>
+<li><p>Kernel rewrites. Several CUDA kernels were refactored/fused to reduce memory traffic and improve occupancy.</p></li>
+<li><p>Simplified parameters. Removed sigma and sigma_fixed from the parameters.</p></li>
+<li><p>In terms of SGM10 (1e-8 accuracy), 14% faster for Mittelmann’s LP benchmark set and 95% faster for MIP2017 large-scale LP relaxations (compared to v0.1.0).</p></li>
+</ul>
+<p><strong>Downloads</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.1.zip">Source code (zip)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.1.tar.gz">Source code (tar.gz)</a></p></li>
+</ul>
+</details>
+<hr class="docutils" />
+<details id="v010">
+<summary><code>v0.1.0</code> — A preliminary release: Julia GPU-accelerated HPR-LP solver</summary>
+<p><strong>Release date</strong>: 2025-07-04</p>
+<p><strong>Highlights</strong></p>
+<ul class="simple">
+<li><p>First public release of <strong>HPR-LP</strong>.</p></li>
+<li><p>GPU-accelerated LP solver in Julia implementing the Halpern–Peaceman–Rachford (HPR) method.</p></li>
+<li><p>Model formulation:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\min_{x \in \mathbb{R}^n} \quad &amp; (c, x) \\
+\text{s.t.}\quad
+&amp; A_1 x = b_1, \\
+&amp; A_2 x \ge b_2, \\
+&amp; l \le x \le u.
+\end{aligned}\end{split}\]</div>
+<p><strong>Downloads</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.0.zip">Source code (zip)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.0.tar.gz">Source code (tar.gz)</a></p></li>
+</ul>
+</details>
+<hr class="docutils" />
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Releases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C%20Releases.html" class="btn btn-neutral float-right" title="C Releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python interfaces &mdash; HPR-LP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=1776d9ad"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Releases" href="../Releases/index.html" />
+    <link rel="prev" title="C interfaces" href="C%20interfaces.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HPR-LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20HPR-LP/index.html">About HPR-LP</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Julia%20interfaces.html">Julia interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%20interfaces.html">C interfaces</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Python interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-examples">Running examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test-problem-lp">Test problem (LP)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-based-api">1. Model-based API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mps-file-api">2. MPS file API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Citing%20HPR-LP.html">Citing HPR-LP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HPR-LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Interfaces</a></li>
+      <li class="breadcrumb-item active">Python interfaces</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="python-interfaces">
+<h1>Python interfaces</h1>
+<p>This page shows how to use the <strong>Python interface</strong> of HPR-LP: run demos, build custom problems, adjust solver settings, and interpret results.</p>
+<section id="running-examples">
+<h2>Running examples</h2>
+<p>The demo LP problem is:</p>
+<section id="test-problem-lp">
+<h3>Test problem (LP)</h3>
+<p>The default demo problem we ship is a small linear program of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\min \quad &amp; - 3 x_1 - 5 x_2\\
+\text{s.t.} \quad &amp; x_1 + 2 x_2 \le 10, \\
+&amp; 3 x_1 + x_2 \le 12, \\
+&amp; x_1 \ge 0, \\
+&amp; x_2 \ge 0.
+\end{aligned}
+\end{split}\]</div>
+<p>After installing the environment, you can run the solver in two ways: <strong>model-based API</strong> or <strong><code class="docutils literal notranslate"><span class="pre">.mps</span></code> API</strong>.</p>
+</section>
+<section id="model-based-api">
+<h3>1. Model-based API</h3>
+<p>You can also build and solve an LP <strong>directly from NumPy / SciPy arrays</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
+
+
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">PROJECT_ROOT</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">PROJECT_ROOT</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.model_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Parameters</span>
+
+<span class="n">A</span>  <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]],</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span>
+<span class="p">)</span>
+
+<span class="c1"># Row bounds on A x:</span>
+<span class="n">AL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">AU</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span>     <span class="mf">12.0</span>   <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="c1"># Variable bounds:</span>
+<span class="n">l</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>       <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">u</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="c1"># Objective vector for &quot;maximize c^T x&quot;</span>
+<span class="n">c</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">],</span>     <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="c1"># Build a Model object directly from arrays (no disk I/O)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">AL</span><span class="p">,</span> <span class="n">AU</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">param</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+
+<span class="c1"># These names match what you set in run_single_file.py</span>
+<span class="n">param</span><span class="o">.</span><span class="n">time_limit</span>    <span class="o">=</span> <span class="mf">3600.0</span>       
+<span class="n">param</span><span class="o">.</span><span class="n">stoptol</span>       <span class="o">=</span> <span class="mf">1e-9</span>       
+<span class="n">param</span><span class="o">.</span><span class="n">device_number</span> <span class="o">=</span> <span class="mi">0</span>                    
+
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># 5. Print result</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;status:     &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;output_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;objective:  &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;primal_obj&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solution x: &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iterations: &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;iter&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solve_time: &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+</pre></div>
+</div>
+</section>
+<section id="mps-file-api">
+<h3>2. MPS file API</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/run_single_file.py
+</pre></div>
+</div>
+<p>This calls <code class="docutils literal notranslate"><span class="pre">run_single_file.py</span></code> with its default arguments, which solve one LP model in MPS format.</p>
+<p>You can also override any of these from the command line, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/run_single_file.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--file_name<span class="w"> </span>/path/to/your_problem.mps<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device_number<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--stoptol<span class="w"> </span>1e-8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--time_limit<span class="w"> </span><span class="m">3600</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--check_iter<span class="w"> </span><span class="m">150</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--warm_up<span class="w"> </span>True<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--use_Ruiz_scaling<span class="w"> </span>True<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--use_Pock_Chambolle_scaling<span class="w"> </span>True<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--use_bc_scaling<span class="w"> </span>True
+</pre></div>
+</div>
+</section>
+</section>
+<section id="parameters">
+<h2>Parameters</h2>
+</section>
+<section id="id1">
+<h2>Parameters</h2>
+<p>Below is a list of the parameters in HPR-LP along with their default values and usage:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Parameter</strong></p></th>
+<th class="head"><p><strong>Default Value</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">warm_up</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Determines if a warm-up phase is performed before main execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">time_limit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3600</span></code></p></td>
+<td><p>Maximum allowed runtime (seconds) for the algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stoptol</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1e-4</span></code></p></td>
+<td><p>Stopping tolerance for convergence checks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">device_number</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>GPU device number (only relevant if <code class="docutils literal notranslate"><span class="pre">use_gpu</span></code> is true).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_iter</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">typemax(Int32)</span></code></p></td>
+<td><p>Maximum number of iterations allowed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">check_iter</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">150</span></code></p></td>
+<td><p>Number of iterations to check residuals.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">use_Ruiz_scaling</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Whether to apply Ruiz scaling.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">use_Pock_Chambolle_scaling</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Whether to use the Pock-Chambolle scaling.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">use_bc_scaling</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Whether to use the scaling for b and c.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">use_gpu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Whether to use GPU or not.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">print_frequency</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-1</span></code> (auto)</p></td>
+<td><p>Print the log every <code class="docutils literal notranslate"><span class="pre">print_frequency</span></code> iterations.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="results">
+<h2>Results</h2>
+<p>After solving an instance, you can access the result variables as shown below:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Category</strong></p></th>
+<th class="head"><p><strong>Variable</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Iteration Counts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">iter</span></code></p></td>
+<td><p>Total number of iterations performed by the algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">iter_4</span></code></p></td>
+<td><p>Number of iterations required to achieve an accuracy of <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">iter_6</span></code></p></td>
+<td><p>Number of iterations required to achieve an accuracy of <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Time Metrics</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">time</span></code></p></td>
+<td><p>Total time in seconds taken by the algorithm.</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">time_4</span></code></p></td>
+<td><p>Time in seconds taken to achieve an accuracy of <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">time_6</span></code></p></td>
+<td><p>Time in seconds taken to achieve an accuracy of <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">power_time</span></code></p></td>
+<td><p>Time in seconds used by the power method.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Objective Values</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">primal_obj</span></code></p></td>
+<td><p>The primal objective value obtained.</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gap</span></code></p></td>
+<td><p>The gap between the primal and dual objective values.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Residuals</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">residuals</span></code></p></td>
+<td><p>Relative residuals of the primal feasibility, dual feasibility, and duality gap.</p></td>
+</tr>
+<tr class="row-even"><td><p>Algorithm Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">output_type</span></code></p></td>
+<td><p>The final status of the algorithm:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OPTIMAL</span></code> : Found optimal solution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_ITER</span></code> : Max iterations reached</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TIME_LIMIT</span></code> : Time limit reached</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Solution Vectors</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>The final solution vector <strong>x</strong>.</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+<td><p>The final solution vector <strong>y</strong>.</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">z</span></code></p></td>
+<td><p>The final solution vector <strong>z</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="C%20interfaces.html" class="btn btn-neutral float-left" title="C interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Releases/index.html" class="btn btn-neutral float-right" title="Releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

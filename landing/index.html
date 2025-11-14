@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- <link rel="stylesheet" href="./landing.css?v=2"> -->
+  <link rel="icon" type="image/png" href="/HPR-web-test/assets/avatars/favicon.png">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>HPR</title>
+  <style>
+    /* ===== Base ===== */
+    html,body{height:100%;margin:0}
+    body{
+      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      color:#e6f1ff; background:#0a0f1c; overflow-x:hidden;
+      transition: background-color .5s ease, color .5s ease;
+      position: relative;
+    }
+    a{color:inherit;text-decoration:none}
+
+
+    /* ===== Stars background ===== */
+    canvas#stars{
+      position:fixed; inset:0; z-index:-2; /* put behind the overlay */
+      background:#0a0f1c;
+      transition: opacity .8s ease;
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      min-height:100vh;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:24px; text-align:center; padding:24px;
+    }
+    .title{
+      font-weight:900; line-height:0.95; letter-spacing:0.04em;
+      text-shadow:0 0 20px rgba(120,170,255,.45);
+      font-size:clamp(58px, 9vw, 140px); /* half of the big one */
+      transition: color .5s ease, text-shadow .5s ease;
+      margin:0;              /* remove default margins */
+      line-height:1;         /* no extra vertical room */
+    }
+    /* Second line inside the same <h1> */
+    .title .sub{
+      display:block;                 /* new line under HPR */
+      font-size:0.3em !important;    /* exactly half of the main HPR */
+      line-height:1.05;
+      margin-top:0.06em;             /* very tight gap; tweak if needed */
+      font-weight:inherit;
+      letter-spacing:inherit;
+      color:inherit;
+      text-shadow:inherit;
+    }
+    /* If you want them to be absolutely stuck together, use: */
+    /* .title .sub{ margin-top:0 } or even margin-top:-2px */
+
+
+    /* ===== Typewriter line ===== */
+    .type-line{
+      margin-top:6px;
+      font-size:clamp(18px, 2.4vw, 28px);
+      font-weight:500;
+      opacity:.95;
+      min-height:1.6em; /* avoid layout shift */
+    }
+    .cursor{
+      display:inline-block;width:0.6ch;border-right:2px solid currentColor;
+      animation:blink .9s step-end infinite; transform:translateY(2px);
+    }
+    @keyframes blink{ 50%{ border-color:transparent; } }
+
+    .btns{display:flex; gap:20px; flex-wrap:wrap; justify-content:center}
+    .btn{
+      padding:16px 26px;
+      font-size:18px; font-weight:800;
+      border-radius:14px;
+      border:1px solid #2d4b86;
+      background:rgba(20,40,80,.65);
+      color:#d0e3ff;
+      transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease, background-color .5s ease, color .5s ease;
+      backdrop-filter:saturate(1.1) blur(2px);
+    }
+    .btn:hover{ transform:translateY(-3px); border-color:#4aa8ff; box-shadow:0 12px 30px rgba(40,120,220,.35) }
+
+    /* Scroll indicator */
+    .scroll-down{
+      position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      color:#a9c5ffb0; font-size:13px; cursor:pointer; user-select:none;
+      transition:opacity .2s ease;
+    }
+    .scroll-down:hover{opacity:.9}
+    .arrow{
+      width:22px; height:22px; border:2px solid currentColor; border-left:0; border-top:0;
+      transform:rotate(45deg); animation:bounce 1.4s ease-in-out infinite;
+    }
+    @keyframes bounce{ 0%,100%{transform:rotate(45deg) translate(0,0)} 50%{transform:rotate(45deg) translate(0,6px)} }
+
+    /* ===== Common sections ===== */
+    section{padding:72px 24px; transition: background-color .5s ease, color .5s ease;}
+    .container{max-width:1100px;margin:0 auto}
+    .section-title{font-size:clamp(28px,4vw,40px); font-weight:900; margin-bottom:24px;}
+
+    /* ===== Features (3 per row, with inline SVG icons) ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 36px;
+    }
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+    .feature{
+      text-align:center; padding:22px 16px;
+      border-radius:14px;
+      border:1px solid rgba(42,68,116,.25);
+      background:rgba(16,28,54,.08);
+      transition:transform .2s ease, box-shadow .2s ease, background-color .3s ease, border-color .3s ease, color .3s ease;
+    }
+    .feature:hover{ transform:translateY(-3px); box-shadow:0 8px 20px rgba(40,120,220,.12) }
+    .feature .icon{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:44px; height:44px; margin-bottom:10px;
+      border-radius:10px; background:rgba(80,130,255,.12);
+    }
+    .feature svg{ width:26px; height:26px; stroke:currentColor; fill:none; stroke-width:2 }
+    .feature h3{ margin:8px 0 6px 0; font-size:18px; font-weight:800 }
+    .feature p{ margin:0 auto; max-width:28em; font-size:14px; line-height:1.6; opacity:.9; min-height:40px }
+
+    /* ===== Modules grid ===== */
+    .muted{color:#a8c3ffcc; line-height:1.6; font-size:16px; transition: color .5s ease;}
+    .grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
+    .card{
+      grid-column:span 12;
+      background:rgba(16,28,54,.66);
+      border:1px solid #2a4474; border-radius:16px; padding:20px;
+      transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease, background-color .5s ease, color .5s ease;
+      color:#e6f1ff;
+    }
+    .card:hover{ transform:translateY(-3px); border-color:#4aa8ff; box-shadow:0 10px 24px rgba(40,120,220,.25) }
+    .card h3{margin:0 0 8px 0; font-size:20px}
+    .card p{margin:0; color:#a8c3ff; font-size:14px; line-height:1.6}
+    .card .go{display:inline-block;margin-top:10px;font-weight:700;color:#bfe1ff}
+    @media (min-width:900px){ .card{grid-column:span 6} }
+
+    /* ===== Light (pure white) mode after hero ===== */
+    body.light{ background:#ffffff; color:#1b2330; }
+    body.light canvas#stars{ opacity:0; }
+    body.light .title{ color:#1b2330; text-shadow:none; }
+    body.light .type-line{ color:#1b2330; } /* type line adapts */
+    body.light .btn{
+      background:#ffffff; color:#1b2330; border-color:#d6d9e6;
+    }
+    body.light .btn:hover{
+      border-color:#7aa2ff; box-shadow:0 10px 24px rgba(80,120,200,.18);
+    }
+    body.light .muted{ color:#3b4660; }
+    body.light .card{ background:#ffffff; color:#1b2330; border-color:#e3e6ef; }
+    body.light .card p{ color:#4a556d; }
+    body.light .card .go{ color:#3558ff; }
+    body.light .feature{
+      background:#ffffff; border-color:#e4e7f0; color:#1b2330;
+    }
+    body.light .feature .icon{ background:#eef3ff }
+
+    /* ===== Credits ===== */
+  .credits-grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap:36px;
+    justify-items:center;
+    align-items:start;
+  }
+  @media (max-width:900px){ .credits-grid{ grid-template-columns: repeat(2, minmax(220px,1fr)); } }
+  @media (max-width:600px){ .credits-grid{ grid-template-columns: 1fr; } }
+
+  .credit{
+    /* Card container */
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:18px; border-radius:16px;
+    background:rgba(16,28,54,.08); border:1px solid rgba(42,68,116,.25);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .credit:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(40,120,220,.22); border-color:#4aa8ff; }
+
+  .credit img{
+    /* Round avatar */
+    width:120px; height:120px; border-radius:50%;
+    object-fit:cover; display:block;
+    border:3px solid rgba(120,170,255,.55);
+    box-shadow:0 6px 20px rgba(40,120,220,.25);
+    margin-bottom:12px;
+    background:#fff;
+  }
+  .credit .name{ font-weight:800; margin-top:6px; }
+  .credit .role{ font-size:13px; opacity:.85; line-height:1.4; margin-top:4px; }
+
+  /* Light mode overrides */
+  body.light .credit{ background:#ffffff; border-color:#e4e7f0; }
+  body.light .credit img{ border-color:#c9d7ff; box-shadow:0 6px 18px rgba(80,120,200,.18); }
+
+
+  /* Subtle note at the end of credits */
+  .credits-note{
+    text-align:center;
+    margin-top:14px;
+    font-size:14px;
+    opacity:.9;
+    color:#a8c3ffcc;
+  }
+  body.light .credits-note{ color:#4a556d; }
+
+  </style>
+</head>
+<body>
+  <!-- Stars background -->
+  <canvas id="stars"></canvas>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <h1 class="title">
+      HPR
+      <span class="sub">Halpern Peaceman–Rachford</span>
+    </h1>
+    
+    <!-- Typewriter line -->
+    <!-- <p class="type-line" aria-live="polite">
+      <span id="typewriter"></span><span class="cursor" aria-hidden="true"></span>
+    </p> -->
+    <p class="type-line">
+      GPU-accelerated solvers for convex optimization problems<br>
+    </p>
+
+
+    <div class="btns">
+      <a class="btn" href="./hprlp/index.html">HPR-LP</a>
+      <a class="btn" href="./hprqp/index.html">HPR-QP</a>
+    </div>
+    <div class="scroll-down" id="scrollMore" aria-label="Scroll to learn more">
+      <div>Scroll</div><div class="arrow"></div>
+    </div>
+  </header>
+
+  <!-- ===== Features (under the hero) ===== -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">Features</h2>
+
+      <div class="features-grid">
+        <div class="feature">
+          <div class="icon">
+            <!-- Lightning -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"/>
+            </svg>
+          </div>
+          <h3>Efficient</h3>
+          <p><!-- TODO: fill your brief description --></p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- Shield -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7l8-4z"/>
+              <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>High-precision</h3>
+          <p><!-- TODO: fill your brief description --></p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- CPU / Embed -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="7" y="7" width="10" height="10" rx="2"/>
+              <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
+            </svg>
+          </div>
+          <h3>GPU-accelerated</h3>
+          <p><!-- TODO: fill your brief description --></p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- Link / Interfaces -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 14l-2 2a4 4 0 0 1-6-6l2-2"/>
+              <path d="M14 10l2-2a4 4 0 1 1 6 6l-2 2"/>
+              <path d="M8 16l8-8"/>
+            </svg>
+          </div>
+          <h3>Many interfaces</h3>
+          <p><!-- TODO: fill your brief description --></p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- Heart -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s-6-4.35-9-7.35C-1 9 2 4 6 4c2 0 3.5 1 4.5 2.5C11.5 5 13 4 15 4c4 0 7 5 3 9.65C18 16.65 12 21 12 21z"/>
+            </svg>
+          </div>
+          <h3>Adaptive restarts</h3>
+          <p><!-- TODO: fill your brief description --></p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- Feather / library-free -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 3c-4 0-9 3-12 6S3 14 3 18c4 0 9-3 12-6s5-8 5-9z"/>
+              <path d="M14 7l3 3M3 21l6-6"/>
+            </svg>
+          </div>
+          <h3>Free & Open-source</h3>
+          <p><!-- TODO: fill your brief description --></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section id="Contribution team">
+    <div class="container">
+      <h2 class="section-title">Contribution team</h2>
+  
+      <div class="credits-grid">
+        <!-- Single person card template -->
+        <!-- Tip: Duplicate <figure> blocks below to add more members -->
+        
+        <!-- Defeng Sun -->
+        <figure class="credit">
+          <a href="https://www.polyu.edu.hk/ama/profile/dfsun/" target="_blank" rel="noopener">
+            <img src="../assets/avatars/defeng_sun.png" alt="Defeng Sun" loading="lazy" width="120" height="120">
+          </a>
+          <figcaption>
+            <div class="name">Defeng Sun</div>
+            <div class="role"><em>The Hong Kong Polytechnic University</em></div>
+          </figcaption>
+        </figure>
+
+        <!-- Xinyuan Zhao -->
+        <figure class="credit">
+          <a href="https://msm.bjut.edu.cn/info/1091/2624.htm" target="_blank" rel="noopener">
+            <img src="../assets/avatars/xinyuan_zhao.jpg" alt="Xinyuan Zhao" loading="lazy" width="120" height="120">
+          </a>
+          <figcaption>
+            <div class="name">Xinyuan Zhao</div>
+            <div class="role"><em>Beijing University of Technology</em></div>
+          </figcaption>
+        </figure>
+
+        <!-- Yancheng Yuan -->
+        <figure class="credit">
+          <a href="https://paulyuanmath.github.io/" target="_blank" rel="noopener">
+            <img src="../assets/avatars/yancheng_yuan.png" alt="Yancheng Yuan" loading="lazy" width="120" height="120">
+          </a>
+          <figcaption>
+            <div class="name">Yancheng Yuan</div>
+            <div class="role"><em>The Hong Kong Polytechnic University</em></div>
+          </figcaption>
+        </figure>
+
+        <!-- Guojun Zhang -->
+        <figure class="credit">
+          <a href="#" onclick="return false;">
+            <img src="../assets/avatars/guojun_zhang.png" alt="Guojun Zhang" loading="lazy" width="120" height="120">
+          </a>
+          <figcaption>
+            <div class="name">Guojun Zhang</div>
+            <div class="role"><em>The Hong Kong Polytechnic University</em></div>
+          </figcaption>
+        </figure>
+
+        <!-- Kaihuang Chen -->
+        <figure class="credit">
+          <a href="#" onclick="return false;">
+            <img src="../assets/avatars/kaihuang_chen.png" alt="Kaihuang Chen" loading="lazy" width="120" height="120">
+          </a>
+          <figcaption>
+            <div class="name">Kaihuang Chen</div>
+            <div class="role"><em>The Hong Kong Polytechnic University</em></div>
+          </figcaption>
+        </figure>
+
+        <!-- Zhexuan Gu -->
+        <figure class="credit">
+          <a href="#" onclick="return false;">
+            <img src="../assets/avatars/zhexuan_gu.jpg" alt="Zhexuan Gu" loading="lazy" width="120" height="120">
+          </a>
+          <figcaption>
+            <div class="name">Zhexuan Gu</div>
+            <div class="role"><em>The Hong Kong Polytechnic University</em></div>
+          </figcaption>
+        </figure>
+
+        <!-- Jiawei Lu -->
+        <figure class="credit">
+          <a href="#" onclick="return false;">
+            <img src="../assets/avatars/jiawei_lu.jpg" alt="Jiawei Lu" loading="lazy" width="120" height="120">
+          </a>
+          <figcaption>
+            <div class="name">Jiawei Lu</div>
+            <div class="role"><em>The Hong Kong Polytechnic University</em></div>
+          </figcaption>
+        </figure>
+    </div>
+    <div class="credits-note">And many others...</div>
+  </section>
+
+
+  <script>
+    /* ===== Stars parallax background ===== */
+    const canvas=document.getElementById('stars'), ctx=canvas.getContext('2d');
+    let W,H;
+    function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+    resize(); addEventListener('resize',resize);
+
+    const N=220, SPEED=0.26;
+    const stars=[...Array(N)].map(()=>({x:Math.random()*W, y:Math.random()*H, z:Math.random()*1+0.2}));
+    let mx=0,my=0;
+    addEventListener('mousemove',e=>{
+      mx=(e.clientX/W-0.5)*2; my=(e.clientY/H-0.5)*2;
+    });
+
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      for(const s of stars){
+        s.x+=SPEED*s.z; s.y+=SPEED*0.2*s.z;
+        if(s.x>W) s.x=0; if(s.y>H) s.y=0;
+        ctx.fillStyle=`rgba(180,220,255,${0.3+s.z*0.7})`;
+        ctx.fillRect(s.x+mx*8*s.z, s.y+my*4*s.z, 2, 2);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    /* ===== Toggle pure white mode when hero leaves viewport ===== */
+    const hero=document.getElementById('hero');
+    const observer=new IntersectionObserver(
+      entries=>{
+        const inView = entries[0].isIntersecting;
+        document.body.classList.toggle('light', !inView);
+      },
+      { root:null, threshold:0.5 } // trigger later; adjust 0.3~0.7 to taste
+    );
+    observer.observe(hero);
+
+    /* Smooth scroll on "Scroll" indicator */
+    document.getElementById('scrollMore').addEventListener('click',()=>{
+      const features=document.getElementById('features');
+      features?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+
+    /* ===== Typewriter (vanilla JS) ===== */
+    (function(){
+      const lines = [
+        "Efficient and high-precision for large-scale problems.",
+        "GPU-accelerated solvers for convex optimization problems.",
+        "Robust, free, and open-source."
+      ];
+      const TYPE=70, ERASE=40, HOLD=1400, GAP=600;
+      const el=document.getElementById("typewriter");
+      if(!el) return;
+      const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const typeSpeed=reduceMotion?0:TYPE, eraseSpeed=reduceMotion?0:ERASE;
+
+      let i=0, j=0, typing=true;
+      function step(){
+        const text=lines[i];
+        if(typing){
+          j++; el.textContent=text.slice(0,j);
+          if(j===text.length){ typing=false; return setTimeout(step,HOLD); }
+          return setTimeout(step,typeSpeed);
+        }else{
+          j--; el.textContent=text.slice(0,j);
+          if(j===0){ typing=true; i=(i+1)%lines.length; return setTimeout(step,GAP); }
+          return setTimeout(step,eraseSpeed);
+        }
+      }
+      setTimeout(step,400);
+    })();
+  </script>
+</body>
+</html>

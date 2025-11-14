@@ -1,0 +1,12 @@
+.wy-nav-side {
+    background: #1e2a38; /* 深蓝灰 */
+}
+.wy-nav-side .toctree-l1 > a {
+    color: #dbe4ee;      /* 浅灰蓝文字 */
+}
+.wy-nav-side .toctree-l1.current > a {
+    color: #4dabf7;      /* 高亮：亮蓝 */
+}
+.wy-side-nav-search {
+    background: #243447; /* 稍亮的蓝灰 */
+}

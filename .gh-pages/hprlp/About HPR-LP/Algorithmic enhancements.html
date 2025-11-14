@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algorithmic enhancements &mdash; HPR-LP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=1776d9ad"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HPR-LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About HPR-LP</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Interfaces/index.html">Interfaces</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Citing%20HPR-LP.html">Citing HPR-LP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HPR-LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Algorithmic enhancements</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="algorithmic-enhancements">
+<h1>Algorithmic enhancements</h1>
+<p>Several enhancements have been proposed to improve the performance of the HPR method for solving LP [5] and CCQP [6].<br />
+In particular, restart strategies and adaptive updates of the penalty parameter <span class="math notranslate nohighlight">\(\sigma\)</span>, motivated by the <span class="math notranslate nohighlight">\(O(1/k)\)</span> complexity results in Theorem 2.4, have proven effective.<br />
+For completeness, we summarize the HPR-LP framework in Algorithm 2.2.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{|l|}
+\hline
+\textbf{Algorithm 2.2 \  HPR-LP: A Halpern Peaceman-Rachford method} \\ \textbf{for the problem (1.2) (cf. [5])} \\ \hline
+\textbf{Input:} \ \mathcal{T}_1:\mathbb{R}^m\to\mathbb{R}^m\ \text{be a self-adjoint positive semidefinite linear operator}  \text{such that }\mathcal{T}_1+AA^*\succ0.\ \\ \text{Denote }w=(y,z,x),\ \bar{w}=(\bar{y},\bar{z},\bar{x}).\ \text{Choose an initial point }w^{0,0}=(y^{0,0},z^{0,0},x^{0,0})\in\mathbb{R}^m\times\mathbb{R}^n\times\mathbb{R}^n. \\ 
+\textbf{Initialization:}\ \text{Set the outer loop counter }r=0,\ \text{the total loop counter }k=0,\ \\ \text{and the initial penalty parameter }\sigma_0&gt;0. \\ 
+\textbf{repeat} \\ 
+\quad \text{initialize the inner loop: set inner loop counter }t=0; \\ 
+\quad \textbf{repeat} \\ 
+\quad\quad \bar{z}^{r,t+1}=\arg\min_{z\in\mathbb{R}^n}\{L_{\sigma_r}(y^{r,t},z;x^{r,t})\}; \\ 
+\quad\quad \bar{x}^{r,t+1}=x^{r,t}+\sigma_r(A^*y^{r,t}+\bar{z}^{r,t+1}-c); \\ 
+\quad\quad \bar{y}^{r,t+1}=\arg\min_{y\in\mathbb{R}^m}\{L_{\sigma_r}(y,\bar{z}^{r,t+1};\bar{x}^{r,t+1})+\tfrac{\sigma_r}{2}\|y-y^{r,t}\|_{\mathcal{T}_1}^2\}; \\ 
+\quad\quad \hat{w}^{r,t+1}=2\bar{w}^{r,t+1}-w^{r,t}; \\ 
+\quad\quad w^{r,t+1}=\tfrac{1}{t+2}w^{r,0}+\tfrac{t+1}{t+2}\hat{w}^{r,t+1}; \\ 
+\quad\quad t=t+1,\ k=k+1; \\ 
+\quad \textbf{until}\ \text{one of the restart criteria holds or termination criteria hold} \\ 
+\quad \textbf{restart the inner loop: }\tau_r=t,\ w^{r+1,0}=w^{r,\tau_r}, \\ 
+\quad \sigma_{r+1}=\text{SigmaUpdate}(\bar{w}^{r,\tau_r},w^{r,0},\mathcal{T}_1,A),\ r=r+1; \\ 
+\textbf{until}\ \text{termination criteria hold} \\ 
+\textbf{Output:}\ \{w^{r,t}\}. \\ \hline
+\end{array}\end{split}\]</div>
+<section id="restart-strategy">
+<h2>Restart strategy</h2>
+<p>Restarting has been recognized as particularly important for Halpern iterations.<br />
+As noted in Theorem 2.4, the complexity bound depends on the weighted distance <span class="math notranslate nohighlight">\(R_0\)</span> between the initial point and the optimal solution. Consequently, as the iterates approach optimality, continuing to reference a distant initial anchor becomes counterproductive, whereas resetting the anchor to the current iterate helps reduce the bound and refocus the iteration near the solution.</p>
+<p>This observation motivates the merit function</p>
+<div class="math notranslate nohighlight">
+\[R_{r,t} := \| w^{r,t} - w^* \|_{\mathcal{M}}, 
+\quad \forall r \geq 0,\; t \geq 0,\]</div>
+<p>where <span class="math notranslate nohighlight">\(w^*\)</span> is any solution of the KKT system (2.1). Since <span class="math notranslate nohighlight">\(w^*\)</span> is unknown, the practical surrogate</p>
+<div class="math notranslate nohighlight">
+\[\tilde{R}_{r,t} := \| w^{r,t} - \hat{w}^{r,t+1} \|_{\mathcal{M}}\]</div>
+<p>is employed in defining restart rules. The following criteria are commonly adopted:</p>
+<ol class="arabic simple">
+<li><p><strong>Sufficient decay:</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\tilde{R}_{r,t+1} \leq \alpha_1 \tilde{R}_{r,0},\]</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Necessary decay + no local progress:</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\tilde{R}_{r,t+1} \leq \alpha_2 \tilde{R}_{r,0}, 
+\quad \text{and} \quad
+\tilde{R}_{r,t+1} &gt; \tilde{R}_{r,t};\]</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Long inner loop:</strong></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[t \geq \alpha_3 k;\]</div>
+<p>where <span class="math notranslate nohighlight">\(0 &lt; \alpha_1 &lt; \alpha_2 &lt; 1\)</span> and <span class="math notranslate nohighlight">\(0 &lt; \alpha_3 &lt; 1\)</span>.<br />
+When any criterion is met, the inner loop is restarted at iteration <span class="math notranslate nohighlight">\((r+1)\)</span> with <span class="math notranslate nohighlight">\(w^{r+1,0} = \bar{w}^{r,\tau_r}\)</span> and an updated <span class="math notranslate nohighlight">\(\sigma_{r+1}\)</span>.</p>
+<p><strong>Remark 2.6.</strong> Restart strategies are commonly used in first-order methods for LP [1, 31, 33, 32].<br />
+For instance, PDLP adopts a normalized duality gap as the merit function [1], while subsequent works by Lu et al. [31, 33] introduced variants based on weighted KKT residuals.</p>
+</section>
+<section id="update-rules-for-sigma">
+<h2>Update rules for <span class="math notranslate nohighlight">\(\sigma\)</span></h2>
+<p>Another important enhancement of HPR methods concerns the update of the penalty parameter <span class="math notranslate nohighlight">\(\sigma\)</span>.<br />
+The update strategy is motivated by the complexity results of the HPR method in Algorithm 2.1 (see Theorem 2.4).<br />
+At a high level, the goal is to select <span class="math notranslate nohighlight">\(\sigma\)</span> at each restart to tighten the complexity bound and thereby reduce the KKT residuals in subsequent iterations. Specifically, the ideal update is defined as the minimizer of the weighted distance to the optimal solution:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{r+1} := \arg\min_\sigma \| w^{r+1,0} - w^* \|_{\mathcal{M}}^2,\]</div>
+<p>where <span class="math notranslate nohighlight">\(w^*\)</span> is any solution of the KKT system (2.1).<br />
+Substituting the definition of <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> from (2.3) leads to the closed-form expression</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{r+1} =
+\sqrt{
+\frac{\| x^{r+1,0} - x^* \|^2}
+{\| y^{r+1,0} - y^* \|_{T_1}^2 + \| A^*(y^{r+1,0} - y^*) \|^2}
+}.\]</div>
+<p>Since the optimal solution <span class="math notranslate nohighlight">\((x^*, y^*)\)</span> is unknown, practical implementations approximate these terms using the observed progress within each outer loop:</p>
+<div class="math notranslate nohighlight">
+\[\Delta_x := \| \bar{x}^{r,\tau_r} - x^{r,0} \|, 
+\quad
+\Delta_y := \sqrt{ \| \bar{y}^{r,\tau_r} - y^{r,0} \|_{T_1}^2 + \| A^*(\bar{y}^{r,\tau_r} - y^{r,0}) \|^2 },\]</div>
+<p>which yields the implementable update rule</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{r+1} = \frac{\Delta_x}{\Delta_y}.\]</div>
+<hr class="docutils" />
+<p>Several special cases of <span class="math notranslate nohighlight">\(T_1\)</span> have been investigated in the literature [5]:</p>
+<ol class="arabic">
+<li><p><strong>Case <span class="math notranslate nohighlight">\(T_1 = 0\)</span>.</strong><br />
+This case occurs when <span class="math notranslate nohighlight">\(l_c = u_c\)</span>, which arises in applications with special structure in <span class="math notranslate nohighlight">\(A\)</span>, such as optimal transport [43] and Wasserstein barycenter problem [44].<br />
+The <span class="math notranslate nohighlight">\(y\)</span>-update then reduces to solving the linear system</p>
+<div class="math notranslate nohighlight">
+\[A A^* \bar{y}^{r,t+1} = \frac{1}{\sigma_r} \big( b - A(\bar{x}^{r,t+1} + \sigma_r(\bar{z}^{r,t+1} - c)) \big),\]</div>
+<p>which is computationally affordable in practice.<br />
+In this case, the update rule (2.12) simplifies to</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{r+1} = \frac{\| \bar{x}^{r,\tau_r} - x^{r,0} \|}{\| A^*(\bar{y}^{r,\tau_r} - y^{r,0}) \|}.\]</div>
+</li>
+<li><p><strong>Case <span class="math notranslate nohighlight">\(T_1 = \lambda_A I_m - A A^*\)</span> with <span class="math notranslate nohighlight">\(\lambda_A \geq \|A\|_2^2\)</span>.</strong><br />
+Proposed in [13, 4, 42], this choice applies when <span class="math notranslate nohighlight">\(l_c \neq u_c\)</span> or when solving (2.13) directly is expensive.<br />
+The <span class="math notranslate nohighlight">\(y\)</span>-update takes the form</p>
+<div class="math notranslate nohighlight">
+\[\bar{y}^{r,t+1} = \frac{1}{\sigma_r \lambda_A} \Big( \Pi_{\mathcal{K}}(R_y) - R_y \Big),\]</div>
+<p>where <span class="math notranslate nohighlight">\(R_y := A(2\bar{x}^{r,t+1} - x^{r,t}) - \sigma_r \lambda_A y^{r,t}\)</span>.<br />
+In this setting, the update for <span class="math notranslate nohighlight">\(\sigma\)</span> becomes</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{r+1} = \frac{\| \bar{x}^{r,\tau_r} - x^{r,0} \|}{\sqrt{\lambda_A} \; \| \bar{y}^{r,\tau_r} - y^{r,0} \|}.\]</div>
+</li>
+</ol>
+<p><strong>Remark 2.7.</strong> The update formula above is closely related to the primal weight update in PDLP [1, Algorithm 3], differing mainly by the presence of the factor <span class="math notranslate nohighlight">\(\lambda_A\)</span>.</p>
+<p>It is worth noting that the approximations <span class="math notranslate nohighlight">\(\Delta_x\)</span> and <span class="math notranslate nohighlight">\(\Delta_y\)</span> may deviate significantly from the true quantities.<br />
+To address this, various smoothing schemes [1, 31, 33, 6] and safeguards [5] have been proposed to stabilize the update.<br />
+Moreover, the rule (2.12) is not specific to LP; it extends directly to the HPR method for more general convex optimization problems [40], including CCQP [6].</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

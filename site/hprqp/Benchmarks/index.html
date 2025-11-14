@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benchmarks &mdash; HPR-QP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HPR-QP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20HPR-QP/index.html">About HPR-QP</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Interfaces/index.html">Interfaces</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Citing%20HPR-QP.html">Citing HPR-QP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HPR-QP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Benchmarks</li>
+  <li class="wy-breadcrumbs-aside">
+    <a href="https://github.com/PolyU-IOR/HPR-QP" target="_blank" rel="noopener">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 
+             5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49
+             -2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+             -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 
+             1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+             -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+             .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+             1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+             3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 
+             2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42
+             -3.58-8-8-8z">
+        </path>
+      </svg>
+      GitHub
+    </a>
+  </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="benchmarks">
+<h1>Benchmarks</h1>
+<p>This page reports numerical results on an <strong>NVIDIA A100-SXM4-80GB</strong> GPU.</p>
+<hr class="docutils" />
+<section id="numerical-results">
+<h2>Numerical Results</h2>
+<ul class="simple">
+<li><p><strong>HPR-QP</strong> is implemented in Julia and leverages CUDA for GPU acceleration.</p></li>
+<li><p><a class="reference external" href="https://github.com/jinwen-yang/PDQP.jl"><strong>PDQP</strong></a> (GPU, downloaded in April 2025).</p></li>
+<li><p><a class="reference external" href="https://github.com/jump-dev/SCS.jl"><strong>SCS</strong></a> (GPU, v2.1.0)is written in C/C++ with a Julia interface. GPU acceleration is enabled via its indirect solver, which performs all matrix operations on the GPU.</p></li>
+<li><p><a class="reference external" href="https://github.com/oxfordcontrol/Clarabel.jl/tree/CuClarabel"><strong>CuClarabel</strong></a> (GPU, v0.10.0).</p></li>
+<li><p><a class="reference external" href="https://www.gurobi.com/"><strong>Gurobi</strong></a> (CPU, version 12.0.2, academic license) is executed on CPU using the barrier method.</p></li>
+<li><p>All benchmarks were conducted on a SuperServer SYS-420GP-TNR with an NVIDIA A100-SXM4-80GB GPU, Intel Xeon Platinum 8338C CPU &#64; 2.60 GHz, and 256 GB RAM</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="marosmeszaros-data-set-137-instances-tolerances-10-6-and-10-8">
+<h2>Maros–Mészáros Data Set (137 Instances; tolerances <span class="math notranslate nohighlight">\(10^{-6}\)</span> and <span class="math notranslate nohighlight">\(10^{-8}\)</span>)</h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Solver</p></th>
+<th class="head text-right"><p>SGM10 (1e-6)</p></th>
+<th class="head text-right"><p>Solved (1e-6)</p></th>
+<th class="head text-right"><p>SGM10 (1e-8)</p></th>
+<th class="head text-right"><p>Solved (1e-8)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>HPR-QP</strong></p></td>
+<td class="text-right"><p>10.5</p></td>
+<td class="text-right"><p>129</p></td>
+<td class="text-right"><p>12.6</p></td>
+<td class="text-right"><p>128</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>PDQP</strong></p></td>
+<td class="text-right"><p>33.1</p></td>
+<td class="text-right"><p>125</p></td>
+<td class="text-right"><p>42.5</p></td>
+<td class="text-right"><p>124</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>SCS</strong></p></td>
+<td class="text-right"><p>126.0</p></td>
+<td class="text-right"><p>103</p></td>
+<td class="text-right"><p>165.0</p></td>
+<td class="text-right"><p>93</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>CuClarabel</strong></p></td>
+<td class="text-right"><p>3.7</p></td>
+<td class="text-right"><p>130</p></td>
+<td class="text-right"><p>7.8</p></td>
+<td class="text-right"><p>124</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Gurobi</strong></p></td>
+<td class="text-right"><p>0.4</p></td>
+<td class="text-right"><p>137</p></td>
+<td class="text-right"><p>1.2</p></td>
+<td class="text-right"><p>135</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="qap-relaxations-36-instances-tolerances-10-6-and-10-8">
+<h2>QAP Relaxations (36 Instances; tolerances <span class="math notranslate nohighlight">\(10^{-6}\)</span> and <span class="math notranslate nohighlight">\(10^{-8}\)</span>)</h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Solver</p></th>
+<th class="head text-right"><p>SGM10 (1e-6)</p></th>
+<th class="head text-right"><p>Solved (1e-6)</p></th>
+<th class="head text-right"><p>SGM10 (1e-8)</p></th>
+<th class="head text-right"><p>Solved (1e-8)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>HPR-QP</strong></p></td>
+<td class="text-right"><p>1.8</p></td>
+<td class="text-right"><p>36</p></td>
+<td class="text-right"><p>4.7</p></td>
+<td class="text-right"><p>36</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>PDQP</strong></p></td>
+<td class="text-right"><p>124.1</p></td>
+<td class="text-right"><p>23</p></td>
+<td class="text-right"><p>149.4</p></td>
+<td class="text-right"><p>23</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>SCS</strong></p></td>
+<td class="text-right"><p>11.3</p></td>
+<td class="text-right"><p>36</p></td>
+<td class="text-right"><p>86.0</p></td>
+<td class="text-right"><p>36</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>CuClarabel</strong></p></td>
+<td class="text-right"><p>13.6</p></td>
+<td class="text-right"><p>33</p></td>
+<td class="text-right"><p>114.9</p></td>
+<td class="text-right"><p>22</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Gurobi</strong></p></td>
+<td class="text-right"><p>24.8</p></td>
+<td class="text-right"><p>36</p></td>
+<td class="text-right"><p>26.8</p></td>
+<td class="text-right"><p>36</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="lasso-problems-11-instances-tolerance-10-8">
+<h2>LASSO Problems (11 Instances; tolerance <span class="math notranslate nohighlight">\(10^{-8}\)</span>)</h2>
+<p><strong>Abbreviations:</strong> <code class="docutils literal notranslate"><span class="pre">T</span></code> = time-limit, <code class="docutils literal notranslate"><span class="pre">F</span></code> = failure (e.g., unbounded or infeasible).</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Instance</p></th>
+<th class="head text-right"><p>HPR-QP</p></th>
+<th class="head text-right"><p>PDQP</p></th>
+<th class="head text-right"><p>SCS</p></th>
+<th class="head text-right"><p>CuClarabel</p></th>
+<th class="head text-right"><p>Gurobi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>abalone7</p></td>
+<td class="text-right"><p>10.5</p></td>
+<td class="text-right"><p>372.5</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>24.4</p></td>
+<td class="text-right"><p>127.3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>bodyfat7</p></td>
+<td class="text-right"><p>1.2</p></td>
+<td class="text-right"><p>33.3</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>2.2</p></td>
+<td class="text-right"><p>30.8</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>E2006.test</p></td>
+<td class="text-right"><p>0.2</p></td>
+<td class="text-right"><p>1.3</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>15.4</p></td>
+<td class="text-right"><p>9.0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>E2006.train</p></td>
+<td class="text-right"><p>0.7</p></td>
+<td class="text-right"><p>1.9</p></td>
+<td class="text-right"><p>F</p></td>
+<td class="text-right"><p>116.0</p></td>
+<td class="text-right"><p>277.8</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>housing7</p></td>
+<td class="text-right"><p>22.6</p></td>
+<td class="text-right"><p>123.3</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>5.7</p></td>
+<td class="text-right"><p>125.9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>log1p.E2006.test</p></td>
+<td class="text-right"><p>7.0</p></td>
+<td class="text-right"><p>1416.9</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>196.0</p></td>
+<td class="text-right"><p>137.0</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>log1p.E2006.train</p></td>
+<td class="text-right"><p>17.3</p></td>
+<td class="text-right"><p>2983.2</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>361.0</p></td>
+<td class="text-right"><p>878.8</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>mpg7</p></td>
+<td class="text-right"><p>0.6</p></td>
+<td class="text-right"><p>18.1</p></td>
+<td class="text-right"><p>2000.0</p></td>
+<td class="text-right"><p>0.3</p></td>
+<td class="text-right"><p>1.2</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>pyrim5</p></td>
+<td class="text-right"><p>49.1</p></td>
+<td class="text-right"><p>410.6</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>3.5</p></td>
+<td class="text-right"><p>35.9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>space_ga9</p></td>
+<td class="text-right"><p>0.6</p></td>
+<td class="text-right"><p>62.7</p></td>
+<td class="text-right"><p>1210.0</p></td>
+<td class="text-right"><p>6.7</p></td>
+<td class="text-right"><p>38.1</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>triazines4</p></td>
+<td class="text-right"><p>401.3</p></td>
+<td class="text-right"><p>3533.3</p></td>
+<td class="text-right"><p>T</p></td>
+<td class="text-right"><p>26.0</p></td>
+<td class="text-right"><p>843.1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>SGM10 (time)</strong></p></td>
+<td class="text-right"><p><strong>13.2</strong></p></td>
+<td class="text-right"><p><strong>161.8</strong></p></td>
+<td class="text-right"><p><strong>3091.0</strong></p></td>
+<td class="text-right"><p><strong>26.1</strong></p></td>
+<td class="text-right"><p><strong>91.2</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, HPR Methods Developer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
