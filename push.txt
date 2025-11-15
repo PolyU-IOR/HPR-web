@@ -1,5 +1,5 @@
 param(
-  [string]$Message = "deploy 11.14 official",
+  [string]$Message = "Update the index page",
   [string]$CustomDomain = "hpr.top"
 )
 
