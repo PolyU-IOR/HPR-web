@@ -3,18 +3,16 @@ A compact index of HPR-LP (Python) releases—each entry shows the version tag a
 
 
 <details id="v010">
-<summary><code>v0.1.0</code> — First version</summary>
+<summary><code>v0.1.0</code> — A preliminary release: Python GPU-accelerated HPR-LP solver</summary>
 
-Coming soon...
-<!-- **Release date**: 2025-xx-xx
+**Release date**: 2025-12-1
 
 **Highlights**
-1. 
+- First Python public release of **HPR-LP**.  
+- GPU-accelerated LP solver in Python implementing the Halpern–Peaceman–Rachford (HPR) method.  
 
-
-**Downloads** -->
-
-
+**Downloads**
+- [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP-Python/archive/refs/heads/main.zip)  
 </details>
 
 ---

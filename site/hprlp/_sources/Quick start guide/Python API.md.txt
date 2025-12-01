@@ -1,6 +1,6 @@
 # Python API
-Coming soon...
-<!-- This page explains how to install the **Python version** of HPR-LP.
+<!-- Coming soon... -->
+This page explains how to install the **Python version** of HPR-LP.
 
 ---
 
@@ -45,4 +45,4 @@ pip install -r requirements.txt
 
 ## Next Steps
 
-- See the [Interfaces](../Interfaces/Python%20interfaces.md) section for python usage. -->
+- See the [Interfaces](../Interfaces/Python%20interfaces.md) section for python usage.

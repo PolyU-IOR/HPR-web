@@ -1,5 +1,5 @@
 param(
-  [string]$Message = "Update the index page",
+  [string]$Message = "Update the HPR-LP-Python part",
   [string]$CustomDomain = "hpr.top"
 )
 

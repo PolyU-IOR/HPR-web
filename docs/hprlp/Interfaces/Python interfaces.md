@@ -1,6 +1,6 @@
 # Python Version
-Coming soon...
-<!-- This page shows how to use the **Python interface** of HPR-LP: run demos, build custom problems, adjust solver settings, and interpret results.
+<!-- Coming soon... -->
+This page shows how to use the **Python interface** of HPR-LP: run demos, build custom problems, adjust solver settings, and interpret results.
 
 ---
 
@@ -214,4 +214,4 @@ After solving an instance, you can access the result variables as shown below:
 * - 
   - `z`
   - The final solution vector **z**.
-``` -->
+```
