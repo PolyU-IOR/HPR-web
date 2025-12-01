@@ -132,9 +132,13 @@
 <section id="prerequisites">
 <h2>1. Prerequisites</h2>
 <ul class="simple">
-<li><p><strong>Python</strong> ≥ 3.12</p></li>
 <li><p><strong>CUDA Toolkit</strong> (≥ 12.4 recommended)</p></li>
 </ul>
+<p>Build a new environment by conda and activate it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>hprlp_python<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
+conda<span class="w"> </span>activate<span class="w"> </span>hprlp_python
+</pre></div>
+</div>
 <p>Quick checks:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
 nvidia-smi

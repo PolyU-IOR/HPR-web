@@ -7,8 +7,14 @@ This page explains how to install the **Python version** of HPR-LP.
 
 ## 1. Prerequisites
 
-- **Python** ≥ 3.12  
 - **CUDA Toolkit** (≥ 12.4 recommended)  
+
+Build a new environment by conda and activate it.
+
+```bash
+conda create -n hprlp_python python=3.12
+conda activate hprlp_python
+```
 
 Quick checks:
 ```bash

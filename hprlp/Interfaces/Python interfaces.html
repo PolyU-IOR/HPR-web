@@ -156,56 +156,8 @@
 </section>
 <section id="model-based-api">
 <h3>1. Model-based API</h3>
-<p>You can also build and solve an LP <strong>directly from NumPy / SciPy arrays</strong>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
-
-
-<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="k">if</span> <span class="n">PROJECT_ROOT</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">PROJECT_ROOT</span><span class="p">)</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.model_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Parameters</span>
-
-<span class="n">A</span>  <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span>
-    <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
-     <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]],</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span>
-<span class="p">)</span>
-
-<span class="c1"># Row bounds on A x:</span>
-<span class="n">AL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-<span class="n">AU</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span>     <span class="mf">12.0</span>   <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-
-<span class="c1"># Variable bounds:</span>
-<span class="n">l</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>       <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-<span class="n">u</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-
-<span class="c1"># Objective vector for &quot;maximize c^T x&quot;</span>
-<span class="n">c</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">],</span>     <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-
-<span class="c1"># Build a Model object directly from arrays (no disk I/O)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">AL</span><span class="p">,</span> <span class="n">AU</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-<span class="n">param</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
-
-<span class="c1"># These names match what you set in run_single_file.py</span>
-<span class="n">param</span><span class="o">.</span><span class="n">time_limit</span>    <span class="o">=</span> <span class="mf">3600.0</span>       
-<span class="n">param</span><span class="o">.</span><span class="n">stoptol</span>       <span class="o">=</span> <span class="mf">1e-9</span>       
-<span class="n">param</span><span class="o">.</span><span class="n">device_number</span> <span class="o">=</span> <span class="mi">0</span>                    
-
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
-
-<span class="c1"># -----------------------------------------------------------------------------</span>
-<span class="c1"># 5. Print result</span>
-<span class="c1"># -----------------------------------------------------------------------------</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;status:     &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;output_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;objective:  &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;primal_obj&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solution x: &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iterations: &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;iter&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solve_time: &quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-
+<p>You can also build and solve a small demo script under <code class="docutils literal notranslate"><span class="pre">demo/demo_model_api.py</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>demo/demo_model_api.py
 </pre></div>
 </div>
 </section>
