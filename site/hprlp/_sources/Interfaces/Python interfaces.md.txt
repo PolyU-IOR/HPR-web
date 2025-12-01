@@ -29,58 +29,10 @@ After installing the environment, you can run the solver in two ways: **model-ba
 
 ### 1. Model-based API 
 
-You can also build and solve an LP **directly from NumPy / SciPy arrays**.
+You can also build and solve a small demo script under `demo/demo_model_api.py`.
 
-```python
-import os, sys
-import numpy as np
-from scipy import sparse
-
-
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
-
-from src.model_api import Model, Parameters
-
-A  = sparse.csr_matrix(
-    [[1.0, 2.0],
-     [3.0, 1.0]],
-    dtype=np.float64
-)
-
-# Row bounds on A x:
-AL = np.array([-np.inf, -np.inf], dtype=np.float64)
-AU = np.array([10.0,     12.0   ], dtype=np.float64)
-
-# Variable bounds:
-l  = np.array([0.0, 0.0],       dtype=np.float64)
-u  = np.array([np.inf, np.inf], dtype=np.float64)
-
-# Objective vector for "maximize c^T x"
-c  = np.array([-3.0, -5.0],     dtype=np.float64)
-
-# Build a Model object directly from arrays (no disk I/O)
-model = Model.from_arrays(A, AL, AU, l, u, c)
-param = Parameters()
-
-# These names match what you set in run_single_file.py
-param.time_limit    = 3600.0       
-param.stoptol       = 1e-9       
-param.device_number = 0                    
-
-
-res = model.solve(param)
-
-# -----------------------------------------------------------------------------
-# 5. Print result
-# -----------------------------------------------------------------------------
-print("status:     ", getattr(res, "output_type", None))
-print("objective:  ", getattr(res, "primal_obj", None))
-print("solution x: ", getattr(res, "x", None))
-print("iterations: ", getattr(res, "iter", None))
-print("solve_time: ", getattr(res, "time", None))
-
+```bash
+python demo/demo_model_api.py
 ```
 
 ### 2. MPS file API
