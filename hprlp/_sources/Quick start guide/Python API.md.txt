@@ -22,8 +22,8 @@ nvidia-smi
 ## 2. Clone the Repository
 
 ```bash
-git clone https://github.com/PolyU-IOR/HPR-LP-python.git
-cd HPR-LP-python
+git clone https://github.com/PolyU-IOR/HPR-LP-Python.git
+cd HPR-LP-Python
 ```
 
 Or download and extract the ZIP file from GitHub.
@@ -45,4 +45,4 @@ pip install -r requirements.txt
 
 ## Next Steps
 
-- See the [Interfaces](../Interfaces/Python%20interfaces.md) section for python usage.
+- See the [Interfaces](../Interfaces/Python%20interfaces.md) section for Python usage.
