@@ -134,7 +134,7 @@ Below is a list of the parameters in HPR-LP along with their default values and 
 
 ---
 
-# Result Explanation
+## Result Explanation
 
 After solving an instance, you can access the result variables as shown below:
 
