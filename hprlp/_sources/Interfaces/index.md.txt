@@ -10,4 +10,5 @@ HPR-LP offers several interfaces with examples, usage, settings, and results.
 Julia interfaces
 C interfaces/index
 Python interfaces
+MATLAB interfaces
 ```

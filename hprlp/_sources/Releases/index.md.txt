@@ -10,4 +10,5 @@ This page offers several releases for HPR-LP.
 Julia Releases
 C Releases
 Python Releases
+MATLAB Releases
 ```

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python API &mdash; HPR-LP</title>
+  <title>MATLAB Releases &mdash; HPR-LP</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
@@ -26,8 +26,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MATLAB API" href="MATLAB%20API.html" />
-    <link rel="prev" title="C API" href="C%20API.html" /> 
+    <link rel="next" title="Contributing" href="../Contributing.html" />
+    <link rel="prev" title="Python Releases" href="Python%20Releases.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,26 +52,20 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../About%20HPR-LP/index.html">About HPR-LP</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Quick start guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Julia%20API.html">Julia API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C%20API.html">C API</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Python API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#prerequisites">1. Prerequisites</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clone-the-repository">2. Clone the Repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">3. Install Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="MATLAB%20API.html">MATLAB API</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20start%20guide/index.html">Quick start guide</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Interfaces/index.html">Interfaces</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Releases</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Julia%20Releases.html">Julia Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C%20Releases.html">C Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Python%20Releases.html">Python Releases</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MATLAB Releases</a></li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
@@ -94,8 +88,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">Quick start guide</a></li>
-      <li class="breadcrumb-item active">Python API</li>
+          <li class="breadcrumb-item"><a href="index.html">Releases</a></li>
+      <li class="breadcrumb-item active">MATLAB Releases</li>
   <li class="wy-breadcrumbs-aside">
     <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
       <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
@@ -125,62 +119,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="python-api">
-<h1>Python API</h1>
-<!-- Coming soon... -->
-<p>This page explains how to install the <strong>Python version</strong> of HPR-LP.</p>
-<hr class="docutils" />
-<section id="prerequisites">
-<h2>1. Prerequisites</h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="matlab-releases">
+<h1>MATLAB Releases</h1>
+<p>A compact index of HPR-LP (MATLAB) releases—each entry shows the version tag and a one-line summary; click a version to view full notes, benchmarks, and downloads.</p>
+<details id="v010">
+<summary><code>v0.1.0</code> — A preliminary release: MATLAB HPR-LP solver</summary>
+<p><strong>Release date</strong>: 2025-12-3</p>
+<p><strong>Highlights</strong></p>
 <ul class="simple">
-<li><p><strong>CUDA Toolkit</strong> (≥ 12.4 recommended)</p></li>
+<li><p>First MATLAB public release of <strong>HPR-LP</strong>.</p></li>
+<li><p>LP solver in MATLAB implementing the Halpern–Peaceman–Rachford (HPR) method.</p></li>
 </ul>
-<p>Build a new environment by conda and activate it.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>hprlp_python<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
-conda<span class="w"> </span>activate<span class="w"> </span>hprlp_python
-</pre></div>
-</div>
-<p>Quick checks:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
-nvidia-smi
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="clone-the-repository">
-<h2>2. Clone the Repository</h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/PolyU-IOR/HPR-LP-Python.git
-<span class="nb">cd</span><span class="w"> </span>HPR-LP-Python
-</pre></div>
-</div>
-<p>Or download and extract the ZIP file from GitHub.</p>
-</section>
-<hr class="docutils" />
-<section id="install-dependencies">
-<h2>3. Install Dependencies</h2>
-<p>Install PyTorch <strong>first</strong> (choose the right CUDA wheel for your system):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>torchvision
-</pre></div>
-</div>
-<p>Then install the remaining packages:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</pre></div>
-</div>
-</section>
-<section id="next-steps">
-<h2>Next Steps</h2>
+<p><strong>Downloads</strong></p>
 <ul class="simple">
-<li><p>See the <a class="reference internal" href="../Interfaces/Python%20interfaces.html"><span class="std std-doc">Interfaces</span></a> section for Python usage.</p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-MATLAB/archive/refs/heads/main.zip">Source code (zip)</a></p></li>
 </ul>
-</section>
+</details>
+<hr class="docutils" />
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C%20API.html" class="btn btn-neutral float-left" title="C API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="MATLAB%20API.html" class="btn btn-neutral float-right" title="MATLAB API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Python%20Releases.html" class="btn btn-neutral float-left" title="Python Releases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

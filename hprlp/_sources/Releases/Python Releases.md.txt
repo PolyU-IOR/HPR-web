@@ -5,7 +5,7 @@ A compact index of HPR-LP (Python) releases—each entry shows the version tag a
 <details id="v010">
 <summary><code>v0.1.0</code> — A preliminary release: Python GPU-accelerated HPR-LP solver</summary>
 
-**Release date**: 2025-12-1
+**Release date**: 2025-12-3
 
 **Highlights**
 - First Python public release of **HPR-LP**.  
