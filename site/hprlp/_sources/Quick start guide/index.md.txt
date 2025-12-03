@@ -9,4 +9,5 @@ let's get started!
 Julia API
 C API
 Python API
+MATLAB API
 ```
