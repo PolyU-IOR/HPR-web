@@ -22,7 +22,7 @@ A compact index of HPR-QP (Julia) releases—each entry shows the version tag an
 ---
 
 <details id="v011">
-<summary><code>v0.1.1</code> — Unified Architecture + CPU & GPU Support + JuMP Integration</summary>
+<summary><code>v0.1.1</code> — Unified Architecture + CPU & GPU Support + JuMP Integration + Warm-Start Capability + Auto-Save Feature</summary>
 
 **Release date**: 2025-12-30
 
