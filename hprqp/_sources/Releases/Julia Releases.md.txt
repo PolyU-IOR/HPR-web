@@ -20,3 +20,34 @@ A compact index of HPR-QP (Julia) releases—each entry shows the version tag an
 </details>
 
 ---
+
+<details id="v011">
+<summary><code>v0.1.1</code> — Unified Architecture + CPU & GPU Support + JuMP Integration</summary>
+
+**Release date**: 2025-12-30
+
+**Highlights**
+- 1. Unified Architecture
+Single codebase for all problem types (standard QP, QAP, LASSO)
+Modular Q operator system for extensibility: easily add custom problem types
+- 2. CPU & GPU Support
+Full CPU implementation in addition to GPU acceleration
+Automatic device selection via use_gpu parameter
+- 3. JuMP Integration
+Native JuMP/MathOptInterface (MOI) support for easy modeling
+Use HPR-QP directly as a JuMP optimizer
+- 4. Warm-Start Capability
+Initialize via initial_x and initial_y parameters
+Resume optimization from previous (auto-saved) solutions
+- 5. Auto-Save Feature
+Automatically save best solution during optimization (auto_save=true)
+Resume from saved states for long-running problems
+
+
+**Downloads**
+- [Source code (zip)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.zip)  
+- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.tar.gz)
+
+</details>
+
+---
