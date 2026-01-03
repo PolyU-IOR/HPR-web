@@ -1,5 +1,5 @@
 param(
-  [string]$Message = "Update the HPR-LP-MATLAB part",
+  [string]$Message = "Update the HPR-QP release",
   [string]$CustomDomain = "hpr.top"
 )
 
@@ -24,4 +24,3 @@ git push origin main
 
 $sha = git subtree split --prefix=site HEAD
 git push -f origin ("{0}:gh-pages" -f $sha)
-

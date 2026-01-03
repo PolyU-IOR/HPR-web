@@ -137,6 +137,49 @@
 </ul>
 </details>
 <hr class="docutils" />
+<details id="v011">
+<summary><code>v0.1.1</code> — Unified Architecture + CPU & GPU Support + JuMP Integration</summary>
+<p><strong>Release date</strong>: 2025-12-30</p>
+<p><strong>Highlights</strong></p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>Unified Architecture
+Single codebase for all problem types (standard QP, QAP, LASSO)
+Modular Q operator system for extensibility: easily add custom problem types</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>CPU &amp; GPU Support
+Full CPU implementation in addition to GPU acceleration
+Automatic device selection via use_gpu parameter</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>JuMP Integration
+Native JuMP/MathOptInterface (MOI) support for easy modeling
+Use HPR-QP directly as a JuMP optimizer</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="4">
+<li><p>Warm-Start Capability
+Initialize via initial_x and initial_y parameters
+Resume optimization from previous (auto-saved) solutions</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="5">
+<li><p>Auto-Save Feature
+Automatically save best solution during optimization (auto_save=true)
+Resume from saved states for long-running problems</p></li>
+</ol>
+</li>
+</ul>
+<p><strong>Downloads</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.zip">Source code (zip)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.tar.gz">Source code (tar.gz)</a></p></li>
+</ul>
+</details>
+<hr class="docutils" />
 </section>
 
 
