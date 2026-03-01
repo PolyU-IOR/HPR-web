@@ -214,6 +214,155 @@
   }
   body.light .credits-note{ color:#4a556d; }
 
+  /* ===== Software Cards (Replacing old .btns) ===== */
+  .software-cards {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    width: 100%;
+    max-width: 860px;
+    z-index: 10;
+  }
+
+  .software-card {
+    flex: 1;
+    min-width: 320px;
+    max-width: 400px;
+    background: rgba(16, 28, 54, 0.66);
+    border: 1px solid #2a4474;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    backdrop-filter: blur(8px);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease;
+  }
+
+  .software-card:hover {
+    transform: translateY(-6px);
+    border-color: #4aa8ff;
+    box-shadow: 0 14px 28px rgba(40, 120, 220, 0.25);
+  }
+
+  .card-image {
+    height: 180px;
+    background: #0b1120; /* Dark fallback if image is missing */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .software-card:hover .card-image img {
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+
+  .card-image .sparkle {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .card-header h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: #e6f1ff;
+    transition: color 0.5s ease;
+  }
+
+  .card-header .badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(168, 195, 255, 0.15);
+    color: #a8c3ff;
+    letter-spacing: 0.05em;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  .card-desc {
+    margin: 0 0 24px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #a8c3ff;
+    transition: color 0.5s ease;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(168, 195, 255, 0.1);
+    transition: border-color 0.5s ease;
+  }
+
+  .card-footer .langs {
+    color: #7b8ea8;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    transition: color 0.5s ease;
+  }
+
+  .card-footer a {
+    color: #4aa8ff;
+    font-weight: 700;
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+
+  .card-footer a:hover {
+    color: #8bbfff;
+  }
+
+  /* ===== Light Mode Overrides for Cards ===== */
+  body.light .software-card {
+    background: #ffffff;
+    border-color: #e4e7f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  body.light .software-card:hover {
+    border-color: #7aa2ff;
+    box-shadow: 0 12px 24px rgba(80, 120, 200, 0.15);
+  }
+
+  body.light .card-header h3 { color: #1b2330; }
+  body.light .card-header .badge { background: #f0f4ff; color: #3558ff; }
+  body.light .card-desc { color: #4a556d; }
+  body.light .card-footer { border-top-color: #f0f2f5; }
+  body.light .card-footer .langs { color: #8896ab; }
+  body.light .card-footer a { color: #3558ff; }
+  body.light .card-footer a:hover { color: #1e3a8a; }
+
   </style>
 </head>
 <body>
@@ -236,9 +385,46 @@
     </p>
 
 
-    <div class="btns">
+    <!-- <div class="btns">
       <a class="btn" href="./hprlp/index.html">HPR-LP</a>
       <a class="btn" href="./hprqp/index.html">HPR-QP</a>
+    </div> -->
+    <div class="software-cards">
+      <div class="software-card">
+        <div class="card-image">
+          <img src="./assets/hpr_lp_cover.jpg" alt="HPR-LP Cover">
+          <span class="sparkle">✦</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3>HPR-LP</h3>
+            <span class="badge">SOLVER</span>
+          </div>
+          <p class="card-desc">A GPU-accelerated solver for large-scale linear programming.</p>
+          <div class="card-footer">
+            <span class="langs">Julia / C / CUDA</span>
+            <a href="./hprlp/index.html">GitHub &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="software-card">
+        <div class="card-image">
+          <img src="./assets/hpr_qp_cover.jpg" alt="HPR-QP Cover">
+          <span class="sparkle">✦</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3>HPR-QP</h3>
+            <span class="badge">SOLVER</span>
+          </div>
+          <p class="card-desc">A GPU-accelerated solver for large-scale convex composite quadratic programming.</p>
+          <div class="card-footer">
+            <span class="langs">Julia / CUDA</span>
+            <a href="./hprqp/index.html">GitHub &rarr;</a>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="scroll-down" id="scrollMore" aria-label="Scroll to learn more">
       <div>Scroll</div><div class="arrow"></div>
