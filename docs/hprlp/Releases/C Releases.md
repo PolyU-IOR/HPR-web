@@ -1,6 +1,8 @@
 # C Releases
 A compact index of HPR-LP (C++/CUDA) releases—each entry shows the version tag and a one-line summary; click a version to view full notes, benchmarks, and downloads.
 
+---
+
 <details id="v011">
 <summary><code>v0.1.1</code> — Add CUDA Graphs and align Power Iteration</summary>
 
@@ -10,11 +12,9 @@ A compact index of HPR-LP (C++/CUDA) releases—each entry shows the version tag
 - Apply the CUDA Graph to accelerate the main loop.
 - Refined the Power Iteration implementation for more efficient and accurate dominant eigenvalue estimation.
 
-**Full Changelog**: `v0.1.0...v0.1.1`
-
 **Downloads**
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.tar.gz)
+- [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.1.zip)  
+- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.1.tar.gz)
 
 ---
 
@@ -36,7 +36,7 @@ A compact index of HPR-LP (C++/CUDA) releases—each entry shows the version tag
 **Downloads** -->
 
 **Downloads**
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.tar.gz)
+- [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.0.zip)  
+- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.0.tar.gz)
 
 ---
