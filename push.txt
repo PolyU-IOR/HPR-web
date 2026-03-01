@@ -1,5 +1,5 @@
 param(
-  [string]$Message = "Update the HPR-LP-C release",
+  [string]$Message = "Update the HPR homepage",
   [string]$CustomDomain = "hpr.top"
 )
 
