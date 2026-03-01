@@ -26,11 +26,15 @@
     }
 
     /* ===== Hero ===== */
-    .hero{
-      min-height:100vh;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      gap:24px; text-align:center; padding:24px;
+.hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 24px; text-align: center; 
+      /* FIX: Increased bottom padding to 80px to prevent overlapping */
+      padding: 24px 24px 80px 24px; 
+      /* FIX: Added relative position so the scroll arrow stays inside */
+      position: relative; 
     }
     .title{
       font-weight:900; line-height:0.95; letter-spacing:0.04em;
@@ -83,11 +87,14 @@
     .btn:hover{ transform:translateY(-3px); border-color:#4aa8ff; box-shadow:0 12px 30px rgba(40,120,220,.35) }
 
     /* Scroll indicator */
-    .scroll-down{
-      position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
-      display:flex; flex-direction:column; align-items:center; gap:6px;
-      color:#a9c5ffb0; font-size:13px; cursor:pointer; user-select:none;
-      transition:opacity .2s ease;
+    .scroll-down {
+      position: absolute; 
+      /* FIX: Changed from 26px to 16px to move it further down */
+      bottom: 16px; 
+      left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: #a9c5ffb0; font-size: 13px; cursor: pointer; user-select: none;
+      transition: opacity .2s ease;
     }
     .scroll-down:hover{opacity:.9}
     .arrow{
@@ -403,20 +410,6 @@
             <span class="badge">SOLVER</span>
           </div>
           <p class="card-desc">A GPU-accelerated solver for large-scale linear programming.</p>
-        </div>
-      </a>
-
-      <a href="./hprqp/index.html" class="software-card">
-        <div class="card-image">
-          <img src="./assets/avatars/hpr_qp_cover.jpg" alt="HPR-QP Cover">
-          <span class="sparkle">✦</span>
-        </div>
-        <div class="card-body">
-          <div class="card-header">
-            <h3>HPR-QP</h3>
-            <span class="badge">SOLVER</span>
-          </div>
-          <p class="card-desc">A GPU-accelerated solver for large-scale convex composite quadratic programming.</p>
         </div>
       </a>
 
