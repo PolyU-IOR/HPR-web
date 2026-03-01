@@ -16,6 +16,8 @@ A compact index of HPR-LP (C++/CUDA) releases—each entry shows the version tag
 - [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.1.zip)  
 - [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.1.tar.gz)
 
+</details>
+
 ---
 
 <details id="v010">
@@ -27,16 +29,10 @@ A compact index of HPR-LP (C++/CUDA) releases—each entry shows the version tag
 - First C public release of **HPR-LP**.  
 - GPU-accelerated LP solver in C implementing the Halpern–Peaceman–Rachford (HPR) method.  
 
-<!-- **Release date**: 2025-xx-xx
-
-**Highlights**
-1. 
-
-
-**Downloads** -->
-
 **Downloads**
 - [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.0.zip)  
 - [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.0.tar.gz)
+
+</details>
 
 ---
