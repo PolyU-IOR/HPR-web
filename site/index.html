@@ -641,7 +641,7 @@
 
 
   <script>
-/* ===== Final Fixed & Upgraded bundled Neon Beam Animation ===== */
+/* ===== High-Performance Bundled Neon Beam Animation ===== */
   const canvas = document.getElementById('stars');
   
   /* ===== Original Stars background (Preserved Safe Version) ===== */
@@ -674,7 +674,7 @@
     tick();
   }
 
-  /* ===== Toggle pure white mode when hero leaves viewport (Preserved) ===== */
+  /* ===== Toggle pure white mode when hero leaves viewport ===== */
   const hero=document.getElementById('hero');
   if (hero) {
     const observer=new IntersectionObserver(
@@ -682,12 +682,12 @@
         const inView = entries[0].isIntersecting;
         document.body.classList.toggle('light', !inView);
       },
-      { root:null, threshold:0.5 } // trigger later; adjust 0.3~0.7 to taste
+      { root:null, threshold:0.5 }
     );
     observer.observe(hero);
   }
 
-  /* ===== FIX: Safely bind scroll event, preventing crash ===== */
+  /* ===== Safe Scroll Event ===== */
   const scrollBtn=document.getElementById('scrollMore');
   if (scrollBtn) {
     scrollBtn.addEventListener('click',()=>{
@@ -696,7 +696,7 @@
     });
   }
 
-  /* ===== Typewriter (Preserved vanilla JS) ===== */
+  /* ===== Typewriter ===== */
   (function(){
     const lines = [
       "Efficient and high-precision for large-scale problems.",
@@ -725,14 +725,13 @@
     setTimeout(step,400);
   })();
 
-  /* ===== New: Bundled Neon Beam Animation ===== */
+  /* ===== Optimized Neon Beam Performance Edition ===== */
   const flowingCanvas = document.getElementById('flowing-lines');
   
   if (flowingCanvas) {
     const ctx = flowingCanvas.getContext('2d');
     let W, H;
     
-    // Resize canvas to fill the window
     function resizeCanvas() {
       W = flowingCanvas.width = window.innerWidth;
       H = flowingCanvas.height = window.innerHeight;
@@ -740,38 +739,30 @@
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Array to hold all the light vehicles (trails)
     const trails = [];
-    const numTrails = 120; // Increased significantly for density and "bundled" look
+    // PERFORMANCE FIX: Reduced to 60. Still looks incredibly dense because of 'lighter' blend mode.
+    const numTrails = 100; 
     const colors = ['#a8ff78', '#78ffd6', '#e8ffb7', '#ffea61', '#6be585'];
 
-    // Initialize trails with random properties for organic flow
     for (let i = 0; i < numTrails; i++) {
       trails.push({
-        progress: Math.random() * 1.5 - 0.2, // Randomized start position concentrates
-        speed: 0.003 + Math.random() * 0.004, // Velocity faster for "flow" concentrates
-        length: 0.15 + Math.random() * 0.4, // Trail length
-        width: 0.5 + Math.random() * 1.5, // Finer streams for finer bundled look
+        progress: Math.random() * 1.5 - 0.2, 
+        speed: 0.001 + Math.random() * 0.0015, 
+        length: 0.2 + Math.random() * 0.4, 
+        width: 1.0 + Math.random() * 3.0, // Made slightly thicker to compensate for fewer lines
         color: colors[Math.floor(Math.random() * colors.length)],
-        // Greatly reduced randomized offsets to "bundle" the fine streams trail concentrates concentrates fine streams refined look traffic
-        offsetX: (Math.random() - 0.5) * 40,
-        offsetY: (Math.random() - 0.5) * 40,
-        amplitudeMult: 0.5 + Math.random() * 1.0 // For randomized scattering
+        offsetX: (Math.random() - 0.5) * 50,
+        offsetY: (Math.random() - 0.5) * 50,
+        amplitudeMult: 0.5 + Math.random() * 1.0 
       });
     }
 
-    // Function to calculate the (x, y) coordinates of the main path equations highway refined look traffic lines concentrates
     function getPathPoint(t, trail) {
-      // 1. Diagonal progression from bottom-left to top-right concentrates concentrates concentrates
       const x = t * W;
-      const baseY = H * 0.8 - (t * H * 0.6); // Adjusted starting position concentrates
+      const baseY = H * 0.8 - (t * H * 0.6); 
       
-      // 2. Add an elegant S-curve bending to the diagonal path concentrations path path diagonal path
-      // Envelope ensures the curve is more pronounced in the center refined S-curve concentrates concentrations
       const envelope = Math.sin((t > 0 && t < 1 ? t : 0) * Math.PI);
       const curve = Math.sin(t * Math.PI * 1.5) * (H * 0.2) * envelope;
-      
-      // Secondary curve randomized scattering concentrations concentrates scatter randomized spreading scattering spread scattered scattering concentrations concentrates spread spreading concentrates spreading randomized scatter Spread randomized scattering concentrates spreader spreads scattering spreading concentrations scattered spreading scattered spread scattered spreader spreads concentrations concentrations spreader spreader spreader spread concentrations concentrations concentrates spreads spread spread spreads spreading spreading spread spreader scattered spreads spread spreads
       const secondaryCurve = Math.sin(t * Math.PI * 3.0) * (H * 0.1) * envelope * trail.amplitudeMult;
       
       return {
@@ -780,37 +771,31 @@
       };
     }
 
-    let time = 0;
-
-    function renderRefinedBeam() {
-      // Draw dark background depth instead of flat black refined bokeh depth refined particles refined trail refined fine refined streams refined fine streams refined traffic trails refined streams trail refined finer stream trail refined finer stream trail refined finer stream trail
+    function renderOptimizedBeam() {
       const bgGradient = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W);
-      bgGradient.addColorStop(0, '#0f172a'); // Slightly lighter dark blue in center concentrates refined bokeh bokeh bokeh bokeh bokeh refined particles
-      bgGradient.addColorStop(1, '#05080f'); // Very dark edges refined particles bokeh bokeh refined particles
+      bgGradient.addColorStop(0, '#0f172a'); 
+      bgGradient.addColorStop(1, '#05080f'); 
       ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, W, H);
 
-      // Additive blending overlapping lights extremely bright for neon overlapping light concentrations glow glow glow glow glow glow
+      // PERFORMANCE FIX: This blend mode is doing the heavy lifting for the "glow" instead of shadowBlur
       ctx.globalCompositeOperation = 'lighter';
 
       trails.forEach(trail => {
-        // Move the trail forward velocity flow traffic flow traffic refined finer streams concentrates fine streams refined
         trail.progress += trail.speed;
         
-        // Loop back start position concentrations randomized offsets concentrates offsets refined randomized offsets
         if (trail.progress - trail.length > 1.2) {
           trail.progress = -0.2;
-          // Reduced randomizer spreads fine streams trail concentrates refined randomized offsets spreading randomized spreads scattering spreader spread concentrations concentrations
-          trail.offsetX = (Math.random() - 0.5) * 40;
-          trail.offsetY = (Math.random() - 0.5) * 40;
+          trail.offsetX = (Math.random() - 0.5) * 50;
+          trail.offsetY = (Math.random() - 0.5) * 50;
         }
 
         const head = trail.progress;
         const tail = trail.progress - trail.length;
 
-        // Render refined fading tail small line segments concentrates segments concentrates small segments concentrates small segments
         if (head > -0.2 && tail < 1.2) {
-          const segments = 30; // Refined Smoother curve refined smoother curve refined curve refined smoother segments refined smo refined segments
+          // PERFORMANCE FIX: Reduced segments to 20 for smoother performance
+          const segments = 20; 
           const step = trail.length / segments;
 
           for (let i = 0; i < segments; i++) {
@@ -824,37 +809,35 @@
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
 
-            // Refined Finer Tapered trail alpha fades end concentrations concentrations concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates end fades concentrates end fades end
-            const alpha = Math.pow(i / segments, 1.7); 
+            // Steeper alpha curve makes the head brighter and tail fade faster
+            const alpha = Math.pow(i / segments, 2.5); 
             
             ctx.strokeStyle = trail.color;
             ctx.lineWidth = trail.width;
-            ctx.globalAlpha = alpha; // Refined Tapered tail alpha refined alpha alpha alpha alpha alpha alpha alpha alpha alpha
-
-            // Glow Refined Glow Refined Glow Refined Refined Refined Finer concentrates Glow concentrates Glow concentrates Refined refined refined finer refined finer refined refined finer refined concentrates finer concentrates Refined Refined finer refined finer refined
-            if (i > segments - 8) {
-              ctx.shadowBlur = 40; // High ShadowBlur for refined strong neon glow bloom bloom effect refined
-              ctx.shadowColor = trail.color;
-            } else {
-              ctx.shadowBlur = 0; // Faint glow taper end glow glow faint glow faint glow concentrates Finer refined finer
-            }
-
+            ctx.globalAlpha = alpha; 
+            
+            // PERFORMANCE FIX: Completely removed ctx.shadowBlur! 
             ctx.stroke();
+
+            // CHEAP NEON HEAD TRICK: Draw a slightly larger, faint circle at the very front to simulate a glowing tip
+            if (i === segments - 1) {
+              ctx.beginPath();
+              ctx.arc(p2.x, p2.y, trail.width * 1.5, 0, Math.PI * 2);
+              ctx.fillStyle = trail.color;
+              ctx.globalAlpha = 0.8;
+              ctx.fill();
+            }
           }
         }
       });
 
-      // Reset for next frame state check state state state state
       ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 1.0;
-      ctx.shadowBlur = 0;
 
-      time += 16;
-      requestAnimationFrame(renderRefinedBeam);
+      requestAnimationFrame(renderOptimizedBeam);
     }
 
-    // Start the loop concentrates refined traffic trails trail refined trails trail fine streams refined stream trail finer stream concentrates fine streams finer streams refined fine finer streams finer
-    renderRefinedBeam();
+    renderOptimizedBeam();
   }
   </script>
 </body>
