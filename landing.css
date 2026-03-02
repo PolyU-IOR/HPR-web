@@ -35,6 +35,20 @@ canvas#stars {
   transition: opacity .8s ease;
 }
 
+/* ===== Option 2: Flowing Light Lines ===== */
+canvas#flowing-lines {
+  position: fixed; 
+  inset: 0; 
+  z-index: -2; 
+  background: #0a0f1c; /* Match your base dark background */
+  transition: opacity .8s ease;
+}
+
+/* Hide the flowing lines when switching to light mode */
+body.light canvas#flowing-lines {
+  opacity: 0;
+}
+
 .bg-glow::before,
 .bg-glow::after {
   content: "";
@@ -72,90 +86,6 @@ canvas#stars {
   50% { transform: translate(20vw, 15vh) scale(1.2); }
   100% { transform: translate(-15vw, 20vh) scale(0.9); }
 }
-
-/* ===== Option X: Traffic Light Trails (Standalone, robust) ===== */
-
-/* Put background at z=0 (no negative z-index issues) */
-.bg-traffic{
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  transition: opacity .8s ease;
-
-  background:
-    radial-gradient(900px 520px at 50% 42%,
-      rgba(90, 180, 255, 0.08) 0%,
-      rgba(20, 60, 120, 0.04) 45%,
-      rgba(0, 0, 0, 0.0) 75%),
-    linear-gradient(180deg, #050814 0%, #070d1f 45%, #040712 100%);
-}
-
-/* Lift all normal content above background layers (no HTML refactor needed) */
-body > *:not(.bg-traffic):not(.bg-glow):not(canvas#stars){
-  position: relative;
-  z-index: 1;
-}
-
-.bg-traffic svg{
-  position: absolute;
-  inset: -12%;
-  width: 124%;
-  height: 124%;
-  opacity: 0.95;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 0 18px rgba(120,255,220,0.18));
-  animation: trafficFloat 22s ease-in-out infinite alternate;
-}
-
-@keyframes trafficFloat{
-  from{ transform: translate3d(0,0,0) scale(1.02); }
-  to  { transform: translate3d(-1.2%, -0.8%, 0) scale(1.02); }
-}
-
-/* Soft continuous glow line */
-.bg-traffic .trail-glow{
-  fill: none;
-  stroke: url(#trailGradA);
-  stroke-width: 18;
-  stroke-linecap: round;
-  opacity: 0.28;
-  filter: url(#glowA);
-}
-
-/* Moving segments: "traffic flow" */
-.bg-traffic .trail-move{
-  fill: none;
-  stroke: url(#trailGradB);
-  stroke-width: 6;
-  stroke-linecap: round;
-  opacity: 0.95;
-  stroke-dasharray: 14 28;
-  animation: dashMove 24s linear infinite;
-}
-
-/* Secondary lane */
-.bg-traffic .trail-move2{
-  fill: none;
-  stroke: url(#trailGradC);
-  stroke-width: 4;
-  stroke-linecap: round;
-  opacity: 0.75;
-  stroke-dasharray: 6 22;
-  animation: dashMove2 32s linear infinite;
-}
-
-@keyframes dashMove{
-  from{ stroke-dashoffset: 0; }
-  to  { stroke-dashoffset: -520; }
-}
-@keyframes dashMove2{
-  from{ stroke-dashoffset: 0; }
-  to  { stroke-dashoffset: -640; }
-}
-
-body.light .bg-traffic{ opacity: 0; }
 
 
 /* ===== Hero ===== */
