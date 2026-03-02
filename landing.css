@@ -140,21 +140,41 @@ body.light canvas#flowing-lines {
   box-shadow: 0 12px 30px rgba(40,120,220,.35);
 }
 
-/* ===== Scroll indicator ===== */
+/* ===== Scroll indicator (Enhanced Visibility) ===== */
 .scroll-down {
-  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  color: #a9c5ffb0; font-size: 13px; cursor: pointer; user-select: none;
-  transition: opacity .2s ease;
+  position: absolute; 
+  bottom: 24px; /* Slightly up from the edge */
+  left: 50%; 
+  transform: translateX(-50%);
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 8px;
+  color: #ffffff; /* Pure white for maximum contrast */
+  font-size: 14px; 
+  font-weight: 600;
+  cursor: pointer; 
+  user-select: none;
+  z-index: 99; /* Higher than the background canvas */
+  transition: opacity .3s ease;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5); /* Shadow to stand out from glow */
 }
-.scroll-down:hover { opacity: .9; }
+
+.scroll-down:hover { opacity: 1; color: #a8ff78; } /* Glow green on hover */
+
 .arrow {
-  width: 22px; height: 22px; border: 2px solid currentColor; border-left: 0; border-top: 0;
-  transform: rotate(45deg); animation: bounce 1.4s ease-in-out infinite;
+  width: 18px; 
+  height: 18px; 
+  border: 3px solid currentColor; /* Thicker lines */
+  border-left: 0; 
+  border-top: 0;
+  transform: rotate(45deg); 
+  animation: bounce 1.5s ease-in-out infinite;
 }
-@keyframes bounce {
-  0%, 100% { transform: rotate(45deg) translate(0,0); }
-  50%      { transform: rotate(45deg) translate(0,6px); }
+
+@keyframes bounce { 
+  0%, 100% { transform: rotate(45deg) translate(0,0); } 
+  50% { transform: rotate(45deg) translate(0,8px); } 
 }
 
 /* ===== Sections ===== */
