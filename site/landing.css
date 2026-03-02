@@ -26,45 +26,51 @@ canvas#stars {
   transition: opacity .8s ease;
 }
 
-/* ===== Option 1: Flowing Ambient Glow (Brighter & Animated) ===== */
+/* ===== Option 1: Flowing Ambient Glow (Ultra Visible Version) ===== */
 .bg-glow {
   position: fixed; inset: 0; z-index: -2;
-  background-color: #080c16; /* A slightly deeper base color to make the glow pop */
-  overflow: hidden; /* Prevent scrollbars from the moving elements */
+  /* Slightly lighter base background so the glow doesn't get completely swallowed */
+  background-color: #0d1326; 
+  overflow: hidden; 
   transition: opacity .8s ease;
 }
 
-/* FIX: Create large, soft, blurred blobs for the organic glow */
 .bg-glow::before,
 .bg-glow::after {
   content: "";
   position: absolute;
-  width: 65vw; height: 65vh;
+  /* Made the blobs slightly larger */
+  width: 75vw; height: 75vh; 
   border-radius: 50%;
-  filter: blur(100px); /* Heavy blur is the secret to the modern glow look */
+  /* Slightly reduced blur to keep the center of the light source brighter */
+  filter: blur(85px); 
   z-index: -1;
-  animation: floatGlow 12s ease-in-out infinite alternate;
+  animation: floatGlow 10s ease-in-out infinite alternate;
+  /* This makes the colors pop and blend like real light */
+  mix-blend-mode: screen; 
 }
 
-/* Top left glowing blob */
+/* Top left glowing blob - Bright Neon Blue */
 .bg-glow::before {
-  background: rgba(45, 110, 220, 0.45); /* Brighter deep blue */
-  top: -20%; left: -10%;
+  /* Increased opacity to 0.85 for extremely high visibility */
+  background: rgba(60, 130, 255, 0.85); 
+  top: -10%; left: -10%;
 }
 
-/* Bottom right glowing blob */
+/* Bottom right glowing blob - Bright Cyan */
 .bg-glow::after {
-  background: rgba(0, 180, 210, 0.35); /* Brighter cyan */
-  bottom: -20%; right: -10%;
-  animation-delay: -6s; /* Move out of sync with the first one */
-  animation-duration: 16s;
+  /* Increased opacity to 0.80 */
+  background: rgba(0, 220, 255, 0.80); 
+  bottom: -10%; right: -10%;
+  animation-delay: -5s; 
+  animation-duration: 14s;
 }
 
-/* FIX: The flowing animation keyframes */
+/* The flowing animation keyframes */
 @keyframes floatGlow {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(15vw, 10vh) scale(1.15); }
-  100% { transform: translate(-10vw, 15vh) scale(0.9); }
+  50% { transform: translate(20vw, 15vh) scale(1.2); }
+  100% { transform: translate(-15vw, 20vh) scale(0.9); }
 }
 
 /* ===== Hero ===== */
