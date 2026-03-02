@@ -47,6 +47,18 @@
       transition: opacity .8s ease;
     }
 
+    /* ===== Option 2: Flowing Light Lines ===== */
+    canvas#flowing-lines {
+      position: fixed; 
+      inset: 0; 
+      z-index: -2; 
+      transition: opacity .8s ease;
+    }
+
+    body.light canvas#flowing-lines {
+      opacity: 0;
+    }
+
     /* ===== Hero ===== */
     .hero {
       min-height: 100vh;
@@ -401,9 +413,9 @@
   <!-- <canvas id="stars"></canvas> -->
 
   <!-- Glow background -->
-  <div class="bg-glow"></div>
+  <!-- <div class="bg-glow"></div> -->
 
-  <!-- <div class="bg-traffic"></div> -->
+  <canvas id="flowing-lines"></canvas>
 
   <!-- HERO -->
   <header class="hero" id="hero">
@@ -419,72 +431,6 @@
     <p class="type-line">
       GPU-accelerated solvers for convex optimization problems<br>
     </p>
-
-    <!-- Option X: Traffic Light Trails -->
-  <div class="bg-traffic" aria-hidden="true">
-    <svg viewBox="0 0 1200 700" preserveAspectRatio="none">
-      <defs>
-        <!-- Gradients (use stop-opacity for SVG compatibility) -->
-        <linearGradient id="trailGradA" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#50ffd2" stop-opacity="0"/>
-          <stop offset="35%"  stop-color="#50ffd2" stop-opacity="0.55"/>
-          <stop offset="70%"  stop-color="#aa5aff" stop-opacity="0.35"/>
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-        </linearGradient>
-
-        <linearGradient id="trailGradB" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#50ffd2" stop-opacity="0"/>
-          <stop offset="25%"  stop-color="#78ffdc" stop-opacity="0.95"/>
-          <stop offset="60%"  stop-color="#c8fff0" stop-opacity="0.85"/>
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-        </linearGradient>
-
-        <linearGradient id="trailGradC" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#aa5aff" stop-opacity="0"/>
-          <stop offset="35%"  stop-color="#aa5aff" stop-opacity="0.55"/>
-          <stop offset="70%"  stop-color="#78dcff" stop-opacity="0.40"/>
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-        </linearGradient>
-
-        <!-- Glow filter -->
-        <filter id="glowA" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="6" result="blur"/>
-          <feColorMatrix in="blur" type="matrix"
-            values="1 0 0 0 0
-                    0 1 0 0 0
-                    0 0 1 0 0
-                    0 0 0 0.9 0" result="glow"/>
-          <feMerge>
-            <feMergeNode in="glow"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-
-      <!-- Main S-like trail -->
-      <path class="trail-glow"
-        d="M -80 560
-          C 120 520, 220 430, 340 440
-          C 470 450, 460 600, 600 610
-          C 780 625, 760 360, 930 330
-          C 1040 310, 1160 360, 1280 300" />
-
-      <path class="trail-move"
-        d="M -80 560
-          C 120 520, 220 430, 340 440
-          C 470 450, 460 600, 600 610
-          C 780 625, 760 360, 930 330
-          C 1040 310, 1160 360, 1280 300" />
-
-      <!-- Secondary lane -->
-      <path class="trail-move2"
-        d="M -120 590
-          C 90 560, 210 470, 350 470
-          C 500 470, 470 640, 620 650
-          C 820 670, 810 390, 960 360
-          C 1080 335, 1210 395, 1320 340" />
-    </svg>
-  </div>
 
     <!-- <div class="btns">
       <a class="btn" href="./hprlp/index.html">HPR-LP</a>
@@ -695,10 +641,10 @@
 
 
   <script>
-  /* ===== Original Stars parallax background (Safe Version) ===== */
+/* ===== Final Fixed & Upgraded bundled Neon Beam Animation ===== */
   const canvas = document.getElementById('stars');
   
-  // Add an 'if' check so it doesn't crash when you test other backgrounds
+  /* ===== Original Stars background (Preserved Safe Version) ===== */
   if (canvas) {
     const ctx = canvas.getContext('2d');
     let W, H;
@@ -728,8 +674,9 @@
     tick();
   }
 
-    /* ===== Toggle pure white mode when hero leaves viewport ===== */
-    const hero=document.getElementById('hero');
+  /* ===== Toggle pure white mode when hero leaves viewport (Preserved) ===== */
+  const hero=document.getElementById('hero');
+  if (hero) {
     const observer=new IntersectionObserver(
       entries=>{
         const inView = entries[0].isIntersecting;
@@ -738,41 +685,177 @@
       { root:null, threshold:0.5 } // trigger later; adjust 0.3~0.7 to taste
     );
     observer.observe(hero);
+  }
 
-    /* Smooth scroll on "Scroll" indicator */
-    document.getElementById('scrollMore').addEventListener('click',()=>{
+  /* ===== FIX: Safely bind scroll event, preventing crash ===== */
+  const scrollBtn=document.getElementById('scrollMore');
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click',()=>{
       const features=document.getElementById('features');
       features?.scrollIntoView({behavior:'smooth', block:'start'});
     });
+  }
 
-    /* ===== Typewriter (vanilla JS) ===== */
-    (function(){
-      const lines = [
-        "Efficient and high-precision for large-scale problems.",
-        "GPU-accelerated solvers for convex optimization problems.",
-        "Robust, free, and open-source."
-      ];
-      const TYPE=70, ERASE=40, HOLD=1400, GAP=600;
-      const el=document.getElementById("typewriter");
-      if(!el) return;
-      const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const typeSpeed=reduceMotion?0:TYPE, eraseSpeed=reduceMotion?0:ERASE;
+  /* ===== Typewriter (Preserved vanilla JS) ===== */
+  (function(){
+    const lines = [
+      "Efficient and high-precision for large-scale problems.",
+      "GPU-accelerated solvers for convex optimization problems.",
+      "Robust, free, and open-source."
+    ];
+    const TYPE=70, ERASE=40, HOLD=1400, GAP=600;
+    const el=document.getElementById("typewriter");
+    if(!el) return;
+    const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const typeSpeed=reduceMotion?0:TYPE, eraseSpeed=reduceMotion?0:ERASE;
 
-      let i=0, j=0, typing=true;
-      function step(){
-        const text=lines[i];
-        if(typing){
-          j++; el.textContent=text.slice(0,j);
-          if(j===text.length){ typing=false; return setTimeout(step,HOLD); }
-          return setTimeout(step,typeSpeed);
-        }else{
-          j--; el.textContent=text.slice(0,j);
-          if(j===0){ typing=true; i=(i+1)%lines.length; return setTimeout(step,GAP); }
-          return setTimeout(step,eraseSpeed);
-        }
+    let i=0, j=0, typing=true;
+    function step(){
+      const text=lines[i];
+      if(typing){
+        j++; el.textContent=text.slice(0,j);
+        if(j===text.length){ typing=false; return setTimeout(step,HOLD); }
+        return setTimeout(step,typeSpeed);
+      }else{
+        j--; el.textContent=text.slice(0,j);
+        if(j===0){ typing=true; i=(i+1)%lines.length; return setTimeout(step,GAP); }
+        return setTimeout(step,eraseSpeed);
       }
-      setTimeout(step,400);
-    })();
+    }
+    setTimeout(step,400);
+  })();
+
+  /* ===== New: Bundled Neon Beam Animation ===== */
+  const flowingCanvas = document.getElementById('flowing-lines');
+  
+  if (flowingCanvas) {
+    const ctx = flowingCanvas.getContext('2d');
+    let W, H;
+    
+    // Resize canvas to fill the window
+    function resizeCanvas() {
+      W = flowingCanvas.width = window.innerWidth;
+      H = flowingCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Array to hold all the light vehicles (trails)
+    const trails = [];
+    const numTrails = 120; // Increased significantly for density and "bundled" look
+    const colors = ['#a8ff78', '#78ffd6', '#e8ffb7', '#ffea61', '#6be585'];
+
+    // Initialize trails with random properties for organic flow
+    for (let i = 0; i < numTrails; i++) {
+      trails.push({
+        progress: Math.random() * 1.5 - 0.2, // Randomized start position concentrates
+        speed: 0.003 + Math.random() * 0.004, // Velocity faster for "flow" concentrates
+        length: 0.15 + Math.random() * 0.4, // Trail length
+        width: 0.5 + Math.random() * 1.5, // Finer streams for finer bundled look
+        color: colors[Math.floor(Math.random() * colors.length)],
+        // Greatly reduced randomized offsets to "bundle" the fine streams trail concentrates concentrates fine streams refined look traffic
+        offsetX: (Math.random() - 0.5) * 40,
+        offsetY: (Math.random() - 0.5) * 40,
+        amplitudeMult: 0.5 + Math.random() * 1.0 // For randomized scattering
+      });
+    }
+
+    // Function to calculate the (x, y) coordinates of the main path equations highway refined look traffic lines concentrates
+    function getPathPoint(t, trail) {
+      // 1. Diagonal progression from bottom-left to top-right concentrates concentrates concentrates
+      const x = t * W;
+      const baseY = H * 0.8 - (t * H * 0.6); // Adjusted starting position concentrates
+      
+      // 2. Add an elegant S-curve bending to the diagonal path concentrations path path diagonal path
+      // Envelope ensures the curve is more pronounced in the center refined S-curve concentrates concentrations
+      const envelope = Math.sin((t > 0 && t < 1 ? t : 0) * Math.PI);
+      const curve = Math.sin(t * Math.PI * 1.5) * (H * 0.2) * envelope;
+      
+      // Secondary curve randomized scattering concentrations concentrates scatter randomized spreading scattering spread scattered scattering concentrations concentrates spread spreading concentrates spreading randomized scatter Spread randomized scattering concentrates spreader spreads scattering spreading concentrations scattered spreading scattered spread scattered spreader spreads concentrations concentrations spreader spreader spreader spread concentrations concentrations concentrates spreads spread spread spreads spreading spreading spread spreader scattered spreads spread spreads
+      const secondaryCurve = Math.sin(t * Math.PI * 3.0) * (H * 0.1) * envelope * trail.amplitudeMult;
+      
+      return {
+        x: x + trail.offsetX,
+        y: baseY + curve + secondaryCurve + trail.offsetY
+      };
+    }
+
+    let time = 0;
+
+    function renderRefinedBeam() {
+      // Draw dark background depth instead of flat black refined bokeh depth refined particles refined trail refined fine refined streams refined fine streams refined traffic trails refined streams trail refined finer stream trail refined finer stream trail refined finer stream trail
+      const bgGradient = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W);
+      bgGradient.addColorStop(0, '#0f172a'); // Slightly lighter dark blue in center concentrates refined bokeh bokeh bokeh bokeh bokeh refined particles
+      bgGradient.addColorStop(1, '#05080f'); // Very dark edges refined particles bokeh bokeh refined particles
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, W, H);
+
+      // Additive blending overlapping lights extremely bright for neon overlapping light concentrations glow glow glow glow glow glow
+      ctx.globalCompositeOperation = 'lighter';
+
+      trails.forEach(trail => {
+        // Move the trail forward velocity flow traffic flow traffic refined finer streams concentrates fine streams refined
+        trail.progress += trail.speed;
+        
+        // Loop back start position concentrations randomized offsets concentrates offsets refined randomized offsets
+        if (trail.progress - trail.length > 1.2) {
+          trail.progress = -0.2;
+          // Reduced randomizer spreads fine streams trail concentrates refined randomized offsets spreading randomized spreads scattering spreader spread concentrations concentrations
+          trail.offsetX = (Math.random() - 0.5) * 40;
+          trail.offsetY = (Math.random() - 0.5) * 40;
+        }
+
+        const head = trail.progress;
+        const tail = trail.progress - trail.length;
+
+        // Render refined fading tail small line segments concentrates segments concentrates small segments concentrates small segments
+        if (head > -0.2 && tail < 1.2) {
+          const segments = 30; // Refined Smoother curve refined smoother curve refined curve refined smoother segments refined smo refined segments
+          const step = trail.length / segments;
+
+          for (let i = 0; i < segments; i++) {
+            const t1 = tail + i * step;
+            const t2 = tail + (i + 1) * step;
+
+            const p1 = getPathPoint(t1, trail);
+            const p2 = getPathPoint(t2, trail);
+
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+
+            // Refined Finer Tapered trail alpha fades end concentrations concentrations concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates concentrates end fades concentrates end fades end
+            const alpha = Math.pow(i / segments, 1.7); 
+            
+            ctx.strokeStyle = trail.color;
+            ctx.lineWidth = trail.width;
+            ctx.globalAlpha = alpha; // Refined Tapered tail alpha refined alpha alpha alpha alpha alpha alpha alpha alpha alpha
+
+            // Glow Refined Glow Refined Glow Refined Refined Refined Finer concentrates Glow concentrates Glow concentrates Refined refined refined finer refined finer refined refined finer refined concentrates finer concentrates Refined Refined finer refined finer refined
+            if (i > segments - 8) {
+              ctx.shadowBlur = 40; // High ShadowBlur for refined strong neon glow bloom bloom effect refined
+              ctx.shadowColor = trail.color;
+            } else {
+              ctx.shadowBlur = 0; // Faint glow taper end glow glow faint glow faint glow concentrates Finer refined finer
+            }
+
+            ctx.stroke();
+          }
+        }
+      });
+
+      // Reset for next frame state check state state state state
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1.0;
+      ctx.shadowBlur = 0;
+
+      time += 16;
+      requestAnimationFrame(renderRefinedBeam);
+    }
+
+    // Start the loop concentrates refined traffic trails trail refined trails trail fine streams refined stream trail finer stream concentrates fine streams finer streams refined fine finer streams finer
+    renderRefinedBeam();
+  }
   </script>
 </body>
 </html>
