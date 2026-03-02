@@ -322,10 +322,14 @@
   }
 
   .card-image {
-    height: 180px;
+    height: 100%;
+    aspect-ratio: 1/1; /* Square aspect ratio */
     background: #0b1120; /* Dark fallback if image is missing */
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card-image img {
