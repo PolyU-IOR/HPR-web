@@ -26,27 +26,45 @@ canvas#stars {
   transition: opacity .8s ease;
 }
 
-/* Option 1: Modern Ambient Glow */
+/* ===== Option 1: Flowing Ambient Glow (Brighter & Animated) ===== */
 .bg-glow {
   position: fixed; inset: 0; z-index: -2;
-  background-color: #0a0f1c; 
-  background-image: 
-    radial-gradient(circle at 15% 30%, rgba(20, 80, 150, 0.25) 0%, transparent 40%),
-    radial-gradient(circle at 85% 70%, rgba(0, 150, 200, 0.15) 0%, transparent 40%);
+  background-color: #080c16; /* A slightly deeper base color to make the glow pop */
+  overflow: hidden; /* Prevent scrollbars from the moving elements */
   transition: opacity .8s ease;
 }
 
-/* Option 2: Perspective Tech Grid */
-.bg-grid {
-  position: fixed; inset: 0; z-index: -2;
-  background-color: #080c16;
-  background-image: 
-    linear-gradient(rgba(40, 80, 150, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(40, 80, 150, 0.15) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
-  transition: opacity .8s ease;
+/* FIX: Create large, soft, blurred blobs for the organic glow */
+.bg-glow::before,
+.bg-glow::after {
+  content: "";
+  position: absolute;
+  width: 65vw; height: 65vh;
+  border-radius: 50%;
+  filter: blur(100px); /* Heavy blur is the secret to the modern glow look */
+  z-index: -1;
+  animation: floatGlow 12s ease-in-out infinite alternate;
+}
+
+/* Top left glowing blob */
+.bg-glow::before {
+  background: rgba(45, 110, 220, 0.45); /* Brighter deep blue */
+  top: -20%; left: -10%;
+}
+
+/* Bottom right glowing blob */
+.bg-glow::after {
+  background: rgba(0, 180, 210, 0.35); /* Brighter cyan */
+  bottom: -20%; right: -10%;
+  animation-delay: -6s; /* Move out of sync with the first one */
+  animation-duration: 16s;
+}
+
+/* FIX: The flowing animation keyframes */
+@keyframes floatGlow {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(15vw, 10vh) scale(1.15); }
+  100% { transform: translate(-10vw, 15vh) scale(0.9); }
 }
 
 /* ===== Hero ===== */
