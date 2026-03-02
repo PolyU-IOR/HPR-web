@@ -73,6 +73,89 @@ canvas#stars {
   100% { transform: translate(-15vw, 20vh) scale(0.9); }
 }
 
+/* ===== Option X: Traffic Light Trails (Standalone) ===== */
+.bg-traffic{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity .8s ease;
+
+  /* base */
+  background:
+    radial-gradient(900px 520px at 50% 42%,
+      rgba(90, 180, 255, 0.08) 0%,
+      rgba(20, 60, 120, 0.04) 45%,
+      rgba(0, 0, 0, 0.0) 75%),
+    linear-gradient(180deg, #050814 0%, #070d1f 45%, #040712 100%);
+}
+
+.bg-traffic svg{
+  position: absolute;
+  inset: -12%;
+  width: 124%;
+  height: 124%;
+  opacity: 0.95;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 18px rgba(120,255,220,0.18));
+  animation: trafficFloat 22s ease-in-out infinite alternate;
+}
+
+@keyframes trafficFloat{
+  from{ transform: translate3d(0,0,0) scale(1.02); }
+  to  { transform: translate3d(-1.2%, -0.8%, 0) scale(1.02); }
+}
+
+/* Glow base line (soft continuous) */
+.bg-traffic .trail-glow{
+  fill: none;
+  stroke: url(#trailGradA);
+  stroke-width: 18;
+  stroke-linecap: round;
+  opacity: 0.28;
+  filter: url(#glowA);
+}
+
+/* Moving segments (traffic flow) */
+.bg-traffic .trail-move{
+  fill: none;
+  stroke: url(#trailGradB);
+  stroke-width: 6;
+  stroke-linecap: round;
+  opacity: 0.95;
+
+  /* "cars" segments */
+  stroke-dasharray: 14 28;
+  animation: dashMove 18s linear infinite;
+}
+
+/* Second moving lane (slower, different rhythm) */
+.bg-traffic .trail-move2{
+  fill: none;
+  stroke: url(#trailGradC);
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.75;
+
+  stroke-dasharray: 6 22;
+  animation: dashMove2 26s linear infinite;
+}
+
+@keyframes dashMove{
+  from{ stroke-dashoffset: 0; }
+  to  { stroke-dashoffset: -520; }
+}
+
+@keyframes dashMove2{
+  from{ stroke-dashoffset: 0; }
+  to  { stroke-dashoffset: -640; }
+}
+
+/* Light mode: hide */
+body.light .bg-traffic{ opacity: 0; }
+
+
 /* ===== Hero ===== */
 .hero {
   min-height: 100vh;
