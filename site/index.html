@@ -120,22 +120,53 @@
     }
     .btn:hover{ transform:translateY(-3px); border-color:#4aa8ff; box-shadow:0 12px 30px rgba(40,120,220,.35) }
 
-    /* Scroll indicator */
+/* ===== Scroll indicator (Fixed & High Visibility) ===== */
     .scroll-down {
-      position: absolute; 
-      /* FIX: Changed from 26px to 16px to move it further down */
-      bottom: 16px; 
-      left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      color: #a9c5ffb0; font-size: 13px; cursor: pointer; user-select: none;
-      transition: opacity .2s ease;
+      /* Fixed position ensures it stays at the bottom of the viewport */
+      position: fixed; 
+      bottom: 30px; 
+      left: 50%; 
+      transform: translateX(-50%);
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      gap: 8px;
+      color: #ffffff; 
+      font-size: 14px; 
+      font-weight: 800;
+      cursor: pointer; 
+      user-select: none;
+      /* Higher z-index to stay above canvas layers and cards */
+      z-index: 999; 
+      transition: opacity .5s ease, transform .3s ease;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
     }
-    .scroll-down:hover{opacity:.9}
-    .arrow{
-      width:22px; height:22px; border:2px solid currentColor; border-left:0; border-top:0;
-      transform:rotate(45deg); animation:bounce 1.4s ease-in-out infinite;
+
+    /* Hide arrow when scrolling into the white background sections */
+    body.light .scroll-down {
+      opacity: 0;
+      pointer-events: none;
     }
-    @keyframes bounce{ 0%,100%{transform:rotate(45deg) translate(0,0)} 50%{transform:rotate(45deg) translate(0,6px)} }
+
+    .scroll-down:hover {
+      transform: translateX(-50%) scale(1.1);
+      color: #a8ff78; 
+    }
+
+    .arrow {
+      width: 20px; 
+      height: 20px; 
+      border: 3px solid currentColor; 
+      border-left: 0; 
+      border-top: 0;
+      transform: rotate(45deg); 
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce { 
+      0%, 100% { transform: rotate(45deg) translate(0,0); } 
+      50% { transform: rotate(45deg) translate(8px,8px); } 
+    }
 
     /* ===== Common sections ===== */
     section{padding:72px 24px; transition: background-color .5s ease, color .5s ease;}
@@ -257,55 +288,103 @@
   }
   body.light .credits-note{ color:#4a556d; }
 
-  /* ===== Software Cards (Replacing old .btns) ===== */
+/* ==========================================
+     Cyberpunk Holographic Card Master Styles
+     (Transparency + Scanlines + Color Fix)
+     ========================================== */
+
   .software-cards {
     display: flex;
-    gap: 24px;
+    gap: 28px;
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 32px;
     width: 100%;
-    max-width: 860px;
+    max-width: 900px;
     z-index: 10;
   }
 
+  /* ===== Transparent Glassmorphism Container ===== */
   .software-card {
     flex: 1;
     min-width: 320px;
-    max-width: 400px;
-    background: rgba(16, 28, 54, 0.66);
-    border: 1px solid #2a4474;
+    max-width: 420px;
+    /* High transparency (0.2~0.3) makes the card feel like light glass */
+    background: rgba(16, 28, 54, 0.25); 
+    border: 1px solid rgba(42, 68, 116, 0.4);
     border-radius: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     text-align: left;
-    backdrop-filter: blur(8px);
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease;
+    /* Stronger blur makes the background flow look elegant through glass */
+    backdrop-filter: blur(16px); 
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .software-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     border-color: #4aa8ff;
-    box-shadow: 0 14px 28px rgba(40, 120, 220, 0.25);
+    box-shadow: 0 15px 35px rgba(40, 120, 220, 0.3);
   }
 
+  /* ===== Image Holder with Scanline Overlay ===== */
   .card-image {
-    height: 180px;
-    background: #0b1120; /* Dark fallback if image is missing */
+    height: 200px;
+    /* Removes the solid dark background to be fully transparent */
+    background: transparent; 
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(168, 195, 255, 0.08);
   }
 
+  /* The actual Scanline texture added as an overlay */
+  .card-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* Creates thin horizontal stripes pattern */
+    background: linear-gradient(
+      rgba(0, 0, 0, 0) 50%, 
+      rgba(0, 0, 0, 0.15) 50%
+    );
+    background-size: 100% 4px; /* Adjust line density */
+    z-index: 2; /* Sits above the image but below hover glow */
+    pointer-events: none; /* Let clicks pass through */
+    opacity: 0.7;
+    /* Optional: Subtle animated flicker to mimic a digital display */
+    animation: scanline-flicker 0.2s infinite;
+  }
+
+  @keyframes scanline-flicker {
+    0% { opacity: 0.55; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.55; }
+  }
+
+  /* ===== Holographic Image & Color Transformation ===== */
   .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+    width: 90%;
+    height: 90%;
+    object-fit: contain; /* Keep geometry whole */
+    transition: transform 0.6s ease, filter 0.6s ease;
+    
+    /* THE MAGIC: 'screen' removes the solid black box image background */
+    mix-blend-mode: screen; 
+    
+    /* THE MAGIC: Shifts original cyan geometry to neon green theme */
+    /* Adjust -70deg ~ -85deg to perfectly match your trails */
+    filter: hue-rotate(-75deg) brightness(1.1) contrast(1.1); 
   }
 
   .software-card:hover .card-image img {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.05);
+    /* Boost glow effect on hover */
+    filter: hue-rotate(-75deg) brightness(1.4) contrast(1.2) drop-shadow(0 0 15px rgba(168, 255, 120, 0.5));
   }
 
   .card-image .sparkle {
@@ -442,7 +521,6 @@
       <a href="./hprlp/index.html" class="software-card">
         <div class="card-image">
           <img src="./assets/avatars/hpr_lp_cover.jpg" alt="HPR-LP Cover">
-          <span class="sparkle">✦</span>
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -456,7 +534,6 @@
       <a href="./hprqp/index.html" class="software-card">
         <div class="card-image">
           <img src="./assets/avatars/hpr_qp_cover.jpg" alt="HPR-QP Cover">
-          <span class="sparkle">✦</span>
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -466,7 +543,11 @@
           <p class="card-desc">A GPU-accelerated solver for large-scale convex composite quadratic programming.</p>
         </div>
       </a>
+    </div>
 
+    <div class="scroll-down" id="scrollMore">
+      <span>Scroll</span>
+      <div class="arrow"></div>
     </div>
   </header>
 
