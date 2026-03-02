@@ -73,22 +73,29 @@ canvas#stars {
   100% { transform: translate(-15vw, 20vh) scale(0.9); }
 }
 
-/* ===== Option X: Traffic Light Trails (Standalone) ===== */
+/* ===== Option X: Traffic Light Trails (Standalone, robust) ===== */
+
+/* Put background at z=0 (no negative z-index issues) */
 .bg-traffic{
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   pointer-events: none;
   overflow: hidden;
   transition: opacity .8s ease;
 
-  /* base */
   background:
     radial-gradient(900px 520px at 50% 42%,
       rgba(90, 180, 255, 0.08) 0%,
       rgba(20, 60, 120, 0.04) 45%,
       rgba(0, 0, 0, 0.0) 75%),
     linear-gradient(180deg, #050814 0%, #070d1f 45%, #040712 100%);
+}
+
+/* Lift all normal content above background layers (no HTML refactor needed) */
+body > *:not(.bg-traffic):not(.bg-glow):not(canvas#stars){
+  position: relative;
+  z-index: 1;
 }
 
 .bg-traffic svg{
@@ -107,7 +114,7 @@ canvas#stars {
   to  { transform: translate3d(-1.2%, -0.8%, 0) scale(1.02); }
 }
 
-/* Glow base line (soft continuous) */
+/* Soft continuous glow line */
 .bg-traffic .trail-glow{
   fill: none;
   stroke: url(#trailGradA);
@@ -117,42 +124,37 @@ canvas#stars {
   filter: url(#glowA);
 }
 
-/* Moving segments (traffic flow) */
+/* Moving segments: "traffic flow" */
 .bg-traffic .trail-move{
   fill: none;
   stroke: url(#trailGradB);
   stroke-width: 6;
   stroke-linecap: round;
   opacity: 0.95;
-
-  /* "cars" segments */
   stroke-dasharray: 14 28;
-  animation: dashMove 18s linear infinite;
+  animation: dashMove 24s linear infinite;
 }
 
-/* Second moving lane (slower, different rhythm) */
+/* Secondary lane */
 .bg-traffic .trail-move2{
   fill: none;
   stroke: url(#trailGradC);
   stroke-width: 4;
   stroke-linecap: round;
   opacity: 0.75;
-
   stroke-dasharray: 6 22;
-  animation: dashMove2 26s linear infinite;
+  animation: dashMove2 32s linear infinite;
 }
 
 @keyframes dashMove{
   from{ stroke-dashoffset: 0; }
   to  { stroke-dashoffset: -520; }
 }
-
 @keyframes dashMove2{
   from{ stroke-dashoffset: 0; }
   to  { stroke-dashoffset: -640; }
 }
 
-/* Light mode: hide */
 body.light .bg-traffic{ opacity: 0; }
 
 
