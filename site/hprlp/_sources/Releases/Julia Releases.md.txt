@@ -91,5 +91,3 @@ A compact index of HPR-LP (Julia) releases—each entry shows the version tag an
 - [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.0.tar.gz)
 
 </details>
-
----

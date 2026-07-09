@@ -8,13 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About HPR-LP &mdash; HPR-LP</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
       <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/hprlp_custom.css?v=efd90ad8" />
 
   
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
@@ -28,7 +29,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quick start guide" href="../Quick%20start%20guide/index.html" />
+    <link rel="next" title="Problem statement" href="Problem%20statement.html" />
     <link rel="prev" title="HPR-LP Solver" href="../index.html" /> 
 </head>
 
@@ -53,6 +54,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">About HPR-LP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Problem%20statement.html">Problem statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HPR%20method%20for%20LP.html">HPR method for LP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Algorithmic%20enhancements.html">Algorithmic enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Implementations.html">Implementations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#problem-statement">Problem statement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#hpr-method-for-lp">HPR method for LP</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#base-algorithm">Base algorithm</a></li>
@@ -72,6 +77,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Interfaces/index.html">Interfaces</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Benchmarks/index.html">Benchmarks</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Releases/index.html">Releases</a></li>
@@ -130,15 +138,15 @@
   <section class="tex2jax_ignore mathjax_ignore" id="about-hpr-lp">
 <h1>About HPR-LP</h1>
 <p>HPR-LP is a GPU-accelerated solver for large-scale linear programming (LP). It is based on the Halpern Peaceman–Rachford (HPR) method with an adaptive restart strategy for stability and speed.</p>
-<!-- ```{toctree}
-:maxdepth: 1
-:caption: About HPR-LP
-
-Problem statement
-HPR method for LP
-Algorithmic enhancements
-Implementations
-``` -->
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">About HPR-LP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Problem%20statement.html">Problem statement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HPR%20method%20for%20LP.html">HPR method for LP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Algorithmic%20enhancements.html">Algorithmic enhancements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Implementations.html">Implementations</a></li>
+</ul>
+</div>
 <section id="problem-statement">
 <h2>Problem statement</h2>
 <p><strong>Problem form.</strong> The general LP solved by HPR-LP is:</p>
@@ -378,7 +386,7 @@ This choice applies when <span class="math notranslate nohighlight">\(l_c \neq u
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="HPR-LP Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../Quick%20start%20guide/index.html" class="btn btn-neutral float-right" title="Quick start guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Problem%20statement.html" class="btn btn-neutral float-right" title="Problem statement" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

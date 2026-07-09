@@ -14,5 +14,3 @@ A compact index of HPR-LP (Python) releases—each entry shows the version tag a
 **Downloads**
 - [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP-Python/archive/refs/heads/main.zip)  
 </details>
-
----

@@ -23,12 +23,12 @@ Quick start guide/index
 Interfaces/index
 ```
 
-<!-- ```{toctree}
+```{toctree}
 :maxdepth: 1
 
 
 Benchmarks/index
-``` -->
+```
 
 ```{toctree}
 :maxdepth: 1

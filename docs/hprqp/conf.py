@@ -50,7 +50,7 @@ source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 # -- Options for HTML output -------------------------------------------------
 
-html_favicon = "../assets/favicon.ico"
+html_favicon = "../../assets/avatars/favicon.ico"
 
 
 # html_theme = "furo"
@@ -65,7 +65,7 @@ html_show_sourcelink = False
 html_static_path = ["_static"]
 html_js_files = ['back_to_hpr_fab.js']
 html_css_files = [
-    "custom.css",
+    "hprqp_custom.css",
 ]
 
 html_theme_options = { 
@@ -75,4 +75,3 @@ html_theme_options = {
     "sticky_navigation": True,
     # "titles_only": False,
 }
-

@@ -49,5 +49,3 @@ Resume from saved states for long-running problems
 - [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.tar.gz)
 
 </details>
-
----

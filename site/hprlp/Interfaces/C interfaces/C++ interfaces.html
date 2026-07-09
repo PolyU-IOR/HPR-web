@@ -8,13 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>C++ Binding for HPR-LP-C &mdash; HPR-LP</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../../_static/fonts.css?v=5583d106" />
       <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hprlp_custom.css?v=efd90ad8" />
 
   
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
@@ -79,6 +80,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../MATLAB%20interfaces.html">MATLAB Version</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Benchmarks/index.html">Benchmarks</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Releases/index.html">Releases</a></li>
@@ -215,7 +219,7 @@ make<span class="w"> </span>example_mps_file
 <span class="n">HPRLP_results</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">param</span><span class="p">);</span>
 
 <span class="c1">// Access solution</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Use result.x (primal solution)</span>
 <span class="w">    </span><span class="c1">// Use result.y (dual solution)</span>
 <span class="w">    </span>

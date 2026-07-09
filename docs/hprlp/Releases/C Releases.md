@@ -34,5 +34,3 @@ A compact index of HPR-LP (C++/CUDA) releases—each entry shows the version tag
 - [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP-C/archive/refs/tags/v0.1.0.tar.gz)
 
 </details>
-
----

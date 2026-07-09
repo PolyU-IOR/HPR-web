@@ -27,6 +27,3 @@ Numerical performance of **HPR-LP.jl** and **cuPDLP.jl** on 18 LP relaxations (>
 | cuPDLP.jl | 129.8 | 16 | 253.3 | 15 | 442.2 | 14 |
 | HPR-LP.jl (v0.1.0) | 117.6 | 17 | 260.7 | 15 | 428.6 | 14 |
 | HPR-LP.jl (v0.1.2) | 60.9 | 17 | 122.5 | 17 | 204.2 | 17 |
-
----
-

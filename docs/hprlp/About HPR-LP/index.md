@@ -1,7 +1,7 @@
 # About HPR-LP
 
 HPR-LP is a GPU-accelerated solver for large-scale linear programming (LP). It is based on the Halpern Peaceman–Rachford (HPR) method with an adaptive restart strategy for stability and speed.
-<!-- ```{toctree}
+```{toctree}
 :maxdepth: 1
 :caption: About HPR-LP
 
@@ -9,7 +9,7 @@ Problem statement
 HPR method for LP
 Algorithmic enhancements
 Implementations
-``` -->
+```
 
 ## Problem statement
 
@@ -359,5 +359,4 @@ y^{r, t+1} \;=\; \frac{1}{\sigma_r \lambda_A}\Big( \Pi_{\mathcal{K}}(R_y) - R_y 
 where $R_y := A\big(2x^{r, t+1} - x^{r,t}\big) - \sigma_r \lambda_A y^{r,t}.$ Combining these relations shows $z^{r,t+1}$ need not be computed at every step; it is only required when checking termination. Each step reduces to SpMV, vector operations, and simple projections, with per-iteration cost $O(\mathrm{nnz}(A))$.
 
 On GPUs, these operations are mapped to custom CUDA kernels. Matrix–vector products use **`cusparseSpMV()`** with **`CUSPARSE_SPMV_CSR_ALG2`** for deterministic results.
-
 

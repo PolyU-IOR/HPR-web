@@ -100,5 +100,3 @@ Error: Error during loading of extension AtomixCUDAExt of Atomix, use Base.retry
 
 This is usually transient. Wait a few moments; the extension typically loads successfully on its own.
 ```
-
----

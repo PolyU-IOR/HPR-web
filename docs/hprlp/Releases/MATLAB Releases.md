@@ -14,5 +14,3 @@ A compact index of HPR-LP (MATLAB) releases—each entry shows the version tag a
 **Downloads**
 - [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP-MATLAB/archive/refs/heads/main.zip)  
 </details>
-
----

@@ -2,6 +2,16 @@
 
 HPR-QP is a GPU-accelerated solver for large-scale convex composite quadratic programming (CCQP). It is a GPU-based dual Halpern–Peaceman–Rachford solver built on the restricted Wolfe dual with symmetric Gauss–Seidel, range-space updates, and adaptive restart.
 
+```{toctree}
+:maxdepth: 1
+:caption: About HPR-QP
+
+Problem statement
+HPR method for LP
+Algorithmic enhancements
+Implementations
+```
+
 ## Problem statement
 
 
@@ -399,6 +409,5 @@ Each step thus consists only of **sparse matrix–vector products (SpMV)**, vect
 
 On GPUs, these operations are fused into custom CUDA kernels.  
 Matrix–vector multiplications are implemented with **`cusparseSpMV()`** under the **`CUSPARSE_SPMV_CSR_ALG2`** algorithm for deterministic and high-throughput performance.
-
 
 
