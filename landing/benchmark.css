@@ -1,0 +1,91 @@
+/* Share the homepage's section sizing, typography and dark-to-light fade. */
+.benchmark-section {
+  --benchmark-accent: #a8c3ff;
+  --benchmark-muted: #a8b9d1;
+  --benchmark-border: rgba(151, 179, 219, 0.22);
+  --benchmark-highlight: rgba(80, 130, 255, 0.14);
+  --benchmark-row: rgba(151, 179, 219, 0.06);
+  background: transparent;
+}
+
+.benchmark-section,
+.benchmark-section * {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.benchmark-section .section-title { margin-bottom: 6px; }
+.benchmark-updated { margin: 0 0 24px; color: var(--benchmark-muted); font-size: 14px; line-height: 1.6; }
+
+.benchmark-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.benchmark-panel { min-width: 0; padding: 28px 32px; border: 1px solid var(--benchmark-border); border-radius: 14px; background: rgba(16, 28, 54, 0.08); }
+.benchmark-panel h3 { margin: 0 0 6px; font-size: 22px; font-weight: 800; }
+.benchmark-context { margin: 0; color: var(--benchmark-muted); font-size: 14px; line-height: 1.6; }
+.benchmark-result { margin: 24px 0; }
+.benchmark-solver { margin: 0 0 12px; font-size: 15px; font-weight: 700; line-height: 1.4; }
+.benchmark-summary { display: flex; flex-wrap: wrap; gap: 16px 48px; margin: 0; }
+.benchmark-summary > div { display: flex; flex-direction: column-reverse; gap: 6px; }
+.benchmark-summary dt { color: var(--benchmark-muted); font-size: 14px; }
+.benchmark-summary dd { margin: 0; color: var(--benchmark-accent); font-size: 36px; line-height: 1.15; font-weight: 800; letter-spacing: -0.025em; }
+.benchmark-summary dd span { font-size: 20px; font-weight: 500; letter-spacing: 0; }
+.benchmark-summary dd,
+.benchmark-table { font-variant-numeric: tabular-nums; }
+
+.benchmark-table-wrap { overflow-x: auto; border-radius: 8px; }
+.benchmark-table { width: 100%; min-width: 320px; border-collapse: separate; border-spacing: 0 6px; font-size: 16px; }
+.benchmark-table thead th { padding: 0 16px 10px; color: var(--benchmark-muted); font-size: 14px; font-weight: 600; vertical-align: top; }
+.benchmark-table th { text-align: left; }
+.benchmark-table thead th:not(:first-child),
+.benchmark-table td { text-align: right; white-space: nowrap; }
+.benchmark-table tbody th,
+.benchmark-table td { padding: 13px 16px; background: var(--benchmark-row); }
+.benchmark-table tbody th { width: 34%; border-radius: 8px 0 0 8px; font-weight: 600; white-space: nowrap; }
+.benchmark-table thead th.benchmark-type,
+.benchmark-table tbody td.benchmark-type { text-align: center; color: var(--benchmark-muted); }
+.benchmark-cpu-group tr:first-child > * { border-top: 1px solid var(--benchmark-border); }
+.benchmark-table td:last-child { border-radius: 0 8px 8px 0; }
+.benchmark-table .is-hpr th,
+.benchmark-table .is-hpr td { background: var(--benchmark-highlight); color: var(--benchmark-accent); font-weight: 700; }
+.benchmark-table .is-hpr th { box-shadow: inset 3px 0 var(--benchmark-accent); }
+
+.benchmark-execution,
+.benchmark-licenses { margin: 16px 0 0; color: var(--benchmark-muted); font-size: 13px; line-height: 1.8; }
+.benchmark-execution + .benchmark-licenses { margin-top: 4px; }
+.benchmark-source { margin: 18px 0 0; color: var(--benchmark-muted); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.benchmark-source strong { font-weight: 600; }
+.benchmark-source a { text-decoration: underline; text-decoration-color: var(--benchmark-border); text-underline-offset: 3px; }
+.benchmark-source a:hover { color: var(--benchmark-accent); text-decoration-color: currentColor; }
+.benchmark-section a:focus-visible,
+.benchmark-table-wrap:focus-visible { outline: 2px solid var(--benchmark-accent); outline-offset: 4px; }
+
+body.light .benchmark-section {
+  --benchmark-accent: #3558ff;
+  --benchmark-muted: #59667c;
+  --benchmark-border: #e4e7f0;
+  --benchmark-highlight: #eef3ff;
+  --benchmark-row: #f7f9fc;
+}
+body.light .benchmark-panel { background: #fff; }
+
+@media (max-width: 600px) {
+  .benchmark-grid { gap: 20px; }
+  .benchmark-panel { padding: 20px 14px; }
+  .benchmark-panel h3 { font-size: 20px; }
+  .benchmark-context,
+  .benchmark-summary dt { font-size: 13px; }
+  .benchmark-summary { gap: 12px 24px; }
+  .benchmark-summary dd { font-size: 30px; }
+  .benchmark-table { min-width: 360px; font-size: 12px; }
+  .benchmark-table--addendum { min-width: 0; }
+  .benchmark-table thead th { font-size: 11px; }
+  .benchmark-table tbody th { width: auto; }
+  .benchmark-unit { display: block; margin-top: 3px; }
+  .benchmark-table th,
+  .benchmark-table td,
+  .benchmark-table thead th,
+  .benchmark-table tbody th { padding-left: 5px; padding-right: 5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benchmark-section,
+  .benchmark-section * { transition: none; }
+}
