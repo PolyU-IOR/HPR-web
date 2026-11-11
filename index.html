@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <!-- <link rel="stylesheet" href="./landing.css?v=2"> -->
-  <link rel="icon" type="image/x-icon" href="../assets/avatars/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="./assets/avatars/favicon.ico">
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>HPR</title>
+  <link rel="stylesheet" href="./benchmark.css">
   <style>
     /* ===== Base ===== */
     html,body{height:100%;margin:0}
@@ -301,6 +302,7 @@
   }
 
   .software-card {
+    position: relative;
     flex: 1;
     min-width: 320px;
     max-width: 400px;
@@ -337,6 +339,14 @@
 
   .software-card:hover .card-image img {
     transform: scale(1.05); /* Slight zoom on hover */
+  }
+
+  @media (max-width: 900px) {
+    .card-image img {
+      /* Keep the lower image edge outside the crop on narrow cards. */
+      height: calc(100% + 24px);
+      object-position: center top;
+    }
   }
 
   .card-image .sparkle {
@@ -389,6 +399,106 @@
     transition: color 0.5s ease;
   }
 
+  /* Keep the card linked to its docs, with a separate download picker above it. */
+  .card-doc-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+  }
+
+  .card-doc-link:focus-visible::after {
+    outline: 2px solid #4aa8ff;
+    outline-offset: -3px;
+  }
+
+  .card-download-picker {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .card-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    min-height: 36px;
+    padding: 8px 14px;
+    border: 1px solid rgba(151, 179, 219, 0.28);
+    border-radius: 999px;
+    background: rgba(151, 179, 219, 0.06);
+    color: #c7d8ef;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    list-style: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .card-download::-webkit-details-marker { display: none; }
+
+  .card-download svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .card-download:hover {
+    background: rgba(151, 179, 219, 0.14);
+    border-color: rgba(168, 195, 255, 0.55);
+    color: #e6f1ff;
+  }
+
+  .card-download:focus-visible {
+    outline: 2px solid #8bbfff;
+    outline-offset: 3px;
+  }
+
+  .card-download-picker[open] .card-download svg { transform: rotate(180deg); }
+
+  /* Open upward inside the card so its rounded clipping does not cut off the links. */
+  .download-options {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 10px);
+    width: 240px;
+    box-sizing: border-box;
+    padding: 6px;
+    border: 1px solid rgba(151, 179, 219, 0.25);
+    border-radius: 12px;
+    background: #101b2e;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .download-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 12px;
+    border-radius: 7px;
+    color: #d9e6f9;
+  }
+
+  .download-option:hover,
+  .download-option:focus-visible { background: rgba(151, 179, 219, 0.12); }
+
+  .download-option:focus-visible {
+    outline: 2px solid #8bbfff;
+    outline-offset: -2px;
+  }
+
+  .download-option-copy { display: flex; flex-direction: column; gap: 3px; }
+  .download-option strong { font-size: 13px; font-weight: 600; line-height: 18px; }
+  .download-option small { font-size: 12px; line-height: 16px; color: #a1b3cf; }
+  .download-option svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.65; }
+
   .card-footer {
     margin-top: auto;
     display: flex;
@@ -432,6 +542,25 @@
   body.light .card-header h3 { color: #1b2330; }
   body.light .card-header .badge { background: #f0f4ff; color: #3558ff; }
   body.light .card-desc { color: #4a556d; }
+  body.light .card-download {
+    background: rgba(53, 88, 255, 0.04);
+    border-color: rgba(53, 88, 255, 0.2);
+    color: #355276;
+  }
+  body.light .card-download:hover {
+    background: rgba(53, 88, 255, 0.09);
+    border-color: rgba(53, 88, 255, 0.4);
+    color: #2747c7;
+  }
+  body.light .download-options {
+    background: #ffffff;
+    border-color: #e4e7f0;
+    box-shadow: 0 12px 32px rgba(27, 35, 48, 0.15);
+  }
+  body.light .download-option { color: #1b2330; }
+  body.light .download-option small { color: #596b84; }
+  body.light .download-option:hover,
+  body.light .download-option:focus-visible { background: #f0f4ff; }
   body.light .card-footer { border-top-color: #f0f2f5; }
   body.light .card-footer .langs { color: #8896ab; }
   body.light .card-footer a { color: #3558ff; }
@@ -470,31 +599,67 @@
     
     <div class="software-cards">
       
-      <a href="./hprlp/index.html" class="software-card">
+      <article class="software-card">
         <div class="card-image">
           <img src="./assets/avatars/hpr_lp_cover.png" alt="HPR-LP Cover">
         </div>
         <div class="card-body">
           <div class="card-header">
-            <h3>HPR-LP</h3>
+            <h3><a class="card-doc-link" href="./hprlp/index.html">HPR-LP</a></h3>
             <span class="badge">SOLVER</span>
           </div>
           <p class="card-desc">A GPU-accelerated solver for large-scale linear programming.</p>
+          <details class="card-download-picker">
+            <summary class="card-download">
+              Download
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m4 6 4 4 4-4"/>
+              </svg>
+            </summary>
+            <div class="download-options">
+              <a class="download-option" href="https://github.com/PolyU-IOR/HPR-LP" aria-label="HPR-LP, Julia implementation on GitHub">
+                <span class="download-option-copy"><strong>HPR-LP</strong><small>Julia implementation</small></span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg>
+              </a>
+              <a class="download-option" href="https://github.com/PolyU-IOR/HPR-LP-C" aria-label="HPR-LP-C, C / CUDA implementation on GitHub">
+                <span class="download-option-copy"><strong>HPR-LP-C</strong><small>C / CUDA implementation</small></span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg>
+              </a>
+            </div>
+          </details>
         </div>
-      </a>
+      </article>
 
-      <a href="./hprqp/index.html" class="software-card">
+      <article class="software-card">
         <div class="card-image">
           <img src="./assets/avatars/hpr_qp_cover.png" alt="HPR-QP Cover">
         </div>
         <div class="card-body">
           <div class="card-header">
-            <h3>HPR-QP</h3>
+            <h3><a class="card-doc-link" href="./hprqp/index.html">HPR-QP</a></h3>
             <span class="badge">SOLVER</span>
           </div>
           <p class="card-desc">A GPU-accelerated solver for large-scale convex composite quadratic programming.</p>
+          <details class="card-download-picker">
+            <summary class="card-download">
+              Download
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m4 6 4 4 4-4"/>
+              </svg>
+            </summary>
+            <div class="download-options">
+              <a class="download-option" href="https://github.com/PolyU-IOR/HPR-QP" aria-label="HPR-QP, Julia implementation on GitHub">
+                <span class="download-option-copy"><strong>HPR-QP</strong><small>Julia implementation</small></span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg>
+              </a>
+              <a class="download-option" href="https://github.com/PolyU-IOR/HPR-QP-C" aria-label="HPR-QP-C, C / CUDA implementation on GitHub">
+                <span class="download-option-copy"><strong>HPR-QP-C</strong><small>C / CUDA implementation</small></span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg>
+              </a>
+            </div>
+          </details>
         </div>
-      </a>
+      </article>
     </div>
 
     <div class="scroll-down" id="scrollMore">
@@ -503,7 +668,91 @@
     </div>
   </header>
 
-  <!-- ===== Features (under the hero) ===== -->
+  <!-- Published snapshot: provenance and update notes are in benchmarks/README.md. -->
+  <section id="benchmarks" class="benchmark-section" aria-labelledby="benchmark-title">
+    <div class="container">
+      <h2 id="benchmark-title" class="section-title">Mittelmann LPfeas Benchmark</h2>
+      <p class="benchmark-updated">Page updated <time datetime="2026-11-11">11 Nov 2026</time></p>
+
+      <div class="benchmark-grid">
+        <article class="benchmark-panel" aria-labelledby="benchmark-main-title">
+          <h3 id="benchmark-main-title">Main benchmark</h3>
+          <p class="benchmark-context">65 instances · CPU and GPU results on their respective test platforms</p>
+          <div class="benchmark-result">
+            <p class="benchmark-solver">HPR-LP-C (v0.1.4)</p>
+            <dl class="benchmark-summary">
+              <div><dt>SGM10 runtime</dt><dd>10.8<span> s</span></dd></div>
+              <div><dt>Instances solved</dt><dd>63<span> / 65</span></dd></div>
+            </dl>
+          </div>
+          <div class="benchmark-table-wrap" role="region" aria-label="Main benchmark comparison" tabindex="0">
+            <table class="benchmark-table" aria-label="CPU and GPU solver results on the 65-instance main LPfeas test set">
+              <thead>
+                <tr>
+                  <th scope="col">Solver</th>
+                  <th scope="col" class="benchmark-type">Type</th>
+                  <th scope="col">SGM10<span class="benchmark-unit"> (s)</span></th>
+                  <th scope="col">Relative</th>
+                  <th scope="col">Solved</th>
+                </tr>
+              </thead>
+              <tbody class="benchmark-gpu-group">
+                <tr class="is-hpr"><th scope="row">HPR-LP-C</th><td class="benchmark-type">GPU</td><td>10.8</td><td>1.35</td><td>63 / 65</td></tr>
+                <tr><th scope="row">COPT-H<sup>*</sup></th><td class="benchmark-type">GPU</td><td>8.02</td><td>1.00</td><td>64 / 65</td></tr>
+                <tr><th scope="row">cuOpt<sup>*</sup></th><td class="benchmark-type">GPU</td><td>10.9</td><td>1.36</td><td>62 / 65</td></tr>
+                <tr><th scope="row">cuPDLPx</th><td class="benchmark-type">GPU</td><td>28.5</td><td>3.55</td><td>57 / 65</td></tr>
+              </tbody>
+              <tbody class="benchmark-cpu-group">
+                <tr><th scope="row">COPT</th><td class="benchmark-type">CPU</td><td>25.3</td><td>3.15</td><td>65 / 65</td></tr>
+                <tr><th scope="row">MOSEK</th><td class="benchmark-type">CPU</td><td>89.2</td><td>11.12</td><td>56 / 65</td></tr>
+                <tr><th scope="row">HiGHS</th><td class="benchmark-type">CPU</td><td>256</td><td>31.92</td><td>55 / 65</td></tr>
+                <tr><th scope="row">KNITRO</th><td class="benchmark-type">CPU</td><td>372</td><td>46.38</td><td>48 / 65</td></tr>
+                <tr><th scope="row">PDLP</th><td class="benchmark-type">CPU</td><td>421</td><td>52.49</td><td>50 / 65</td></tr>
+                <tr><th scope="row">XOPT</th><td class="benchmark-type">CPU</td><td>146</td><td>18.20</td><td>59 / 65</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="benchmark-execution">* These configurations combine CPU and GPU computation or run multiple solver methods concurrently.</p>
+          <p class="benchmark-licenses">Open source: HPR-LP-C, HiGHS, PDLP, cuOpt, cuPDLPx · Commercial: COPT / COPT-H, MOSEK, KNITRO.</p>
+        </article>
+
+        <article id="benchmark-addendum" class="benchmark-panel" aria-labelledby="benchmark-addendum-title">
+          <h3 id="benchmark-addendum-title">Large-scale addendum</h3>
+          <p class="benchmark-context">20 large-scale instances · Single-GPU comparison</p>
+          <div class="benchmark-result">
+            <p class="benchmark-solver">HPR-LP-C (v0.1.4)</p>
+            <dl class="benchmark-summary">
+              <div><dt>SGM10 runtime</dt><dd>272.45<span> s</span></dd></div>
+              <div><dt>Instances solved on 1 GPU</dt><dd>18<span> / 20</span></dd></div>
+            </dl>
+          </div>
+          <div class="benchmark-table-wrap" role="region" aria-label="Large-scale addendum comparison" tabindex="0">
+            <table class="benchmark-table benchmark-table--addendum" aria-label="Single-GPU solver results on the 20-instance LPfeas addendum">
+              <thead>
+                <tr>
+                  <th scope="col">Solver</th>
+                  <th scope="col">SGM10<span class="benchmark-unit"> (s)</span></th>
+                  <th scope="col">Relative</th>
+                  <th scope="col">Solved</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="is-hpr"><th scope="row">HPR-LP-C</th><td>272.45</td><td>1.00</td><td>18 / 20</td></tr>
+                <tr><th scope="row">cuOpt<sup>*</sup></th><td>1,376.58</td><td>5.05</td><td>13 / 20</td></tr>
+                <tr><th scope="row">COPT-H<sup>*</sup></th><td>2,190.48</td><td>8.04</td><td>6 / 20</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="benchmark-execution">* These configurations combine CPU and GPU computation or run multiple solver methods concurrently.</p>
+          <p class="benchmark-licenses">Open source: HPR-LP-C, cuOpt · Commercial: COPT-H.</p>
+        </article>
+      </div>
+
+      <p class="benchmark-source"><strong>Source:</strong> H. Mittelmann, <a href="https://plato.asu.edu/ftp/lpfeas.html" target="_blank" rel="noopener">LPfeas Benchmark &amp; Addendum<span aria-hidden="true"> ↗</span></a>. Published <time datetime="2026-10-25">25 Oct 2026</time>. Accessed <time datetime="2026-11-11">11 Nov 2026</time>.</p>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
   <section id="features">
     <div class="container">
       <h2 class="section-title">Features</h2>
@@ -595,7 +844,7 @@
         <!-- Defeng Sun -->
         <figure class="credit">
           <a href="https://www.polyu.edu.hk/ama/profile/dfsun/" target="_blank" rel="noopener">
-            <img src="../assets/avatars/defeng_sun.png" alt="Defeng Sun" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/defeng_sun.png" alt="Defeng Sun" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Defeng Sun</div>
@@ -606,7 +855,7 @@
         <!-- Xinyuan Zhao -->
         <figure class="credit">
           <a href="https://msm.bjut.edu.cn/info/1091/2624.htm" target="_blank" rel="noopener">
-            <img src="../assets/avatars/xinyuan_zhao.jpg" alt="Xinyuan Zhao" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/xinyuan_zhao.jpg" alt="Xinyuan Zhao" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Xinyuan Zhao</div>
@@ -617,7 +866,7 @@
         <!-- Yancheng Yuan -->
         <figure class="credit">
           <a href="https://paulyuanmath.github.io/" target="_blank" rel="noopener">
-            <img src="../assets/avatars/yancheng_yuan.png" alt="Yancheng Yuan" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/yancheng_yuan.png" alt="Yancheng Yuan" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Yancheng Yuan</div>
@@ -628,7 +877,7 @@
         <!-- Guojun Zhang -->
         <figure class="credit">
           <a href="#" onclick="return false;">
-            <img src="../assets/avatars/guojun_zhang.png" alt="Guojun Zhang" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/guojun_zhang.png" alt="Guojun Zhang" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Guojun Zhang</div>
@@ -639,7 +888,7 @@
         <!-- Kaihuang Chen -->
         <figure class="credit">
           <a href="#" onclick="return false;">
-            <img src="../assets/avatars/kaihuang_chen.png" alt="Kaihuang Chen" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/kaihuang_chen.png" alt="Kaihuang Chen" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Kaihuang Chen</div>
@@ -650,7 +899,7 @@
         <!-- Zhexuan Gu -->
         <figure class="credit">
           <a href="#" onclick="return false;">
-            <img src="../assets/avatars/zhexuan_gu.jpg" alt="Zhexuan Gu" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/zhexuan_gu.jpg" alt="Zhexuan Gu" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Zhexuan Gu</div>
@@ -661,7 +910,7 @@
         <!-- Qilin Lai -->
         <figure class="credit">
           <a href="#" onclick="return false;">
-            <img src="../assets/avatars/qilin_lai.jpg" alt="Qilin Lai" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/qilin_lai.jpg" alt="Qilin Lai" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Qilin Lai</div>
@@ -672,7 +921,7 @@
         <!-- Yijia Liang -->
         <figure class="credit">
           <a href="#" onclick="return false;">
-            <img src="../assets/avatars/yijia_liang.jpg" alt="Yijia Liang" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/yijia_liang.jpg" alt="Yijia Liang" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Yijia Liang</div>
@@ -683,7 +932,7 @@
         <!-- Jiawei Lu -->
         <figure class="credit">
           <a href="#" onclick="return false;">
-            <img src="../assets/avatars/jiawei_lu.jpg" alt="Jiawei Lu" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/jiawei_lu.jpg" alt="Jiawei Lu" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Jiawei Lu</div>
@@ -694,7 +943,7 @@
         <!-- Xiangyu Zhang -->
         <figure class="credit">
           <a href="#" onclick="return false;">
-            <img src="../assets/avatars/xiangyu_zhang.jpg" alt="Xiangyu Zhang" loading="lazy" width="120" height="120">
+            <img src="./assets/avatars/xiangyu_zhang.jpg" alt="Xiangyu Zhang" loading="lazy" width="120" height="120">
           </a>
           <figcaption>
             <div class="name">Xiangyu Zhang</div>
@@ -707,6 +956,23 @@
 
 
   <script>
+  /* Native details supplies keyboard activation; add outside-click and Escape dismissal. */
+  document.querySelectorAll('.card-download-picker').forEach((downloads) => {
+    document.addEventListener('click', (event) => {
+      if (!downloads.contains(event.target)) downloads.open = false;
+    });
+    downloads.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && downloads.open) {
+        downloads.open = false;
+        downloads.querySelector('summary').focus();
+        event.stopPropagation();
+      }
+    });
+    downloads.querySelectorAll('.download-option').forEach((link) => {
+      link.addEventListener('click', () => { downloads.open = false; });
+    });
+  });
+
 /* ===== High-Performance Bundled Neon Beam Animation ===== */
   const canvas = document.getElementById('stars');
   
@@ -740,25 +1006,29 @@
     tick();
   }
 
-  /* ===== Toggle pure white mode when hero leaves viewport ===== */
+  /* Start the existing fade while the next section's heading is in the lower half. */
   const hero=document.getElementById('hero');
   if (hero) {
-    const observer=new IntersectionObserver(
-      entries=>{
-        const inView = entries[0].isIntersecting;
-        document.body.classList.toggle('light', !inView);
-      },
-      { root:null, threshold:0.5 }
-    );
-    observer.observe(hero);
+    let themeFrame = 0;
+    const updatePageTheme = () => {
+      themeFrame = 0;
+      const startFade = hero.getBoundingClientRect().bottom <= window.innerHeight * 0.4;
+      document.body.classList.toggle('light', startFade);
+    };
+    const scheduleThemeUpdate = () => {
+      if (!themeFrame) themeFrame = requestAnimationFrame(updatePageTheme);
+    };
+    window.addEventListener('scroll', scheduleThemeUpdate, { passive: true });
+    window.addEventListener('resize', scheduleThemeUpdate);
+    updatePageTheme();
   }
 
   /* ===== Safe Scroll Event ===== */
   const scrollBtn=document.getElementById('scrollMore');
   if (scrollBtn) {
     scrollBtn.addEventListener('click',()=>{
-      const features=document.getElementById('features');
-      features?.scrollIntoView({behavior:'smooth', block:'start'});
+      const benchmarks=document.getElementById('benchmarks');
+      benchmarks?.scrollIntoView({behavior:'smooth', block:'start'});
     });
   }
 
