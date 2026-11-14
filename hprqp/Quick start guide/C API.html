@@ -11,24 +11,21 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/hprqp_custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/hprqp_custom.css?v=b0ca0599" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=4c61d45e"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python API" href="Python%20API.html" />
-    <link rel="prev" title="Julia API" href="Julia%20API.html" /> 
+    <link rel="next" title="Julia API" href="Julia%20API.html" />
+    <link rel="prev" title="Quick start guide" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,8 +52,15 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Quick start guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">C API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-build-and-run-on-a-gpu">Clone, build, and run on a GPU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cuda-and-dependency-configuration">CUDA and dependency configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cpu-only-build">CPU-only build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shared-library-and-language-wrappers">Shared library and language wrappers</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Julia%20API.html">Julia API</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">C API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Python%20API.html">Python API</a></li>
 </ul>
 </li>
@@ -124,15 +128,107 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="c-api">
 <h1>C API</h1>
-<p>How the C version is installed. Coming soon…</p>
+<p>HPR-QP-C is the CUDA/C implementation of HPR-QP. The commands below follow the
+official <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C">HPR-QP-C repository</a>.</p>
+<section id="prerequisites">
+<h2>Prerequisites</h2>
+<ul class="simple">
+<li><p>A C/C++ compiler, GNU Make, and Python 3 for build helpers.</p></li>
+<li><p>OpenSSL <code class="docutils literal notranslate"><span class="pre">libcrypto</span></code> (version 3 or 1.1).</p></li>
+<li><p>A compatible NVIDIA CUDA Toolkit and NVIDIA driver for GPU solving.</p></li>
+<li><p>BLAS/LAPACK for native CPU polishing. On Debian/Ubuntu Linux x86_64, Make can
+download missing libraries and their runtimes into the checkout’s
+<code class="docutils literal notranslate"><span class="pre">.deps/native/</span></code> directory using verified APT metadata. This requires
+<code class="docutils literal notranslate"><span class="pre">apt-get</span></code>/<code class="docutils literal notranslate"><span class="pre">dpkg-deb</span></code>, usable package indexes, and network access. Other
+platforms must provide compatible BLAS/LAPACK libraries themselves.</p></li>
+<li><p>cuDSS for the default GPU build with equality Gram scaling. Make reuses a
+compatible installation or downloads the NVIDIA cuDSS <strong>0.7.1.4</strong> archive for
+CUDA 12 or 13, verifies its SHA256, and installs it into <code class="docutils literal notranslate"><span class="pre">.deps/cudss/</span></code>.
+Linux x86_64 and SBSA are supported; the initial download is about 110–120 MiB.</p></li>
+</ul>
+<p>Plain <code class="docutils literal notranslate"><span class="pre">make</span></code> uses the C/C++ compilers directly and <strong>does not require CMake</strong>.
+Dependency setup stays inside the checkout; it does not install or change the
+CUDA driver or system packages. NumPy and SciPy are not runtime dependencies
+of the native CPU polishing worker.</p>
+</section>
+<section id="clone-build-and-run-on-a-gpu">
+<h2>Clone, build, and run on a GPU</h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/PolyU-IOR/HPR-QP-C.git
+<span class="nb">cd</span><span class="w"> </span>HPR-QP-C
+make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+./build-cuda/solve_qp<span class="w"> </span>model.mps<span class="w"> </span>--use-gpu<span class="w"> </span><span class="m">1</span><span class="w"> </span>--device-number<span class="w"> </span><span class="m">0</span><span class="w"> </span>--stoptol<span class="w"> </span>1e-8<span class="w"> </span>--time-limit<span class="w"> </span><span class="m">1000</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">model.mps</span></code> with your input file and <code class="docutils literal notranslate"><span class="pre">0</span></code> with the desired GPU index.
+The <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> runs the solver only after a successful build. Native CPU polishing,
+conservative automatic equality Gram selection, and supported GPU optimizations
+are enabled by default.</p>
+<p>Alternatively, download a source archive from <a class="reference internal" href="../Releases/C%20Releases.html"><span class="std std-doc">C Releases</span></a>,
+extract it, and run the same <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&amp;&amp;</span> <span class="pre">...</span></code> command from the extracted source
+directory. The v0.1.1 release includes an official source ZIP and a
+<code class="docutils literal notranslate"><span class="pre">SHA256SUMS</span></code> file, as well as GitHub’s generated source ZIP and tar.gz archives.</p>
+</section>
+<section id="cuda-and-dependency-configuration">
+<h2>CUDA and dependency configuration</h2>
+<p>When several CUDA toolkits are installed, use the same <code class="docutils literal notranslate"><span class="pre">CUDA_ROOT</span></code> when building
+and checking cuDSS:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nv">CUDA_ROOT</span><span class="o">=</span>/usr/local/cuda-13.3
+make<span class="w"> </span>check-cudss<span class="w"> </span><span class="nv">CUDA_ROOT</span><span class="o">=</span>/usr/local/cuda-13.3
+</pre></div>
+</div>
+<p>The path is an example; select a toolkit compatible with your GPU and driver.
+The build checks CUDA startup and records the chosen runtime in
+<code class="docutils literal notranslate"><span class="pre">.deps/cuda-runtime.json</span></code>. Re-run <code class="docutils literal notranslate"><span class="pre">make</span></code> after moving to another host or changing
+the CUDA/driver installation.</p>
+<p>To reuse an existing cuDSS installation:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nv">CUDSS_ROOT</span><span class="o">=</span>/path/to/cudss
+</pre></div>
+</div>
+<p>That directory must contain <code class="docutils literal notranslate"><span class="pre">include/cudss.h</span></code> and its matching shared library.
+To prepare dependencies separately:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup-native
+make<span class="w"> </span>setup-cudss
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">AUTO_INSTALL_NATIVE_DEPS=0</span></code> disables native dependency downloads;
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">AUTO_INSTALL_CUDSS=0</span></code> disables cuDSS downloads and fails if required cuDSS
+is missing. For an older checkout previously built without cuDSS, run
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gpu-clean</span></code> before rebuilding.</p>
+</section>
+<section id="cpu-only-build">
+<h2>CPU-only build</h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>cpu<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+./build/solve_qp<span class="w"> </span>model.mps<span class="w"> </span>--stoptol<span class="w"> </span>1e-6<span class="w"> </span>--time-limit<span class="w"> </span><span class="m">3600</span>
+</pre></div>
+</div>
+<p>CPU-only builds do not require cuDSS. See the
+<a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C#install">official installation instructions</a>
+for dependency details and supported fallbacks.</p>
+</section>
+<section id="shared-library-and-language-wrappers">
+<h2>Shared library and language wrappers</h2>
+<p>Install the shared library and associated runtime files:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>When copying a GPU build, keep <code class="docutils literal notranslate"><span class="pre">hprqp_polish_worker</span></code> and its <code class="docutils literal notranslate"><span class="pre">lib/</span></code> directory
+(when present) beside <code class="docutils literal notranslate"><span class="pre">build-cuda/solve_qp</span></code>. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> places the worker
+under <code class="docutils literal notranslate"><span class="pre">libexec/hprqp</span></code>.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../Interfaces/C%20interfaces.html"><span class="std std-doc">C Version: complete installation, usage, and solver options</span></a></p></li>
+<li><p><a class="reference internal" href="../Interfaces/C%20interfaces/Julia%20Wrapper.html"><span class="std std-doc">Julia wrapper for HPR-QP-C</span></a></p></li>
+<li><p><a class="reference internal" href="../Interfaces/C%20interfaces/Python%20Wrapper.html"><span class="std std-doc">Python wrapper for HPR-QP-C</span></a></p></li>
+<li><p><a class="reference internal" href="../Releases/C%20Releases.html"><span class="std std-doc">C releases and source downloads</span></a></p></li>
+</ul>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Julia%20API.html" class="btn btn-neutral float-left" title="Julia API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Python%20API.html" class="btn btn-neutral float-right" title="Python API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Quick start guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Julia%20API.html" class="btn btn-neutral float-right" title="Julia API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

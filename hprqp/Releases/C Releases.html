@@ -11,24 +11,21 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/hprqp_custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/hprqp_custom.css?v=b0ca0599" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=4c61d45e"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python Releases" href="Python%20Releases.html" />
-    <link rel="prev" title="Julia Releases" href="Julia%20Releases.html" /> 
+    <link rel="next" title="Julia Releases" href="Julia%20Releases.html" />
+    <link rel="prev" title="Releases" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -64,8 +61,12 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Releases</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">C Releases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#v0-1-1">v0.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v0-1-0">v0.1.0</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Julia%20Releases.html">Julia Releases</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">C Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Python%20Releases.html">Python Releases</a></li>
 </ul>
 </li>
@@ -124,15 +125,44 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="c-releases">
 <h1>C Releases</h1>
-<p>Coming soon…</p>
+<p>Release notes and downloads from the official <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/releases">HPR-QP-C releases</a>, checked on <strong>12 November 2026</strong>.</p>
+<p>The latest published release is <strong>v0.1.1</strong>. The downloads are source archives to build on the target host. Follow the <a class="reference internal" href="../Quick%20start%20guide/C%20API.html"><span class="std std-doc">C quick start</span></a>.</p>
+<section id="v0-1-1">
+<h2>v0.1.1</h2>
+<p><strong>Published:</strong> 30 October 2026.</p>
+<p>Enables native C++ CPU polishing and conservative automatic equality Gram
+scaling by default. A certified CPU point can terminate a solve with
+<code class="docutils literal notranslate"><span class="pre">polished_optimal</span></code>; intermediate CPU points do not feed back into GPU iterations.</p>
+<p>Adds GPU second-order-cone support, a sparse-factor convex QCQP-to-SOC interface,
+and support for diagonal convex <code class="docutils literal notranslate"><span class="pre">QCMATRIX</span></code> constraints in MPS input. Unsupported
+quadratic input is explicitly rejected. Supported CUDA 13.3+ builds use SpMVOp
+automatically, with guarded packed/fused sparse GPU access and documented fallbacks.</p>
+<p>Improves the plain Make build with verified local dependency setup, matching CUDA
+runtime libraries, and CUDA-driver startup checks. Plain <code class="docutils literal notranslate"><span class="pre">make</span></code> no longer
+requires CMake. The release is source code to build on the target host; native
+polishing uses BLAS/LAPACK and OpenSSL <code class="docutils literal notranslate"><span class="pre">libcrypto</span></code>, and Python 3 is used for build
+helpers. Recompile C/C++ clients against the matching headers and libraries and
+use a fresh dataset output directory after upgrading.</p>
+<p>The attached <code class="docutils literal notranslate"><span class="pre">HPR-QP-C-v0.1.1.zip</span></code> contains tracked source files from the release
+commit. <code class="docutils literal notranslate"><span class="pre">SHA256SUMS</span></code> verifies that ZIP. This release tags the existing public
+commit and makes no new performance benchmark claim.</p>
+<p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/releases/tag/v0.1.1">Release notes</a> · <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/releases/download/v0.1.1/HPR-QP-C-v0.1.1.zip">HPR-QP-C-v0.1.1.zip</a> · <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/releases/download/v0.1.1/SHA256SUMS">SHA256SUMS</a> · <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/archive/refs/tags/v0.1.1.zip">Source code (ZIP)</a> · <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/archive/refs/tags/v0.1.1.tar.gz">Source code (tar.gz)</a></p>
+</section>
+<section id="v0-1-0">
+<h2>v0.1.0</h2>
+<p><strong>Published:</strong> 9 May 2026.</p>
+<p>The first public release of the HPR-QP C implementation supports both GPU
+and CPU solving and roughly aligns with Julia HPR-QP v0.1.1.</p>
+<p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/releases/tag/v0.1.0">Release notes</a> · <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/archive/refs/tags/v0.1.0.zip">Source code (ZIP)</a> · <a class="reference external" href="https://github.com/PolyU-IOR/HPR-QP-C/archive/refs/tags/v0.1.0.tar.gz">Source code (tar.gz)</a></p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Julia%20Releases.html" class="btn btn-neutral float-left" title="Julia Releases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Python%20Releases.html" class="btn btn-neutral float-right" title="Python Releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Releases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Julia%20Releases.html" class="btn btn-neutral float-right" title="Julia Releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

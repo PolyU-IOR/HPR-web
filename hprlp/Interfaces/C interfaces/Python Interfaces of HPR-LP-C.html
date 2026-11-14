@@ -6,31 +6,26 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python Binding of HPR-LP-C &mdash; HPR-LP</title>
+  <title>HPR-LP-C Python Interface &mdash; HPR-LP</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../../_static/fonts.css?v=5583d106" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/hprlp_custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hprlp_custom.css?v=f9487e98" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      <script src="../../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+      <script src="../../_static/back_to_hpr_fab.js?v=4c61d45e"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="MATLAB Binding of HPR-LP-C" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html" />
-    <link rel="prev" title="C Version" href="index.html" /> 
+    <link rel="next" title="HPRLP-C Julia Interface" href="Julia%20Interfaces%20of%20HPR-LP-C.html" />
+    <link rel="prev" title="C++ Examples" href="C%2B%2B%20interfaces.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,22 +55,35 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Interfaces</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Julia%20interfaces.html">Julia Version</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">C Version</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="index.html#running-examples">Running examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#command-line-options">Command-Line Options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#language-interface-installation">Language Interface Installation</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="index.html#bindings-for-hpr-lp-c">Bindings for HPR-LP-C</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Python Binding of HPR-LP-C</a></li>
-<li class="toctree-l4"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html">MATLAB Binding of HPR-LP-C</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html">Julia Binding of HPR-LP-C</a></li>
-<li class="toctree-l4"><a class="reference internal" href="C%20interfaces.html">Pure C examples from C programs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="C%2B%2B%20interfaces.html">C++ Binding for HPR-LP-C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#what-s-new-in-v0-1-3">What’s new in v0.1.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#quick-start">Quick start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#cmake-build-and-installation">CMake build and installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#command-line-usage">Command-line usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#hans-dataset-run-and-csv-summary">Hans dataset run and CSV summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#julia-dataset-run">Julia dataset run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#c-and-c-examples">C and C++ examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#batched-shared-matrix-solves">Batched shared-matrix solves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#language-interfaces">Language interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#runtime-behavior-and-portability">Runtime behavior and portability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#version-provenance">Version provenance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#citation">Citation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#license">License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#contributing-and-support">Contributing and support</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#interface-guides">Interface guides</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="C%20interfaces.html">C Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="C%2B%2B%20interfaces.html">C++ Examples</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">HPR-LP-C Python Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Julia%20Interfaces%20of%20HPR-LP-C.html">HPRLP-C Julia Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MATLAB%20Interfaces%20of%20HPR-LP-C.html">HPR-LP-C MATLAB Interface</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../Julia%20interfaces.html">Julia Version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Python%20interfaces.html">Python Version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../MATLAB%20interfaces.html">MATLAB Version</a></li>
 </ul>
@@ -110,7 +118,7 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Interfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">C Version</a></li>
-      <li class="breadcrumb-item active">Python Binding of HPR-LP-C</li>
+      <li class="breadcrumb-item active">HPR-LP-C Python Interface</li>
   <li class="wy-breadcrumbs-aside">
     <a href="https://github.com/PolyU-IOR/HPR-LP" target="_blank" rel="noopener">
       <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
@@ -140,27 +148,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="python-binding-of-hpr-lp-c">
-<h1>Python Binding of HPR-LP-C</h1>
-<p>This page provides quick-start examples for using the Python interfaces of HPR-LP-C to build and solve linear programs directly from matrices or MPS files.</p>
-<hr class="docutils" />
-<section id="test-problem-lp">
-<h2>Test problem (LP)</h2>
-<p>The default demo problem we ship is a small linear program of the form</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-\min \quad &amp; - 3 x_1 - 5 x_2\\
-\text{s.t.} \quad &amp; x_1 + 2 x_2 \le 10, \\
-&amp; 3 x_1 + x_2 \le 12, \\
-&amp; x_1 \ge 0, \\
-&amp; x_2 \ge 0.
-\end{aligned}
-\end{split}\]</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="hpr-lp-c-python-interface">
+<h1>HPR-LP-C Python Interface</h1>
+<p>Source: <a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-C/blob/main/bindings/python/README.md">official HPR-LP-C documentation</a>.</p>
+<p>Python interface for HPR-LP-C 0.1.3. The build detects the GPU architecture;
+CUDA 13.3+ uses <code class="docutils literal notranslate"><span class="pre">cusparseSpMVOp</span></code>, while older toolkits use <code class="docutils literal notranslate"><span class="pre">cusparseSpMV</span></code>.</p>
+<section id="installation">
+<h2>Installation</h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>bindings/python
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.<span class="w">         </span><span class="c1"># or: python -m pip install -e .</span>
+</pre></div>
+</div>
 </section>
-<hr class="docutils" />
+<section id="examples">
+<h2>Examples</h2>
 <section id="example-1-build-model-directly-from-matrices">
-<h2>Example 1: Build model directly from matrices</h2>
+<h3>Example 1: Build model directly from matrices</h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
 python<span class="w"> </span>example_direct_lp.py<span class="w">              </span><span class="c1"># Solve from arrays</span>
 </pre></div>
@@ -172,7 +175,7 @@ For a complete version with additional options, see example_direct_lp.py.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">hprlp</span>
 
-<span class="c1"># Define LP: minimize c&#39;x subject to AL &lt;= Ax &lt;= AU, l &lt;= x &lt;= u</span>
+<span class="c1"># Define LP: minimize c'x subject to AL &lt;= Ax &lt;= AU, l &lt;= x &lt;= u</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
 <span class="n">AL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
 <span class="n">AU</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">])</span>
@@ -192,10 +195,11 @@ For a complete version with additional options, see example_direct_lp.py.</p>
 <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">is_optimal</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimal: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">primal_obj</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Optimal: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">primal_obj</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Solution: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
 <section id="model-from-arrays-a-al-au-l-u-c">
 <h3><code class="docutils literal notranslate"><span class="pre">Model.from_arrays(A,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">c)</span></code></h3>
 <p>Create an LP model from matrices and vectors.</p>
@@ -208,12 +212,11 @@ For a complete version with additional options, see example_direct_lp.py.</p>
 </ul>
 <p><strong>Returns:</strong> Model object</p>
 </section>
-</section>
 <hr class="docutils" />
 <section id="example-2-solve-from-mps-file">
-<h2>Example 2: Solve from MPS File</h2>
+<h3>Example 2: Solve from MPS File</h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
-python<span class="w"> </span>example_mps_file<span class="w">     </span><span class="c1"># Solve from MPS file</span>
+python<span class="w"> </span>example_mps_file.py<span class="w">          </span><span class="c1"># Solve from MPS file</span>
 </pre></div>
 </div>
 <p><strong>Quick overview:</strong>
@@ -221,7 +224,7 @@ The following snippet demonstrates how to define and solve an LP problem directl
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hprlp</span>
 
 <span class="c1"># Create model from MPS file</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">hprlp</span><span class="o">.</span><span class="n">Model</span><span class="o">.</span><span class="n">from_mps</span><span class="p">(</span><span class="s2">&quot;problem.mps&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">hprlp</span><span class="o">.</span><span class="n">Model</span><span class="o">.</span><span class="n">from_mps</span><span class="p">(</span><span class="s2">"problem.mps"</span><span class="p">)</span>
 
 <span class="c1"># Solve</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
@@ -230,13 +233,14 @@ The following snippet demonstrates how to define and solve an LP problem directl
 </div>
 </section>
 <section id="model-from-mps-filename">
-<h2><code class="docutils literal notranslate"><span class="pre">Model.from_mps(filename)</span></code></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">Model.from_mps(filename)</span></code></h3>
 <p>Create an LP model from the MPS file.</p>
 <p><strong>Arguments:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code> - Path to MPS file</p></li>
 </ul>
 <p><strong>Returns:</strong> Model object</p>
+</section>
 <section id="model-solve-param-none">
 <h3><code class="docutils literal notranslate"><span class="pre">Model.solve(param=None)</span></code></h3>
 <p>Solve the LP model.</p>
@@ -245,8 +249,77 @@ The following snippet demonstrates how to define and solve an LP problem directl
 <li><p><code class="docutils literal notranslate"><span class="pre">param</span></code> - (Optional) Parameters object</p></li>
 </ul>
 <p><strong>Returns:</strong> Results object</p>
+</section>
 <hr class="docutils" />
-<p>See the <a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/python">github</a> for more details.</p>
+<section id="example-3-batched-shared-a-solves">
+<h3>Example 3: Batched shared-A solves</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python<span class="w"> </span>example_batched_lp.py
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">hprlp.solve_batched(A,</span> <span class="pre">C,</span> <span class="pre">AL,</span> <span class="pre">AU,</span> <span class="pre">l,</span> <span class="pre">u,</span> <span class="pre">obj_constants=None,</span> <span class="pre">param=None)</span></code> when every LP shares the same sparse <code class="docutils literal notranslate"><span class="pre">A</span></code>. <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">l</span></code>, and <code class="docutils literal notranslate"><span class="pre">u</span></code> must have shape <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">B)</span></code>; <code class="docutils literal notranslate"><span class="pre">AL</span></code> and <code class="docutils literal notranslate"><span class="pre">AU</span></code> must have shape <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">B)</span></code>. Each column is one LP instance. Results are returned as <code class="docutils literal notranslate"><span class="pre">BatchedResults</span></code>, with <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> shaped <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">B)</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> shaped <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">B)</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">hprlp</span><span class="o">.</span><span class="n">solve_batched</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">AL</span><span class="p">,</span> <span class="n">AU</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="parameters">
+<h2><code class="docutils literal notranslate"><span class="pre">Parameters</span></code></h2>
+<p>Solver configuration:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">max_iter</span></code> - Maximum iterations (default: unlimited)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_tol</span></code> - Stopping tolerance (default: 1e-6)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_limit</span></code> - Time limit in seconds (default: 1000)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_number</span></code> - CUDA device ID (default: 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_iter</span></code> - Convergence check interval (default: 150)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CUSPARSE_spmv</span></code> - Force the cuSPARSE SpMVOp path and disable fused-kernel autotuning (default: False)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">autotune_verbose</span></code> - Print backend autotuning diagnostics when fused kernels are enabled (default: False)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_Ruiz_scaling</span></code> - Ruiz scaling (default: True)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_Pock_Chambolle_scaling</span></code> - Pock-Chambolle scaling (default: True)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_bc_scaling</span></code> - Bounds/cost scaling (default: True)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_presolve</span></code> - Enable presolve/postsolve (default: True)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">presolver</span></code> - Presolver backend (<code class="docutils literal notranslate"><span class="pre">0</span></code>=PSLP, <code class="docutils literal notranslate"><span class="pre">1</span></code>=GPU, <code class="docutils literal notranslate"><span class="pre">2</span></code>=none; default: <code class="docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_gpu_folding</span></code> - GPU presolver folding (default: True)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_reduced_matrix</span></code> - Adaptive reduced-matrix iterations (default: True)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auto_reduced_compression_policy</span></code> - Automatic reduced/compression selection
+from presolved dimensions (default: False)</p></li>
+</ul>
+<section id="results">
+<h3><code class="docutils literal notranslate"><span class="pre">Results</span></code></h3>
+<p>Solution information:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code> - “OPTIMAL”, “TIME_LIMIT”, “ITER_LIMIT”, “ERROR”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> - Primal solution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code> - Dual solution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">z</span></code> - Bound-dual solution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">primal_obj</span></code> - Primal objective value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gap</span></code> - Duality gap</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">residuals</span></code> - Final KKT residual</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iter</span></code> - Total iterations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> - Solve time (seconds)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iter4/6/8</span></code> - Iterations to reach 1e-4/6/8 tolerance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time4/6/8</span></code> - Time to reach tolerance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timing</span></code> - Presolve, setup, scaling, analysis, power-iteration, solve, and
+total-time breakdown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">folding_time</span></code> - GPU presolver folding time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reduced_active_iteration_ratio</span></code>, <code class="docutils literal notranslate"><span class="pre">reduced_average_column_ratio</span></code>,
+<code class="docutils literal notranslate"><span class="pre">reduced_average_nnz_ratio</span></code>, <code class="docutils literal notranslate"><span class="pre">reduced_minimum_column_ratio</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">reduced_minimum_nnz_ratio</span></code> - Reduced-matrix execution statistics</p></li>
+</ul>
+</section>
+<section id="batchedresults">
+<h3><code class="docutils literal notranslate"><span class="pre">BatchedResults</span></code></h3>
+<p>Batched solution information:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code> - list of per-instance statuses</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code> - primal and bound-dual matrices shaped <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">B)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code> - dual matrix shaped <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">B)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">primal_obj</span></code>, <code class="docutils literal notranslate"><span class="pre">gap</span></code>, <code class="docutils literal notranslate"><span class="pre">residuals</span></code>, <code class="docutils literal notranslate"><span class="pre">iter</span></code> - per-instance vectors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">setup_time</span></code>, <code class="docutils literal notranslate"><span class="pre">solve_time</span></code>, <code class="docutils literal notranslate"><span class="pre">power_time</span></code> - batched timing fields</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -255,8 +328,8 @@ The following snippet demonstrates how to define and solve an LP problem directl
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="C Version" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="MATLAB%20Interfaces%20of%20HPR-LP-C.html" class="btn btn-neutral float-right" title="MATLAB Binding of HPR-LP-C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C%2B%2B%20interfaces.html" class="btn btn-neutral float-left" title="C++ Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Julia%20Interfaces%20of%20HPR-LP-C.html" class="btn btn-neutral float-right" title="HPRLP-C Julia Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
