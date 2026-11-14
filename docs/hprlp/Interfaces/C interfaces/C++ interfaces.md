@@ -1,25 +1,8 @@
-# C++ Binding for HPR-LP-C
+# C++ Examples
+
+Source: [official HPR-LP-C documentation](https://github.com/PolyU-IOR/HPR-LP-C/blob/main/examples/cpp/README.md).
 
 C++ examples demonstrating how to use HPR-LP from C++
-
----
-
-## Test problem (LP)
-
-The default demo problem we ship is a small linear program of the form
-
-
-$$
-\begin{aligned}
-\min \quad & - 3 x_1 - 5 x_2\\
-\text{s.t.} \quad & x_1 + 2 x_2 \le 10, \\
-& 3 x_1 + x_2 \le 12, \\
-& x_1 \ge 0, \\
-& x_2 \ge 0.
-\end{aligned}
-$$
-
----
 
 ## Examples
 
@@ -98,3 +81,42 @@ if (result.x != nullptr) {
 // Free the model
 free_model(model);
 ```
+
+## `Parameters`
+Solver configuration options (specified as keyword arguments):
+
+| Parameter | Description | Default |
+|------------|-------------|----------|
+| `max_iter` | Maximum iterations | Unlimited |
+| `stop_tol` | Stopping tolerance | `1e-4` |
+| `time_limit` | Time limit in seconds | `3600` |
+| `device_number` | CUDA device ID | `0` |
+| `check_iter` | Convergence check interval | `150` |
+| `use_Ruiz_scaling` | Apply Ruiz scaling | `true` |
+| `use_Pock_Chambolle_scaling` | Apply Pock–Chambolle scaling | `true` |
+| `use_bc_scaling` | Apply bounds/cost scaling | `true` |
+
+---
+
+## `Results`
+The `Results` object contains solution and performance information after solving the LP:
+
+| Field | Description |
+|--------|-------------|
+| `status` | Solver status: `"OPTIMAL"`, `"TIME_LIMIT"`, `"ITER_LIMIT"`, `"ERROR"` |
+| `x` | Primal solution |
+| `y` | Dual solution |
+| `primal_obj` | Primal objective value |
+| `gap` | Duality gap |
+| `residuals` | Final KKT residual |
+| `iter` | Total iterations |
+| `time` | Solve time (seconds) |
+| `iter4`, `iter6`, `iter8` | Iterations to reach 1e-4/1e-6/1e-8 tolerance |
+| `time4`, `time6`, `time8` | Time to reach corresponding tolerance |
+
+See the example source code for complete working implementations.
+
+
+## Batched Shared-A API
+
+C++ users can call the same C-compatible `solve_batched` API from `HPRLP.h`. Use it when several LPs share the same sparse matrix `A` but have different `C`, `AL`, `AU`, `l`, `u`, or objective constants. Dense batched inputs are column-major: `C`, `l`, and `u` are `n x batch_size`; `AL` and `AU` are `m x batch_size`. Free the returned host buffers with `free_batched_results(&result)`.

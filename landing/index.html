@@ -291,21 +291,19 @@
 
   /* ===== Software Cards (Replacing old .btns) ===== */
   .software-cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
     justify-content: center;
-    flex-wrap: wrap;
     margin-top: 32px;
     width: 100%;
-    max-width: 860px;
+    max-width: 1180px;
     z-index: 10;
   }
 
   .software-card {
     position: relative;
-    flex: 1;
-    min-width: 320px;
-    max-width: 400px;
+    min-width: 0;
     background: rgba(16, 28, 54, 0.66);
     border: 1px solid #2a4474;
     border-radius: 16px;
@@ -315,6 +313,12 @@
     text-align: left;
     backdrop-filter: blur(8px);
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease;
+  }
+
+  @media (max-width: 1000px) {
+    .software-cards { grid-template-columns: minmax(0, 400px); }
+    .hero { padding-bottom: 120px; }
+    .scroll-down { position: absolute; }
   }
 
   .software-card:hover {
@@ -413,6 +417,13 @@
   }
 
   .card-download-picker {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .card-download-link {
     position: relative;
     z-index: 1;
     align-self: flex-start;
@@ -658,6 +669,23 @@
               </a>
             </div>
           </details>
+        </div>
+      </article>
+
+      <article class="software-card">
+        <div class="card-image">
+          <img src="./assets/avatars/hpr_socp_cover.png" alt="HPR-SOCP Cover">
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3><a class="card-doc-link" href="https://github.com/PolyU-IOR/HPR-SOCP">HPR-SOCP</a></h3>
+            <span class="badge">SOLVER</span>
+          </div>
+          <p class="card-desc">A GPU-accelerated solver for large-scale second-order cone programming.</p>
+          <a class="card-download card-download-link" href="https://github.com/PolyU-IOR/HPR-SOCP" aria-label="Download HPR-SOCP on GitHub">
+            Download
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg>
+          </a>
         </div>
       </article>
     </div>

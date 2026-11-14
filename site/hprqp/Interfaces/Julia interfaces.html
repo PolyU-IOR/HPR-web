@@ -11,24 +11,21 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/hprqp_custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/hprqp_custom.css?v=b0ca0599" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=4c61d45e"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="C Version" href="C%20interfaces.html" />
-    <link rel="prev" title="Interfaces" href="index.html" /> 
+    <link rel="next" title="Python Version" href="Python%20interfaces.html" />
+    <link rel="prev" title="Python Wrapper API" href="C%20interfaces/Python%20Wrapper.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,6 +55,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="C%20interfaces.html">C Version</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Julia Version</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#usage-1-test-instances-in-mps-and-mat-for-qap-lasso">Usage 1: Test Instances in MPS (and MAT for QAP/LASSO)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#setting-data-and-result-paths">Setting Data and Result Paths</a></li>
@@ -75,7 +73,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#note-on-first-time-execution-performance">Note on First-Time Execution Performance</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="C%20interfaces.html">C Version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Python%20interfaces.html">Python Version</a></li>
 </ul>
 </li>
@@ -190,7 +187,7 @@ See <code class="docutils literal notranslate"><span class="pre">HPR-QP_QAP_LASS
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">JuMP</span><span class="p">,</span><span class="w"> </span><span class="n">HiGHS</span>
 
 <span class="c"># Read a model from file (or create it elsewhere)</span>
-<span class="n">mps_file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;xxx&quot;</span><span class="w">  </span><span class="c"># your file path</span>
+<span class="n">mps_file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"xxx"</span><span class="w">  </span><span class="c"># your file path</span>
 <span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_from_file</span><span class="p">(</span><span class="n">mps_file_path</span><span class="p">)</span>
 
 <span class="c"># Set HiGHS as the optimizer</span>
@@ -230,7 +227,7 @@ To reduce repeated compilation overhead, it’s recommended to run scripts from 
 </pre></div>
 </div>
 <p><strong>Then, at the Julia REPL, run <code class="docutils literal notranslate"><span class="pre">demo/demo_QAbc.jl</span></code> (or other scripts):</strong></p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;demo/demo_QAbc.jl&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">"demo/demo_QAbc.jl"</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition-caution admonition">
@@ -249,8 +246,8 @@ To reduce repeated compilation overhead, it’s recommended to run scripts from 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C%20interfaces.html" class="btn btn-neutral float-right" title="C Version" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C%20interfaces/Python%20Wrapper.html" class="btn btn-neutral float-left" title="Python Wrapper API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Python%20interfaces.html" class="btn btn-neutral float-right" title="Python Version" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

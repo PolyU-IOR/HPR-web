@@ -7,7 +7,7 @@ This page offers several releases for HPR-QP.
 :maxdepth: 2
 :glob:
 
-Julia Releases
 C Releases
+Julia Releases
 Python Releases
 ```

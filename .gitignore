@@ -1,3 +1,22 @@
 
-site/
-.venv/
+# Generated sites, build caches and local review material
+/site/
+/.gh-pages/
+/output/
+/tmp/
+**/_build/
+**/__pycache__/
+*.py[cod]
+*.log
+
+# Local environments, credentials and editor/OS files
+/.venv/
+/.env
+/.env.*
+!/.env.example
+*.pem
+*.key
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db

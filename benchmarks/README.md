@@ -130,9 +130,11 @@ https://plato.asu.edu/ftp/lpfeas_logs/hpr_results/heat-source-easy.hpr
   and **2.15x** versus v0.1.2 (12.74 s):
   https://github.com/PolyU-IOR/HPR-LP-C/releases/tag/v0.1.3
   This is a project-reported version comparison, not the 65-instance ranking.
-- `docs/hprlp/Benchmarks/index.md` reports Julia results on an A100, 49 instances,
-  Gurobi presolve and a 15,000 s limit. Those values cannot replace these GPU
-  leaderboard values or be compared directly with the B200 snapshot.
+- `docs/hprlp/Benchmarks/index.md` now mirrors the two homepage tables as plain
+  documentation tables. It also includes the two project-supplied release
+  comparison figures for the 49-instance Hans set (v0.1.0 through v0.1.4,
+  tolerance 1e-6, time limit 1,000 s). Those figures are a separate experiment
+  from the 65-instance main benchmark and 20-instance addendum.
 
 ## Editing and refreshing
 

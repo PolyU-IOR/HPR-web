@@ -1,26 +1,19 @@
-# Julia Binding of HPR-LP-C
-This page provides quick-start examples for using the Julia interfaces of HPR-LP-C to build and solve linear programs directly from matrices or MPS files.
+# HPRLP-C Julia Interface
 
----
+Source: [official HPR-LP-C documentation](https://github.com/PolyU-IOR/HPR-LP-C/blob/main/bindings/julia/README.md).
 
-## Test problem (LP)
+Julia interface for HPR-LP-C 0.1.3. The build detects the GPU architecture;
+CUDA 13.3+ uses `cusparseSpMVOp`, while older toolkits use `cusparseSpMV`.
 
-The default demo problem we ship is a small linear program of the form
+## Installation
+```bash
+cd bindings/julia
+bash install.sh
+```
+This script compiles the backend and installs the Julia package of HPR-LP-C locally.
 
-
-$$
-\begin{aligned}
-\min \quad & - 3 x_1 - 5 x_2\\
-\text{s.t.} \quad & x_1 + 2 x_2 \le 10, \\
-& 3 x_1 + x_2 \le 12, \\
-& x_1 \ge 0, \\
-& x_2 \ge 0.
-\end{aligned}
-$$
-
----
-
-## Example 1: Build model directly from matrices
+## Examples
+### Example 1: Build model directly from matrices
 ```bash
 cd examples
 julia --project=../package example_direct_lp.jl
@@ -59,7 +52,7 @@ if is_optimal(result)
 end
 ```
 ---
-**`Model(A, AL, AU, l, u, c)`**
+### `Model(A, AL, AU, l, u, c)`
 Create an LP model directly from matrices and vectors.
 
 | Argument | Description |
@@ -122,6 +115,69 @@ Solve the given LP model.
 cd examples
 julia --project=../package example_jump.jl
 ```
+
+
+
+## Example 4: Batched shared-A solves
+
+```bash
+cd examples
+julia --project=../package example_batched_lp.jl
+```
+
+Use `solve_batched(A, C, AL, AU, l, u, params)` or `solve_batched(model, C, AL, AU, l, u, params)` when every LP shares the same sparse `A`. `C`, `l`, and `u` are `n x B`; `AL` and `AU` are `m x B`; each column is one LP instance.
+
+```julia
+result = solve_batched(A, C, AL, AU, l, u, params)
+println(result.status)
+println(result.x[:, 1])
+```
+
 ---
 
-See the [github](https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/julia) for more details.
+## `Parameters`
+Solver configuration options (specified as keyword arguments):
+
+| Parameter | Description | Default |
+|------------|-------------|----------|
+| `max_iter` | Maximum iterations | Unlimited |
+| `stop_tol` | Stopping tolerance | `1e-4` |
+| `time_limit` | Time limit in seconds | `3600` |
+| `device_number` | CUDA device ID | `0` |
+| `check_iter` | Convergence check interval | `150` |
+| `CUSPARSE_spmv` | Force the cuSPARSE SpMVOp path and disable fused-kernel autotuning | `false` |
+| `autotune_verbose` | Print backend autotuning diagnostics when fused kernels are enabled | `false` |
+| `use_Ruiz_scaling` | Apply Ruiz scaling | `true` |
+| `use_Pock_Chambolle_scaling` | Apply Pock–Chambolle scaling | `true` |
+| `use_bc_scaling` | Apply bounds/cost scaling | `true` |
+| `use_presolve` | Apply embedded PSLP presolve/postsolve in the C core | `true` |
+
+---
+
+## `Results`
+The `Results` object contains solution and performance information after solving the LP:
+
+| Field | Description |
+|--------|-------------|
+| `status` | Solver status: `"OPTIMAL"`, `"TIME_LIMIT"`, `"ITER_LIMIT"`, `"ERROR"` |
+| `x` | Primal solution |
+| `y` | Dual solution |
+| `z` | Bound-dual solution |
+| `primal_obj` | Primal objective value |
+| `gap` | Duality gap |
+| `residuals` | Final KKT residual |
+| `iter` | Total iterations |
+| `time` | Solve time (seconds) |
+| `iter4`, `iter6`, `iter8` | Iterations to reach 1e-4/1e-6/1e-8 tolerance |
+| `time4`, `time6`, `time8` | Time to reach corresponding tolerance |
+
+
+## `BatchedResults`
+
+| Field | Description |
+|--------|-------------|
+| `status` | Per-instance solver statuses |
+| `x`, `z` | Primal and bound-dual matrices shaped `n x B` |
+| `y` | Dual matrix shaped `m x B` |
+| `primal_obj`, `gap`, `residuals`, `iter` | Per-instance vectors |
+| `time`, `setup_time`, `solve_time`, `power_time` | Batched timing fields |

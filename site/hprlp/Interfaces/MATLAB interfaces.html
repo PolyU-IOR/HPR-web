@@ -11,21 +11,18 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/hprlp_custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/hprlp_custom.css?v=f9487e98" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=4c61d45e"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -60,8 +57,8 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Interfaces</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Julia%20interfaces.html">Julia Version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="C%20interfaces/index.html">C Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Julia%20interfaces.html">Julia Version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Python%20interfaces.html">Python Version</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">MATLAB Version</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#running-examples">Running examples</a><ul>
@@ -184,11 +181,11 @@
 <span class="n">params</span><span class="p">.</span><span class="n">time_limit</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3600</span><span class="p">;</span>
 
 <span class="c">% Solve from MPS file</span>
-<span class="n">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">runFile</span><span class="p">(</span><span class="s">&#39;your_problem.mps&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
+<span class="n">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">runFile</span><span class="p">(</span><span class="s">'your_problem.mps'</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
 
 <span class="c">% Check results</span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Status: %s\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="n">output_type</span><span class="p">);</span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Objective: %.6e\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="n">primal_obj</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'Status: %s\n'</span><span class="p">,</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="n">output_type</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'Objective: %.6e\n'</span><span class="p">,</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="n">primal_obj</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
@@ -201,7 +198,7 @@
 <span class="n">params</span><span class="p">.</span><span class="n">time_limit</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
 
 <span class="c">% Run on all files in the directory</span>
-<span class="n">runDataset</span><span class="p">(</span><span class="s">&#39;/path/to/mps/files&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;/path/to/results&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
+<span class="n">runDataset</span><span class="p">(</span><span class="s">'/path/to/mps/files'</span><span class="p">,</span><span class="w"> </span><span class="s">'/path/to/results'</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
@@ -212,7 +209,7 @@
 <section id="example-1-define-an-lp-instance-directly-in-matlab">
 <h3>Example 1: Define an LP Instance Directly in MATLAB</h3>
 <p>This example demonstrates how to construct and solve a linear programming problem directly in MATLAB without relying on MPS files.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">run</span><span class="p">(</span><span class="s">&#39;demo/demo_Abc.m&#39;</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">run</span><span class="p">(</span><span class="s">'demo/demo_Abc.m'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The script demonstrates:</p>
@@ -241,9 +238,9 @@
 
 <span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">runAbc</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">AL</span><span class="p">,</span><span class="w"> </span><span class="n">AU</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">obj_constant</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
 
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Objective value: %.10f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">primal_obj</span><span class="p">);</span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;x1 = %.10f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;x2 = %.10f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'Objective value: %.10f\n'</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">primal_obj</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'x1 = %.10f\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'x2 = %.10f\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
 </pre></div>
 </div>
 </section>
@@ -277,9 +274,9 @@
 <h2>Result Explanation</h2>
 <p>After solving an instance, you can access the result variables as shown below:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Example from demo/demo_Abc.m</span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Objective value: %.10f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">primal_obj</span><span class="p">);</span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;x1 = %.10f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;x2 = %.10f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'Objective value: %.10f\n'</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">primal_obj</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'x1 = %.10f\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">'x2 = %.10f\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
 </pre></div>
 </div>
 <table>

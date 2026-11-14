@@ -7,7 +7,7 @@ HPR-QP offers several interfaces with examples, usage, settings, and results.
 :maxdepth: 2
 :glob:
 
-Julia interfaces
 C interfaces
+Julia interfaces
 Python interfaces
 ```

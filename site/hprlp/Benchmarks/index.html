@@ -11,19 +11,16 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/hprlp_custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/hprlp_custom.css?v=f9487e98" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=4c61d45e"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -61,8 +58,9 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmarks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#mittelmann-lp-benchmark-set">1) Mittelmann LP benchmark set</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#miplib-2017-lp-relaxations">2) MIPLIB 2017 LP relaxations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mittelmann-lpfeas-main-benchmark">Mittelmann LPfeas main benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#large-scale-addendum">Large-scale addendum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hpr-lp-c-performance-over-releases">HPR-LP-C performance over releases</a></li>
 </ul>
 </li>
 </ul>
@@ -122,108 +120,143 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="benchmarks">
 <h1>Benchmarks</h1>
-<p>This page reports numerical results of Julia version on an <strong>NVIDIA A100-SXM4-80GB</strong> GPU.</p>
-<hr class="docutils" />
-<section id="mittelmann-lp-benchmark-set">
-<h2>1) Mittelmann LP benchmark set</h2>
-<p>Numerical performance of <strong>HPR-LP.jl</strong> and <a class="reference external" href="https://github.com/jinwen-yang/cuPDLP.jl"><u><strong>cuPDLP.jl</strong></u></a> (downloaded on July 24th, 2024) on 49 instances of <a class="reference external" href="https://plato.asu.edu/ftp/lpfeas.html"><u>Mittelmann’s LP benchmark set</u></a> with Gurobi’s presolve. Time limit <strong>15,000 seconds</strong>.</p>
+<section id="mittelmann-lpfeas-main-benchmark">
+<h2>Mittelmann LPfeas main benchmark</h2>
+<p>The following tables contain the same results as the homepage. The HPR-LP-C
+results are for <strong>v0.1.4</strong>. SGM10 is reported in seconds; lower is better.</p>
+<p><strong>65 instances.</strong> CPU and GPU results use their respective test platforms.
+Relative values use the lowest SGM10 in this table, 8.02 s, as the baseline.</p>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Tolerance</p></th>
-<th class="head text-center"><p>1e-4</p></th>
-<th class="head text-center"><p>1e-4</p></th>
-<th class="head text-center"><p>1e-6</p></th>
-<th class="head text-center"><p>1e-6</p></th>
-<th class="head text-center"><p>1e-8</p></th>
-<th class="head text-center"><p>1e-8</p></th>
+<tr class="row-odd"><th class="head"><p>Solver</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head text-right"><p>SGM10 (s)</p></th>
+<th class="head text-right"><p>Relative</p></th>
+<th class="head text-right"><p>Solved</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><strong>Solvers</strong></p></td>
-<td class="text-center"><p><strong>SGM10</strong></p></td>
-<td class="text-center"><p><strong>Solved</strong></p></td>
-<td class="text-center"><p><strong>SGM10</strong></p></td>
-<td class="text-center"><p><strong>Solved</strong></p></td>
-<td class="text-center"><p><strong>SGM10</strong></p></td>
-<td class="text-center"><p><strong>Solved</strong></p></td>
+<tr class="row-even"><td><p>HPR-LP-C</p></td>
+<td><p>GPU</p></td>
+<td class="text-right"><p>10.8</p></td>
+<td class="text-right"><p>1.35</p></td>
+<td class="text-right"><p>63 / 65</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>cuPDLP.jl</p></td>
-<td class="text-center"><p>76.9</p></td>
-<td class="text-center"><p>42</p></td>
-<td class="text-center"><p>156.2</p></td>
-<td class="text-center"><p>41</p></td>
-<td class="text-center"><p>277.9</p></td>
-<td class="text-center"><p>40</p></td>
+<tr class="row-odd"><td><p>COPT-H*</p></td>
+<td><p>GPU</p></td>
+<td class="text-right"><p>8.02</p></td>
+<td class="text-right"><p>1.00</p></td>
+<td class="text-right"><p>64 / 65</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>HPR-LP.jl (v0.1.0)</p></td>
-<td class="text-center"><p>30.2</p></td>
-<td class="text-center"><p>47</p></td>
-<td class="text-center"><p>69.1</p></td>
-<td class="text-center"><p>44</p></td>
-<td class="text-center"><p>103.8</p></td>
-<td class="text-center"><p>43</p></td>
+<tr class="row-even"><td><p>cuOpt*</p></td>
+<td><p>GPU</p></td>
+<td class="text-right"><p>10.9</p></td>
+<td class="text-right"><p>1.36</p></td>
+<td class="text-right"><p>62 / 65</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>HPR-LP.jl (v0.1.2)</p></td>
-<td class="text-center"><p>25.7</p></td>
-<td class="text-center"><p>47</p></td>
-<td class="text-center"><p>53.2</p></td>
-<td class="text-center"><p>44</p></td>
-<td class="text-center"><p>82.1</p></td>
-<td class="text-center"><p>44</p></td>
+<tr class="row-odd"><td><p>cuPDLPx</p></td>
+<td><p>GPU</p></td>
+<td class="text-right"><p>28.5</p></td>
+<td class="text-right"><p>3.55</p></td>
+<td class="text-right"><p>57 / 65</p></td>
+</tr>
+<tr class="row-even"><td><p>COPT</p></td>
+<td><p>CPU</p></td>
+<td class="text-right"><p>25.3</p></td>
+<td class="text-right"><p>3.15</p></td>
+<td class="text-right"><p>65 / 65</p></td>
+</tr>
+<tr class="row-odd"><td><p>MOSEK</p></td>
+<td><p>CPU</p></td>
+<td class="text-right"><p>89.2</p></td>
+<td class="text-right"><p>11.12</p></td>
+<td class="text-right"><p>56 / 65</p></td>
+</tr>
+<tr class="row-even"><td><p>HiGHS</p></td>
+<td><p>CPU</p></td>
+<td class="text-right"><p>256</p></td>
+<td class="text-right"><p>31.92</p></td>
+<td class="text-right"><p>55 / 65</p></td>
+</tr>
+<tr class="row-odd"><td><p>KNITRO</p></td>
+<td><p>CPU</p></td>
+<td class="text-right"><p>372</p></td>
+<td class="text-right"><p>46.38</p></td>
+<td class="text-right"><p>48 / 65</p></td>
+</tr>
+<tr class="row-even"><td><p>PDLP</p></td>
+<td><p>CPU</p></td>
+<td class="text-right"><p>421</p></td>
+<td class="text-right"><p>52.49</p></td>
+<td class="text-right"><p>50 / 65</p></td>
+</tr>
+<tr class="row-odd"><td><p>XOPT</p></td>
+<td><p>CPU</p></td>
+<td class="text-right"><p>146</p></td>
+<td class="text-right"><p>18.20</p></td>
+<td class="text-right"><p>59 / 65</p></td>
 </tr>
 </tbody>
 </table>
+<p>* These configurations combine CPU and GPU computation or run multiple solver
+methods concurrently.</p>
 </section>
-<hr class="docutils" />
-<section id="miplib-2017-lp-relaxations">
-<h2>2) MIPLIB 2017 LP relaxations</h2>
-<p>Numerical performance of <strong>HPR-LP.jl</strong> and <strong>cuPDLP.jl</strong> on 18 LP relaxations (&gt;10M nonzeros in <code class="docutils literal notranslate"><span class="pre">A</span></code>) from <a class="reference external" href="https://miplib.zib.de/"><u>MIPLIB 2017</u></a> without Gurobi’s presolve. Time limit <strong>18,000 seconds</strong>.</p>
+<section id="large-scale-addendum">
+<h2>Large-scale addendum</h2>
+<p><strong>20 large-scale instances; single-GPU comparison.</strong> Relative values use
+HPR-LP-C’s SGM10 as the baseline.</p>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Tolerance</p></th>
-<th class="head text-center"><p>1e-4</p></th>
-<th class="head text-center"><p>1e-4</p></th>
-<th class="head text-center"><p>1e-6</p></th>
-<th class="head text-center"><p>1e-6</p></th>
-<th class="head text-center"><p>1e-8</p></th>
-<th class="head text-center"><p>1e-8</p></th>
+<tr class="row-odd"><th class="head"><p>Solver</p></th>
+<th class="head text-right"><p>SGM10 (s)</p></th>
+<th class="head text-right"><p>Relative</p></th>
+<th class="head text-right"><p>Solved</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><strong>Solvers</strong></p></td>
-<td class="text-center"><p><strong>SGM10</strong></p></td>
-<td class="text-center"><p><strong>Solved</strong></p></td>
-<td class="text-center"><p><strong>SGM10</strong></p></td>
-<td class="text-center"><p><strong>Solved</strong></p></td>
-<td class="text-center"><p><strong>SGM10</strong></p></td>
-<td class="text-center"><p><strong>Solved</strong></p></td>
+<tr class="row-even"><td><p>HPR-LP-C</p></td>
+<td class="text-right"><p>272.45</p></td>
+<td class="text-right"><p>1.00</p></td>
+<td class="text-right"><p>18 / 20</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>cuPDLP.jl</p></td>
-<td class="text-center"><p>129.8</p></td>
-<td class="text-center"><p>16</p></td>
-<td class="text-center"><p>253.3</p></td>
-<td class="text-center"><p>15</p></td>
-<td class="text-center"><p>442.2</p></td>
-<td class="text-center"><p>14</p></td>
+<tr class="row-odd"><td><p>cuOpt*</p></td>
+<td class="text-right"><p>1,376.58</p></td>
+<td class="text-right"><p>5.05</p></td>
+<td class="text-right"><p>13 / 20</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>HPR-LP.jl (v0.1.0)</p></td>
-<td class="text-center"><p>117.6</p></td>
-<td class="text-center"><p>17</p></td>
-<td class="text-center"><p>260.7</p></td>
-<td class="text-center"><p>15</p></td>
-<td class="text-center"><p>428.6</p></td>
-<td class="text-center"><p>14</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>HPR-LP.jl (v0.1.2)</p></td>
-<td class="text-center"><p>60.9</p></td>
-<td class="text-center"><p>17</p></td>
-<td class="text-center"><p>122.5</p></td>
-<td class="text-center"><p>17</p></td>
-<td class="text-center"><p>204.2</p></td>
-<td class="text-center"><p>17</p></td>
+<tr class="row-even"><td><p>COPT-H*</p></td>
+<td class="text-right"><p>2,190.48</p></td>
+<td class="text-right"><p>8.04</p></td>
+<td class="text-right"><p>6 / 20</p></td>
 </tr>
 </tbody>
 </table>
+<p>* These configurations combine CPU and GPU computation or run multiple solver
+methods concurrently.</p>
+<p>Source: H. Mittelmann,
+<a class="reference external" href="https://plato.asu.edu/ftp/lpfeas.html">LPfeas Benchmark &amp; Addendum</a>,
+published 25 October 2026; homepage snapshot accessed 11 November 2026.
+The main benchmark and addendum are separate test sets.</p>
+</section>
+<section id="hpr-lp-c-performance-over-releases">
+<h2>HPR-LP-C performance over releases</h2>
+<p>These figures show the separate <strong>49-instance Hans dataset</strong> experiment, with
+<strong>tolerance 1e-6</strong> and a <strong>1,000 s time limit</strong>. They illustrate progress from
+v0.1.0 through v0.1.4 and use a different test set from the tables above.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/solved-instances-over-releases.png"><img alt="Solved Hans instances: 42, 42, 47, 49, and 49 for v0.1.0 through v0.1.4; higher is better." src="../_images/solved-instances-over-releases.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Solved instances over releases on the 49-instance Hans dataset.</span></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/sgm10-total-time-over-releases.png"><img alt="SGM10 total time: 33.3, 32.0, 12.74, 5.93, and 4.86 seconds for v0.1.0 through v0.1.4; lower is better." src="../_images/sgm10-total-time-over-releases.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">SGM10 total time over releases, with tolerance 1e-6 and a 1,000 s time limit.</span></p>
+</figcaption>
+</figure>
 </section>
 </section>
 

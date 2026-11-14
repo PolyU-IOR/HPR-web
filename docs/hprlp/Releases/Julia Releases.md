@@ -1,93 +1,71 @@
 # Julia Releases
-A compact index of HPR-LP (Julia) releases—each entry shows the version tag and a one-line summary; click a version to view full notes, benchmarks, and downloads.
 
----
+Release notes and downloads from the official [HPR-LP releases](https://github.com/PolyU-IOR/HPR-LP/releases), checked on **12 November 2026**.
 
+The latest published release is **v0.1.7**. The ZIP and tar.gz links below are source archives. Install the Julia dependencies using the [Julia quick start](../Quick%20start%20guide/Julia%20API.md).
 
+## v0.1.7
 
-<details id="v013">
-<summary><code>v0.1.3</code> — Robustness upgrade: refined parameter schedule achieves 1e-9 KKT/duality gaps and streamlines JuMP modeling</summary>
+**Published:** 22 May 2026.
 
-**Release date**: 2025-10-17
+Fixes primal solution recovery, adds Curtis–Reid scaling, and falls back to solving the original model when the presolver fails.
 
-**Highlights**
-1. Enhanced parameter adjustment strategy for significantly improved stability, achieving relative KKT and duality gap accuracy up to **1e-9**.  
-2. Improved LP modeling pipeline with seamless **JuMP** integration for a smoother modeling experience.
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.7) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.7.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.7.tar.gz)
 
-**Benchmark results**
-- **Platform**: NVIDIA A100-SXM4-80GB  
-- **Dataset**: Mittelmann’s LP benchmark (no presolve)  
-- **Performance**: 47 / 49 instances solved (**Tolerance**: 1e-4, **Time limit**: 3600s)  
-- **Performance**: 41 / 49 instances solved (**Tolerance**: 1e-9, **Time limit**: 3600s)
+## v0.1.6
 
-**Downloads**
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.3.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.3.tar.gz)
+**Published:** 7 May 2026.
 
-</details>
+Adds PSLP presolve (`params.presolve = "PSLP"`) and GPU presolve (`params.presolve = "GPU"`), developed by @ljw2024polyu and collaborators.
 
----
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.6) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.6.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.6.tar.gz)
 
-<details id="v012">
-<summary><code>v0.1.2</code> — SpMV & kernel rewrites</summary>
+## v0.1.5
 
-**Release date**: 2025-09-27
+**Published:** 5 April 2026.
 
-**Highlights**
-- SpMV rewrites: added preprocessing and buffer preallocation to avoid redundant work between iterations.  
-- CUDA kernel refactors: reduced memory traffic and improved occupancy.  
-- Under SGM10 (1e-8 accuracy): +11% on Mittelmann’s LP benchmark set and +7% on MIP2017 large-scale LP relaxations (vs. v0.1.1).
+Optimizes GPU kernels and workflows for an approximately 10% per-iteration speedup.
 
-**Downloads**
-- [HPR-LP_v012_bug_fixed.zip](https://github.com/PolyU-IOR/HPR-LP/releases/download/v0.1.2/HPR-LP_v012_bug_fixed.zip)  
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.2.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.2.tar.gz)
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.5) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.5.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.5.tar.gz)
 
-</details>
+## v0.1.4
 
----
+**Published:** 20 March 2026.
 
-<details id="v011">
-<summary><code>v0.1.1</code> — Model reformulation + adaptive restart/penalty + fused kernels</summary>
+Improves GPU efficiency with CUDA Graph updates, stabilizes and optimizes power-iteration eigenvalue estimation, adds MOI/JuMP optimizer integration (`demo/demo_JuMP.jl`), and supports warm starts through `initial_x` and `initial_y`.
 
-**Release date**: 2025-09-09
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.4) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.4.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.4.tar.gz)
 
-**Highlights**
-- Model reformulation. Updated the problem formulation to the new form for better stability and consistency across instances. 
-- Adaptive restarts & penalty auto-tuning. A redesigned penalty parameter update rule to improve convergence speed and robustness.
-- Kernel rewrites. Several CUDA kernels were refactored/fused to reduce memory traffic and improve occupancy.
-- Simplified parameters. Removed sigma and sigma_fixed from the parameters.
-- In terms of SGM10 (1e-8 accuracy), 14% faster for Mittelmann's LP benchmark set and 95% faster for MIP2017 large-scale LP relaxations (compared to v0.1.0).
+## v0.1.3
 
-**Downloads**
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.1.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.1.tar.gz)
+**Published:** 17 October 2025.
 
-</details>
+Refines parameter adjustment for greater stability and relative KKT/duality gap accuracy up to **1e-9**, and improves JuMP modeling integration. On an NVIDIA A100-SXM4-80GB, the Mittelmann benchmark without presolve solved **47 / 49** instances at 1e-4 tolerance and **41 / 49** at 1e-9, with a 3,600 s time limit.
 
----
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.3) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.3.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.3.tar.gz)
 
-<details id="v010">
-<summary><code>v0.1.0</code> — A preliminary release: Julia GPU-accelerated HPR-LP solver</summary>
+## v0.1.2
 
-**Release date**: 2025-07-04
+**Published:** 28 September 2025.
 
-**Highlights**
-- First public release of **HPR-LP**.  
-- GPU-accelerated LP solver in Julia implementing the Halpern–Peaceman–Rachford (HPR) method.  
-- Model formulation:
-```{math}
-\begin{aligned}
-\min_{x \in \mathbb{R}^n} \quad & (c, x) \\
-\text{s.t.}\quad
-& A_1 x = b_1, \\
-& A_2 x \ge b_2, \\
-& l \le x \le u.
-\end{aligned}
-```
+Rewrites SpMV with preprocessing and preallocated buffers, and refactors CUDA kernels to reduce memory traffic and improve occupancy. At 1e-8 accuracy, the release notes report an 11% SGM10 improvement on the Mittelmann LP set and 7% on large MIPLIB 2017 LP relaxations compared with v0.1.1.
 
-**Downloads**
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.0.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.0.tar.gz)
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.2) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.2.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.2.tar.gz)
 
-</details>
+Additional release download: [HPR-LP_v012_bug_fixed.zip](https://github.com/PolyU-IOR/HPR-LP/releases/download/v0.1.2/HPR-LP_v012_bug_fixed.zip).
+
+## v0.1.1
+
+**Published:** 9 September 2025.
+
+Updates model reformulation, adaptive restarts and penalty tuning; rewrites or fuses CUDA kernels; and removes `sigma` and `sigma_fixed` from the public parameters. At 1e-8 accuracy, the notes report improvements of 14% on Mittelmann and 95% on large MIPLIB 2017 LP relaxations compared with v0.1.0.
+
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.1) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.1.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.1.tar.gz)
+
+## v0.1.0
+
+**Published:** 9 September 2025.
+
+The initial GPU-accelerated Julia implementation of the Halpern–Peaceman–Rachford method for linear programming. The release notes describe the preliminary release dated 4 July 2025.
+
+[Release notes](https://github.com/PolyU-IOR/HPR-LP/releases/tag/v0.1.0) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.0.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-LP/archive/refs/tags/v0.1.0.tar.gz)

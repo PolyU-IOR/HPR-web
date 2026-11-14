@@ -11,24 +11,21 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
       <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/hprlp_custom.css?v=efd90ad8" />
+      <link rel="stylesheet" type="text/css" href="../_static/hprlp_custom.css?v=f9487e98" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-      <script src="../_static/back_to_hpr_fab.js?v=3b54322b"></script>
+      <script src="../_static/back_to_hpr_fab.js?v=4c61d45e"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python API" href="Python%20API.html" />
-    <link rel="prev" title="Julia API" href="Julia%20API.html" /> 
+    <link rel="next" title="Julia API" href="Julia%20API.html" />
+    <link rel="prev" title="Quick start guide" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,14 +52,15 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Quick start guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Julia%20API.html">Julia API</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">C API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#prerequisites">1. Prerequisites</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clone-the-repository">2. Clone the Repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build">3. Build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-build-and-run">Clone, build, and run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpu-architecture-selection">GPU architecture selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-build-and-installation">CMake build and installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next steps</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="Julia%20API.html">Julia API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Python%20API.html">Python API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MATLAB%20API.html">MATLAB API</a></li>
 </ul>
@@ -131,50 +129,127 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="c-api">
 <h1>C API</h1>
-<p>This page explains how to install the <strong>C version</strong> of HPR-LP.</p>
-<hr class="docutils" />
+<p>HPR-LP-C is the GPU-accelerated C/CUDA implementation of HPR-LP. The commands
+below follow the official <a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-C">HPR-LP-C repository</a>.</p>
 <section id="prerequisites">
-<h2>1. Prerequisites</h2>
+<h2>Prerequisites</h2>
 <ul class="simple">
-<li><p><strong>NVIDIA GPU</strong> with CUDA support</p></li>
-<li><p><strong>CUDA Toolkit</strong> (≥ 12.4 recommended)</p></li>
-<li><p><strong>CUDA libraries</strong>: cuBLAS, cuSOLVER, cuSPARSE (included with CUDA Toolkit)</p></li>
+<li><p>Linux on x86-64.</p></li>
+<li><p>An NVIDIA GPU supported by the selected CUDA Toolkit.</p></li>
+<li><p>The NVIDIA CUDA Toolkit, including <code class="docutils literal notranslate"><span class="pre">nvcc</span></code>, cuBLAS, cuSOLVER, cuSPARSE, and
+the CUDA driver development library.</p></li>
+<li><p>GCC/G++ with C++17 support, supported by the selected CUDA Toolkit
+(GCC 9–12 recommended).</p></li>
+<li><p>GNU Make or CMake 3.18 or newer.</p></li>
+<li><p>zlib development headers.</p></li>
 </ul>
-<p>Quick checks:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvidia-smi
-nvcc<span class="w"> </span>--version
+<p>On Ubuntu 22.04:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>zlib1g-dev
 </pre></div>
 </div>
+<p>Install the CUDA Toolkit separately using NVIDIA’s instructions. If CUDA is
+not installed at <code class="docutils literal notranslate"><span class="pre">/usr/local/cuda</span></code>, set <code class="docutils literal notranslate"><span class="pre">CUDA_PATH</span></code> or <code class="docutils literal notranslate"><span class="pre">CUDA_HOME</span></code>.</p>
 </section>
-<hr class="docutils" />
-<section id="clone-the-repository">
-<h2>2. Clone the Repository</h2>
+<section id="clone-build-and-run">
+<h2>Clone, build, and run</h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/PolyU-IOR/HPR-LP-C.git
 <span class="nb">cd</span><span class="w"> </span>HPR-LP-C
+make<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j
+./build/solve_mps_file<span class="w"> </span>-i<span class="w"> </span>data/model.mps<span class="w"> </span>--tol<span class="w"> </span>1e-6<span class="w"> </span>--time-limit<span class="w"> </span><span class="m">1000</span>
 </pre></div>
 </div>
-<p>Or download and extract the ZIP file from GitHub.</p>
-</section>
-<hr class="docutils" />
-<section id="build">
-<h2>3. Build</h2>
-<p>From the project root:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clean<span class="w">       </span><span class="c1"># Remove build artifacts</span>
-make<span class="w">             </span><span class="c1"># Build everything (recommended)</span>
+<p>The build creates <code class="docutils literal notranslate"><span class="pre">build/solve_mps_file</span></code>, <code class="docutils literal notranslate"><span class="pre">lib/libhprlp.a</span></code>, and <code class="docutils literal notranslate"><span class="pre">lib/libhprlp.so</span></code>.
+Replace <code class="docutils literal notranslate"><span class="pre">data/model.mps</span></code> with your own <code class="docutils literal notranslate"><span class="pre">.mps</span></code> or <code class="docutils literal notranslate"><span class="pre">.mps.gz</span></code> file when needed.</p>
+<p>For the latest published source archive:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>HPR-LP-C-0.1.3.zip
+<span class="nb">cd</span><span class="w"> </span>HPR-LP-C-0.1.3
+make<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j
+./build/solve_mps_file<span class="w"> </span>-i<span class="w"> </span>data/model.mps<span class="w"> </span>--tol<span class="w"> </span>1e-6<span class="w"> </span>--time-limit<span class="w"> </span><span class="m">1000</span>
 </pre></div>
 </div>
-<p>This creates:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lib/libhprlp.a</span></code> — Static library for C/C++ linking</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lib/libhprlp.so</span></code> — Shared library for language bindings (Python/Julia/MATLAB)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">build/solve_mps_file</span></code> — MPS solver executable</p></li>
-</ul>
+<p>Download the archive from <a class="reference internal" href="../Releases/C%20Releases.html"><span class="std std-doc">C Releases</span></a>.</p>
 </section>
-<hr class="docutils" />
+<section id="gpu-architecture-selection">
+<h2>GPU architecture selection</h2>
+<p>The Makefile detects the first visible GPU through <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>GPU family</p></th>
+<th class="head text-right"><p>Compute capability</p></th>
+<th class="head text-right"><p>Build architecture</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NVIDIA B200</p></td>
+<td class="text-right"><p>10.0</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">sm_100</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>NVIDIA H100</p></td>
+<td class="text-right"><p>9.0</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">sm_90</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>NVIDIA A100</p></td>
+<td class="text-right"><p>8.0</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">sm_80</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>GeForce RTX 30 series</p></td>
+<td class="text-right"><p>8.6</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">sm_86</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>GeForce RTX 40 series</p></td>
+<td class="text-right"><p>8.9</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">sm_89</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>GeForce RTX 50 series</p></td>
+<td class="text-right"><p>12.0</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">sm_120</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The selected CUDA Toolkit must support the detected architecture. If no GPU is
+visible, <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> chooses its supported default. Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code> to inspect the
+selection; <code class="docutils literal notranslate"><span class="pre">GPU_SM=&lt;arch&gt;</span></code> remains available for cross-builds.</p>
+<p>CUDA 13.3 and newer use the experimental <code class="docutils literal notranslate"><span class="pre">cusparseSpMVOp</span></code> API; older toolkits
+use <code class="docutils literal notranslate"><span class="pre">cusparseSpMV</span></code>. Selection happens at compile time from the toolkit headers.</p>
+</section>
+<section id="cmake-build-and-installation">
+<h2>CMake build and installation</h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CUDA_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">CUDA_PATH</span><span class="k">:-</span><span class="p">/usr/local/cuda</span><span class="si">}</span><span class="s2">"</span>
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build-cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-DCMAKE_CUDA_COMPILER<span class="o">=</span><span class="s2">"</span><span class="nv">$CUDA_PATH</span><span class="s2">/bin/nvcc"</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build-cmake
+cmake<span class="w"> </span>--install<span class="w"> </span>build-cmake<span class="w"> </span>--prefix<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local"</span>
+</pre></div>
+</div>
+<p>This also detects the first visible GPU automatically. For an explicit H100
+cross-build, use a separate directory and set compute capability 9.0:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CUDA_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">CUDA_PATH</span><span class="k">:-</span><span class="p">/usr/local/cuda</span><span class="si">}</span><span class="s2">"</span>
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build-h100<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-DCMAKE_CUDA_COMPILER<span class="o">=</span><span class="s2">"</span><span class="nv">$CUDA_PATH</span><span class="s2">/bin/nvcc"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-DCMAKE_CUDA_ARCHITECTURES<span class="o">=</span><span class="m">90</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build-h100
+</pre></div>
+</div>
+<p>An explicit <code class="docutils literal notranslate"><span class="pre">CMAKE_CUDA_ARCHITECTURES</span></code> value overrides automatic detection.
+Make and CMake build the vendored GPU-Presolver-C backend by default. Use
+<code class="docutils literal notranslate"><span class="pre">-DBUILD_GPU_PRESOLVER=OFF</span></code> for a smaller PSLP-only CMake build.</p>
+<p>For a Make-based installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j
+make<span class="w"> </span>install<span class="w"> </span><span class="nv">PREFIX</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local/lib:</span><span class="si">${</span><span class="nv">LD_LIBRARY_PATH</span><span class="k">:-</span><span class="si">}</span><span class="s2">"</span>
+</pre></div>
+</div>
+</section>
 <section id="next-steps">
-<h2>Next Steps</h2>
+<h2>Next steps</h2>
 <ul class="simple">
-<li><p>See the <a class="reference internal" href="../Interfaces/C%20interfaces/index.html"><span class="std std-doc">Interfaces</span></a> section for C usage.</p></li>
+<li><p><a class="reference internal" href="../Interfaces/C%20interfaces/index.html"><span class="std std-doc">C Version: usage, options, and language interfaces</span></a></p></li>
+<li><p><a class="reference internal" href="../Releases/C%20Releases.html"><span class="std std-doc">C releases and source downloads</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/PolyU-IOR/HPR-LP-C#troubleshooting">Official troubleshooting instructions</a></p></li>
 </ul>
 </section>
 </section>
@@ -183,8 +258,8 @@ make<span class="w">             </span><span class="c1"># Build everything (rec
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Julia%20API.html" class="btn btn-neutral float-left" title="Julia API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Python%20API.html" class="btn btn-neutral float-right" title="Python API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Quick start guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Julia%20API.html" class="btn btn-neutral float-right" title="Julia API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
