@@ -7,8 +7,8 @@ This page offers several releases for HPR-LP.
 :maxdepth: 2
 :glob:
 
-Julia Releases
 C Releases
+Julia Releases
 Python Releases
 MATLAB Releases
 ```

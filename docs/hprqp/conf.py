@@ -22,7 +22,7 @@ extensions = [
     "myst_parser",
     "sphinx.ext.autodoc", "sphinx.ext.autosummary",
     "sphinx.ext.napoleon", "sphinx.ext.viewcode",
-    "sphinx.ext.mathjax", "sphinxcontrib.pseudocode",
+    "sphinx.ext.mathjax",
 ]
 autosummary_generate = True
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
@@ -61,6 +61,8 @@ html_theme = "renku" #  like OSQP
 
 
 html_show_sourcelink = False
+html_copy_source = False
+mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"
 
 html_static_path = ["_static"]
 html_js_files = ['back_to_hpr_fab.js']

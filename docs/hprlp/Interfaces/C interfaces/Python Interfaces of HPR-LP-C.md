@@ -1,27 +1,22 @@
-# Python Binding of HPR-LP-C
-This page provides quick-start examples for using the Python interfaces of HPR-LP-C to build and solve linear programs directly from matrices or MPS files.
+# HPR-LP-C Python Interface
+
+Source: [official HPR-LP-C documentation](https://github.com/PolyU-IOR/HPR-LP-C/blob/main/bindings/python/README.md).
+
+Python interface for HPR-LP-C 0.1.3. The build detects the GPU architecture;
+CUDA 13.3+ uses `cusparseSpMVOp`, while older toolkits use `cusparseSpMV`.
 
 
----
+## Installation
 
-## Test problem (LP)
+```bash
+cd bindings/python
+python -m pip install .         # or: python -m pip install -e .
+```
 
-The default demo problem we ship is a small linear program of the form
+## Examples
 
 
-$$
-\begin{aligned}
-\min \quad & - 3 x_1 - 5 x_2\\
-\text{s.t.} \quad & x_1 + 2 x_2 \le 10, \\
-& 3 x_1 + x_2 \le 12, \\
-& x_1 \ge 0, \\
-& x_2 \ge 0.
-\end{aligned}
-$$
-
----
-
-## Example 1: Build model directly from matrices
+### Example 1: Build model directly from matrices
 
 ```bash
 cd examples
@@ -77,11 +72,11 @@ Create an LP model from matrices and vectors.
 
 ---
 
-## Example 2: Solve from MPS File
+### Example 2: Solve from MPS File
 
 ```bash
 cd examples
-python example_mps_file     # Solve from MPS file
+python example_mps_file.py          # Solve from MPS file
 ```
 
 **Quick overview:**
@@ -98,7 +93,7 @@ result = model.solve()
 print(result)
 ```
 
-## `Model.from_mps(filename)`
+### `Model.from_mps(filename)`
 Create an LP model from the MPS file.
 
 **Arguments:**
@@ -115,4 +110,69 @@ Solve the LP model.
 **Returns:** Results object
 
 ---
-See the [github](https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/python) for more details.
+
+
+### Example 3: Batched shared-A solves
+
+```bash
+cd examples
+python example_batched_lp.py
+```
+
+Use `hprlp.solve_batched(A, C, AL, AU, l, u, obj_constants=None, param=None)` when every LP shares the same sparse `A`. `C`, `l`, and `u` must have shape `(n, B)`; `AL` and `AU` must have shape `(m, B)`. Each column is one LP instance. Results are returned as `BatchedResults`, with `x` and `z` shaped `(n, B)` and `y` shaped `(m, B)`.
+
+```python
+result = hprlp.solve_batched(A, C, AL, AU, l, u, param=params)
+print(result.status)
+print(result.x[:, 0])
+```
+
+---
+
+## `Parameters`
+Solver configuration:
+- `max_iter` - Maximum iterations (default: unlimited)
+- `stop_tol` - Stopping tolerance (default: 1e-6)
+- `time_limit` - Time limit in seconds (default: 1000)
+- `device_number` - CUDA device ID (default: 0)
+- `check_iter` - Convergence check interval (default: 150)
+- `CUSPARSE_spmv` - Force the cuSPARSE SpMVOp path and disable fused-kernel autotuning (default: False)
+- `autotune_verbose` - Print backend autotuning diagnostics when fused kernels are enabled (default: False)
+- `use_Ruiz_scaling` - Ruiz scaling (default: True)
+- `use_Pock_Chambolle_scaling` - Pock-Chambolle scaling (default: True)
+- `use_bc_scaling` - Bounds/cost scaling (default: True)
+- `use_presolve` - Enable presolve/postsolve (default: True)
+- `presolver` - Presolver backend (`0`=PSLP, `1`=GPU, `2`=none; default: `1`)
+- `enable_gpu_folding` - GPU presolver folding (default: True)
+- `use_reduced_matrix` - Adaptive reduced-matrix iterations (default: True)
+- `auto_reduced_compression_policy` - Automatic reduced/compression selection
+  from presolved dimensions (default: False)
+
+### `Results`
+Solution information:
+- `status` - "OPTIMAL", "TIME_LIMIT", "ITER_LIMIT", "ERROR"
+- `x` - Primal solution
+- `y` - Dual solution
+- `z` - Bound-dual solution
+- `primal_obj` - Primal objective value
+- `gap` - Duality gap
+- `residuals` - Final KKT residual
+- `iter` - Total iterations
+- `time` - Solve time (seconds)
+- `iter4/6/8` - Iterations to reach 1e-4/6/8 tolerance
+- `time4/6/8` - Time to reach tolerance
+- `timing` - Presolve, setup, scaling, analysis, power-iteration, solve, and
+  total-time breakdown
+- `folding_time` - GPU presolver folding time
+- `reduced_active_iteration_ratio`, `reduced_average_column_ratio`,
+  `reduced_average_nnz_ratio`, `reduced_minimum_column_ratio`, and
+  `reduced_minimum_nnz_ratio` - Reduced-matrix execution statistics
+
+
+### `BatchedResults`
+Batched solution information:
+- `status` - list of per-instance statuses
+- `x`, `z` - primal and bound-dual matrices shaped `(n, B)`
+- `y` - dual matrix shaped `(m, B)`
+- `primal_obj`, `gap`, `residuals`, `iter` - per-instance vectors
+- `time`, `setup_time`, `solve_time`, `power_time` - batched timing fields

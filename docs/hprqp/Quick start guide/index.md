@@ -6,7 +6,7 @@ Let's get started!
 :maxdepth: 2
 :glob:
 
-Julia API
 C API
+Julia API
 Python API
 ```

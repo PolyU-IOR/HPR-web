@@ -1,28 +1,40 @@
-# MATLAB Binding of HPR-LP-C
-This page provides quick-start examples for using the MATLAB interfaces of HPR-LP-C to build and solve linear programs directly from matrices or MPS files.
+# HPR-LP-C MATLAB Interface
 
+Source: [official HPR-LP-C documentation](https://github.com/PolyU-IOR/HPR-LP-C/blob/main/bindings/matlab/README.md).
 
----
-
-## Test problem (LP)
-
-The default demo problem we ship is a small linear program of the form
-
-
-$$
-\begin{aligned}
-\min \quad & - 3 x_1 - 5 x_2\\
-\text{s.t.} \quad & x_1 + 2 x_2 \le 10, \\
-& 3 x_1 + x_2 \le 12, \\
-& x_1 \ge 0, \\
-& x_2 \ge 0.
-\end{aligned}
-$$
+MATLAB interface for HPR-LP-C 0.1.3. The build detects the GPU architecture;
+CUDA 13.3+ uses `cusparseSpMVOp`, while older toolkits use `cusparseSpMV`.
 
 ---
 
+## Prerequisites
 
-## Example 1: Build model directly from matrices
+- MATLAB **R2018a** or later  
+- **CUDA Toolkit** (for compilation)  
+- **GCC-11** or **GCC-12** (recommended)  
+- **Linux** operating system 
+
+**Note:** The MEX interface requires access to CUDA headers during compilation. Make sure CUDA is installed and either:
+- Set `CUDA_HOME` environment variable, or
+- Set `CUDA_PATH` environment variable, or
+- Have CUDA installed in `/usr/local/cuda` or `/opt/cuda`
+
+## Installation
+
+```bash
+cd bindings/matlab
+bash install.sh
+```
+
+This will:
+- Detect CUDA installation
+- Build the C++/CUDA library
+- Compile the MEX interface with CUDA headers
+- Set up the HPRLP package
+
+## Examples
+
+### Example 1: Build model directly from matrices
 
 ```bash
 cd examples
@@ -78,7 +90,7 @@ Create an LP model from matrices and vectors.
 **Returns:** Model object
 
 ---
-## Example 2: Solve from MPS File
+### Example 2: Solve from MPS File
 
 ```bash
 cd examples
@@ -119,16 +131,38 @@ Solve the LP model.
 
 **Returns:** Result object
 
-### `hprlp.Parameters`
+
+### Example 3: Batched shared-A solves
+
+```bash
+cd examples
+matlab -batch "example_batched_lp"
+```
+
+Use `hprlp.solve_batched(A, C, AL, AU, l, u, 'params', params)` or `model.solve_batched(C, AL, AU, l, u, ...)` when every LP shares the same sparse `A`. `C`, `l`, and `u` are `n x B`; `AL` and `AU` are `m x B`; each column is one LP instance.
+
+```matlab
+result = hprlp.solve_batched(A, C, AL, AU, l, u, 'params', params);
+disp(result.status);
+disp(result.x(:, 1));
+```
+
+---
+
+## `hprlp.Parameters`
 Solver configuration:
 - `max_iter` - Maximum iterations (default: 2147483647)
 - `stop_tol` - Stopping tolerance (default: 1e-4)
 - `time_limit` - Time limit in seconds (default: 3600)
 - `device_number` - CUDA device ID (default: 0)
 - `check_iter` - Convergence check interval (default: 150)
+- `CUSPARSE_spmv` - Force the cuSPARSE SpMVOp path and disable fused-kernel autotuning (default: false)
+- `autotune_verbose` - Print backend autotuning diagnostics when fused kernels are enabled (default: false)
+- `use_CR_scaling` - Curtis-Reid prescaling (default: true)
 - `use_Ruiz_scaling` - Ruiz scaling (default: true)
 - `use_Pock_Chambolle_scaling` - Pock-Chambolle scaling (default: true)
 - `use_bc_scaling` - Bounds/cost scaling (default: true)
+- `use_presolve` - Embedded PSLP presolve/postsolve in the C core (default: true)
 
 **Example:**
 ```matlab
@@ -136,7 +170,51 @@ param = hprlp.Parameters();
 param.stop_tol = 1e-9;
 param.device_number = 0;
 ```
-
 ---
 
-See the [github](https://github.com/PolyU-IOR/HPR-LP-C/tree/main/bindings/matlab) for more details.
+## `hprlp.Result`
+Solution information:
+- `status` - "OPTIMAL", "TIME_LIMIT", "ITER_LIMIT", "ERROR"
+- `x` - Primal solution (n×1 vector)
+- `y` - Dual solution (m×1 vector)
+- `z` - Bound-dual solution (n×1 vector)
+- `primal_obj` - Primal objective value
+- `gap` - Duality gap
+- `residuals` - Final KKT residual
+- `iter` - Total iterations
+- `time` - Solve time (seconds)
+- `iter4/6/8` - Iterations to reach 1e-4/6/8 tolerance
+- `time4/6/8` - Time to reach tolerance
+
+**Checking optimality:**
+```matlab
+if strcmp(result.status, 'OPTIMAL')
+    fprintf('Solution is optimal!\n');
+end
+```
+
+## Setting Up MATLAB Path
+
+To use HPRLP in your MATLAB scripts, add the bindings directory to your path:
+
+```matlab
+addpath('/path/to/HPR-LP-C/bindings/matlab');
+```
+
+Or add this line to your `startup.m` file for automatic loading.
+
+## Requirements
+
+- MATLAB R2018a or later
+- NVIDIA GPU with CUDA support
+- CUDA Toolkit (compatible with your MATLAB version)
+- C++ compiler compatible with MATLAB MEX
+
+
+## `hprlp.BatchedResult`
+Batched solution information:
+- `status` - cell array of per-instance statuses
+- `x`, `z` - primal and bound-dual matrices shaped `n x B`
+- `y` - dual matrix shaped `m x B`
+- `primal_obj`, `gap`, `residuals`, `iter` - per-instance vectors
+- `time`, `setup_time`, `solve_time`, `power_time` - batched timing fields

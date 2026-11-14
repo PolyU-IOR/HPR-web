@@ -10,14 +10,13 @@
     var side = document.querySelector('.wy-nav-side');
     if (!side) return;
 
-    // -------- target URL (edit if needed) --------
-    // Prefer docs root; fallback to "/index.html".
-    var root = '/';
-    if (window.DOCUMENTATION_OPTIONS && typeof DOCUMENTATION_OPTIONS.URL_ROOT === 'string') {
-      root = DOCUMENTATION_OPTIONS.URL_ROOT;
-    }
-    if (root.slice(-1) !== '/') root += '/';
-    var target = 'http://hpr.top/';  // 
+    // Sphinx supplies the path to this solver's docs root, even on nested pages.
+    // The HPR homepage is one level above it, on the current host and protocol.
+    var docsRoot = new URL(
+      document.documentElement.getAttribute('data-content_root') || './',
+      window.location.href
+    );
+    var target = new URL('../', docsRoot).href;
 
     // -------- create button --------
     var btn = document.createElement('a');

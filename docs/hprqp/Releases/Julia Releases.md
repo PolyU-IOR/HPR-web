@@ -1,51 +1,31 @@
 # Julia Releases
-A compact index of HPR-QP (Julia) releases—each entry shows the version tag and a one-line summary; click a version to view full notes, benchmarks, and downloads.
 
----
+Release notes and downloads from the official [HPR-QP releases](https://github.com/PolyU-IOR/HPR-QP/releases), checked on **12 November 2026**.
 
-<details id="v010">
-<summary><code>v0.1.0</code> — A preliminary release: Julia GPU-accelerated HPR-QP solver</summary>
+The latest published release is **v0.1.1**. The downloads are source archives. Install the Julia dependencies using the [Julia quick start](../Quick%20start%20guide/Julia%20API.md).
 
-**Release date**: 2025-07-07
+## v0.1.1
 
-**Highlights**
-- First public release of **HPR-QP**.  
-- GPU-accelerated QP solver in Julia implementing the Halpern–Peaceman–Rachford (HPR) method.  
+**Published:** 30 December 2025.
 
+Unifies standard QP, QAP, and LASSO in one codebase through a modular Q
+operator system. Adds a full CPU implementation alongside GPU acceleration,
+with device selection through `use_gpu`, and native JuMP/MathOptInterface
+integration.
 
-**Downloads**
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.0.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.0.tar.gz)
+Warm starts use `initial_x` and `initial_y`. The `auto_save=true` option saves
+the best solution during optimization so long-running solves can resume from
+previously saved states.
 
-</details>
+[Release notes](https://github.com/PolyU-IOR/HPR-QP/releases/tag/v0.1.1) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.tar.gz)
 
----
+## v0.1.0
 
-<details id="v011">
-<summary><code>v0.1.1</code> — Unified Architecture + CPU & GPU Support + JuMP Integration + Warm-Start Capability + Auto-Save Feature</summary>
+**Published:** 11 September 2025.
 
-**Release date**: 2025-12-30
+The preliminary Julia release provides a GPU-accelerated solver for convex
+composite quadratic programming using the Halpern Peaceman–Rachford method.
+The upstream release notes identify the preliminary release as **7 July 2025**;
+GitHub's publication date is shown above.
 
-**Highlights**
-- **Unified Architecture：**
-Single codebase for all problem types (standard QP, QAP, LASSO)
-Modular Q operator system for extensibility: easily add custom problem types
-- **CPU & GPU Support：**
-Full CPU implementation in addition to GPU acceleration
-Automatic device selection via use_gpu parameter
-- **JuMP Integration：**
-Native JuMP/MathOptInterface (MOI) support for easy modeling
-Use HPR-QP directly as a JuMP optimizer
-- **Warm-Start Capability：**
-Initialize via initial_x and initial_y parameters
-Resume optimization from previous (auto-saved) solutions
-- **Auto-Save Feature：**
-Automatically save best solution during optimization (auto_save=true)
-Resume from saved states for long-running problems
-
-
-**Downloads**
-- [Source code (zip)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.zip)  
-- [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.1.tar.gz)
-
-</details>
+[Release notes](https://github.com/PolyU-IOR/HPR-QP/releases/tag/v0.1.0) · [Source code (ZIP)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.0.zip) · [Source code (tar.gz)](https://github.com/PolyU-IOR/HPR-QP/archive/refs/tags/v0.1.0.tar.gz)
